@@ -519,6 +519,7 @@
 		};
 		04D00A791CB8912800A81AEE /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3A8FDD7CB6BF71DE56AD9491 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				INFOPLIST_FILE = QnATests/Info.plist;
