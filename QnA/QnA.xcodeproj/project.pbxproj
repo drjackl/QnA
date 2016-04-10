@@ -16,6 +16,7 @@
 		04D00A711CB8912800A81AEE /* QnAUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D00A701CB8912800A81AEE /* QnAUITests.m */; };
 		04D00A801CB8C85D00A81AEE /* SignupViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D00A7F1CB8C85D00A81AEE /* SignupViewController.m */; };
 		04D00A831CB8CC2600A81AEE /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D00A821CB8CC2600A81AEE /* LoginViewController.m */; };
+		04D00A861CB9DCC700A81AEE /* QuestionsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D00A851CB9DCC700A81AEE /* QuestionsViewController.m */; };
 		81732004C39BAAB1144386DB /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = BDCF8B0D5316B8171C0A84F1 /* libPods.a */; };
 /* End PBXBuildFile section */
 
@@ -55,6 +56,8 @@
 		04D00A7F1CB8C85D00A81AEE /* SignupViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SignupViewController.m; sourceTree = "<group>"; };
 		04D00A811CB8CC2600A81AEE /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		04D00A821CB8CC2600A81AEE /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		04D00A841CB9DCC700A81AEE /* QuestionsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionsViewController.h; sourceTree = "<group>"; };
+		04D00A851CB9DCC700A81AEE /* QuestionsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionsViewController.m; sourceTree = "<group>"; };
 		272EA30CA0E068434B2438F2 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		3A8FDD7CB6BF71DE56AD9491 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		BDCF8B0D5316B8171C0A84F1 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -117,6 +120,8 @@
 				04D00A7F1CB8C85D00A81AEE /* SignupViewController.m */,
 				04D00A811CB8CC2600A81AEE /* LoginViewController.h */,
 				04D00A821CB8CC2600A81AEE /* LoginViewController.m */,
+				04D00A841CB9DCC700A81AEE /* QuestionsViewController.h */,
+				04D00A851CB9DCC700A81AEE /* QuestionsViewController.m */,
 				04D00A541CB8912700A81AEE /* Main.storyboard */,
 				04D00A571CB8912800A81AEE /* Assets.xcassets */,
 				04D00A591CB8912800A81AEE /* LaunchScreen.storyboard */,
@@ -354,6 +359,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04D00A831CB8CC2600A81AEE /* LoginViewController.m in Sources */,
+				04D00A861CB9DCC700A81AEE /* QuestionsViewController.m in Sources */,
 				04D00A801CB8C85D00A81AEE /* SignupViewController.m in Sources */,
 				04D00A501CB8912700A81AEE /* AppDelegate.m in Sources */,
 				04D00A4D1CB8912700A81AEE /* main.m in Sources */,

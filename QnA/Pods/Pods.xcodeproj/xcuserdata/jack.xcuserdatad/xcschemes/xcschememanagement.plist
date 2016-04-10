@@ -4,7 +4,27 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Bolts.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FBSDKCoreKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FBSDKLoginKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Firebase.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>FirebaseUI.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -17,12 +37,32 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>1059CA1698D06220FFACFC62CC643AB8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4E286D373D75563CE26E479A68203892</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>569735B422E0E4CEEFC5C6955AFDE3A5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C06900910C3A6326D437273407CBB0AC</key>
+		<key>7587922C7E99D102C8D63DB96BC16537</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>81D7FE2A0FD9258247B1232874B837DA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C43DEF8E5BFEC36D943258BA3F21834D</key>
 		<dict>
 			<key>primary</key>
 			<true/>

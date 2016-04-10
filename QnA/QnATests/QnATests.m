@@ -26,7 +26,21 @@
 }
 
 - (void) testAddSomeQuestions {
-    NSLog(@"Added some questions");
+    Firebase* ref = [[Firebase alloc] initWithUrl:@"https://qna-app.firebaseio.com"];
+    Firebase* appRef = [ref childByAppendingPath:@"web/data"];
+    Firebase* questionsRef = [appRef childByAppendingPath:@"questions"];
+    
+    NSString* question1 = @"How much wood can a wood chuck chuck if a woodchuck could chuck would?";
+    NSString* question2 = @"How hard is it to get a job as an iOS Engineer?";
+    NSString* question3 = @"What can I learn/know right now in 10 minutes that will be useful for the rest of my life?";
+    
+    NSDictionary* questions = @{@"question1" : question1,
+                                @"question2" : question2,
+                                @"question3" : question3};
+    
+    [questionsRef setValue:questions];
+
+    XCTAssertTrue(YES);
 }
 
 - (void)testExample {
