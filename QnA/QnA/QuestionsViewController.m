@@ -11,10 +11,10 @@
 #import <FirebaseTableViewDataSource.h>
 
 @interface QuestionsViewController ()
-
 @property (nonatomic) Firebase* questionsRef;
 @property (nonatomic) FirebaseTableViewDataSource* dataSource;
-
+// IBOutlets
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
 @end
 
 @implementation QuestionsViewController
@@ -27,7 +27,13 @@
     Firebase* appRef = [ref childByAppendingPath:@"web/data"];
     self.questionsRef = [appRef childByAppendingPath:@"questions"];
     
-    //self.dataSource = [[FirebaseTableViewDataSource alloc] initWithRef:self.questionsRef cellReuseIdentifier:@"simpleQuestionCell" view:self.tableView];
+    self.dataSource = [[FirebaseTableViewDataSource alloc] initWithRef:self.questionsRef cellReuseIdentifier:@"simpleQuestionCell" view:self.tableView];
+    
+    [self.dataSource populateCellWithBlock:^(__kindof UITableViewCell*_Nonnull cell, __kindof NSObject*_Nonnull object) {
+        cell.textLabel.text = ((FDataSnapshot*)object).value;
+    }];
+    
+    [self.tableView setDataSource:self.dataSource];
 }
 
 - (void)didReceiveMemoryWarning {
