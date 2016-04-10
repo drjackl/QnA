@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		04B94D2E1CBAADAF00C4A85C /* TestViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B94D2D1CBAADAF00C4A85C /* TestViewController.m */; };
+		04B94D311CBAB3FC00C4A85C /* QuestionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B94D301CBAB3FC00C4A85C /* QuestionCell.m */; };
 		04D00A4D1CB8912700A81AEE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D00A4C1CB8912700A81AEE /* main.m */; };
 		04D00A501CB8912700A81AEE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D00A4F1CB8912700A81AEE /* AppDelegate.m */; };
 		04D00A561CB8912700A81AEE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04D00A541CB8912700A81AEE /* Main.storyboard */; };
@@ -42,6 +43,8 @@
 /* Begin PBXFileReference section */
 		04B94D2C1CBAADAF00C4A85C /* TestViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TestViewController.h; sourceTree = "<group>"; };
 		04B94D2D1CBAADAF00C4A85C /* TestViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TestViewController.m; sourceTree = "<group>"; };
+		04B94D2F1CBAB3FC00C4A85C /* QuestionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionCell.h; sourceTree = "<group>"; };
+		04B94D301CBAB3FC00C4A85C /* QuestionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionCell.m; sourceTree = "<group>"; };
 		04D00A481CB8912600A81AEE /* QnA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QnA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04D00A4C1CB8912700A81AEE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		04D00A4E1CB8912700A81AEE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -128,6 +131,8 @@
 				04D00A821CB8CC2600A81AEE /* LoginViewController.m */,
 				04D00A841CB9DCC700A81AEE /* QuestionsViewController.h */,
 				04D00A851CB9DCC700A81AEE /* QuestionsViewController.m */,
+				04B94D2F1CBAB3FC00C4A85C /* QuestionCell.h */,
+				04B94D301CBAB3FC00C4A85C /* QuestionCell.m */,
 				04D00A871CBA80EB00A81AEE /* TestTableViewController.h */,
 				04D00A881CBA80EB00A81AEE /* TestTableViewController.m */,
 				04B94D2C1CBAADAF00C4A85C /* TestViewController.h */,
@@ -369,6 +374,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04D00A831CB8CC2600A81AEE /* LoginViewController.m in Sources */,
+				04B94D311CBAB3FC00C4A85C /* QuestionCell.m in Sources */,
 				04D00A861CB9DCC700A81AEE /* QuestionsViewController.m in Sources */,
 				04B94D2E1CBAADAF00C4A85C /* TestViewController.m in Sources */,
 				04D00A801CB8C85D00A81AEE /* SignupViewController.m in Sources */,

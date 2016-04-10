@@ -9,10 +9,13 @@
 #import "QuestionsViewController.h"
 #import <Firebase.h>
 #import <FirebaseTableViewDataSource.h>
+#import "QuestionCell.h"
 
 @interface QuestionsViewController () <UITableViewDelegate>
 @property (nonatomic) Firebase* questionsRef;
 @property (nonatomic) FirebaseTableViewDataSource* dataSource;
+
+@property (nonatomic) NSArray* questionsArray;
 // IBOutlets
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @end
@@ -27,17 +30,38 @@
     Firebase* appRef = [ref childByAppendingPath:@"web/data"];
     self.questionsRef = [appRef childByAppendingPath:@"questions"];
     
-    self.dataSource = [[FirebaseTableViewDataSource alloc] initWithRef:self.questionsRef cellReuseIdentifier:@"simpleQuestionCell" view:self.tableView];
+    //self.dataSource = [[FirebaseTableViewDataSource alloc] initWithRef:self.questionsRef prototypeReuseIdentifier:@"mmm" view:self.tableView];
+    //self.dataSource = [[FirebaseTableViewDataSource alloc] initWithRef:self.questionsRef cellReuseIdentifier:@"mmm" view:self.tableView];
+    self.dataSource = [[FirebaseTableViewDataSource alloc] initWithRef:self.questionsRef cellClass:[QuestionCell class] cellReuseIdentifier:@"questionCell" view:self.tableView];
     
-    [self.dataSource populateCellWithBlock:^(__kindof UITableViewCell*_Nonnull cell, __kindof NSObject*_Nonnull object) {
-        cell.textLabel.text = ((FDataSnapshot*)object).value;
-        cell.textLabel.font = [cell.textLabel.font fontWithSize:8.0]; // so this works, seems cell gets reset somehow
+//    [self.dataSource populateCellWithBlock:^(__kindof UITableViewCell*_Nonnull cell, __kindof NSObject*_Nonnull object) {
+//        cell.textLabel.text = ((FDataSnapshot*)object).value;
+//        cell.detailTextLabel.text = ((FDataSnapshot*)object).value;
+////        cell.textLabel.font = [cell.textLabel.font fontWithSize:8.0]; // so this works, seems cell gets reset somehow
+//    }];
+    
+    [self.dataSource populateCellWithBlock:^(QuestionCell*_Nonnull cell, FDataSnapshot*_Nonnull snap) {
+        cell.questionText.text = snap.value;
+        //NSLog(@"obj: %@", object);
     }];
     
     [self.tableView setDataSource:self.dataSource];
+    //[self.tableView setDelegate:self.dataSource];
+    
+    //self.questionsArray = @[];
     
     //self.tableView.delegate = self;
 }
+
+//- (void) viewDidAppear:(BOOL)animated {
+//    [super viewDidAppear:animated];
+//    
+//    [self.questionsRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+//        
+//        [self.tableView reloadData];
+//    }];
+//    
+//}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
