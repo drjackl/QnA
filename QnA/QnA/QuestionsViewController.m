@@ -8,12 +8,10 @@
 
 #import "QuestionsViewController.h"
 #import <Firebase.h>
-#import <FirebaseTableViewDataSource.h>
 #import "QuestionCell.h"
 
-@interface QuestionsViewController () <UITableViewDelegate>
+@interface QuestionsViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic) Firebase* questionsRef;
-@property (nonatomic) FirebaseTableViewDataSource* dataSource;
 
 @property (nonatomic) NSArray* questionsArray;
 // IBOutlets
@@ -30,43 +28,92 @@
     Firebase* appRef = [ref childByAppendingPath:@"web/data"];
     self.questionsRef = [appRef childByAppendingPath:@"questions"];
     
-    //self.dataSource = [[FirebaseTableViewDataSource alloc] initWithRef:self.questionsRef prototypeReuseIdentifier:@"mmm" view:self.tableView];
-    //self.dataSource = [[FirebaseTableViewDataSource alloc] initWithRef:self.questionsRef cellReuseIdentifier:@"mmm" view:self.tableView];
-    self.dataSource = [[FirebaseTableViewDataSource alloc] initWithRef:self.questionsRef cellClass:[QuestionCell class] cellReuseIdentifier:@"questionCell" view:self.tableView];
+    self.questionsArray = @[];
     
-//    [self.dataSource populateCellWithBlock:^(__kindof UITableViewCell*_Nonnull cell, __kindof NSObject*_Nonnull object) {
-//        cell.textLabel.text = ((FDataSnapshot*)object).value;
-//        cell.detailTextLabel.text = ((FDataSnapshot*)object).value;
-////        cell.textLabel.font = [cell.textLabel.font fontWithSize:8.0]; // so this works, seems cell gets reset somehow
-//    }];
-    
-    [self.dataSource populateCellWithBlock:^(QuestionCell*_Nonnull cell, FDataSnapshot*_Nonnull snap) {
-        cell.questionText.text = snap.value;
-        //NSLog(@"obj: %@", object);
-    }];
-    
-    [self.tableView setDataSource:self.dataSource];
-    //[self.tableView setDelegate:self.dataSource];
-    
-    //self.questionsArray = @[];
-    
-    //self.tableView.delegate = self;
+    // since not a TableVC!
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
 }
 
-//- (void) viewDidAppear:(BOOL)animated {
-//    [super viewDidAppear:animated];
-//    
-//    [self.questionsRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-//        
-//        [self.tableView reloadData];
-//    }];
-//    
-//}
+- (void) viewDidAppear:(BOOL)animated {
+    [super viewDidAppear:animated];
+    
+    [self.questionsRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        NSMutableArray* mutableQuestions = [NSMutableArray new];
+        for (NSObject *object in snapshot.children) {
+            [mutableQuestions addObject:object];
+        }
+        
+        self.questionsArray = mutableQuestions;
+        
+        [self.tableView reloadData];
+    }];
+    
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+#pragma mark - Table view data source
+
+// numberOfSections defaults to 1
+//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+//#warning Incomplete implementation, return the number of sections
+//    return 0;
+//}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.questionsArray.count;
+}
+
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"simpleQuestionCell" forIndexPath:indexPath];
+    
+    // Configure the cell...
+    
+    cell.textLabel.text = ((FDataSnapshot*)self.questionsArray[indexPath.row]).value;
+    
+    return cell;
+}
+
+
+/*
+ // Override to support conditional editing of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+ // Return NO if you do not want the specified item to be editable.
+ return YES;
+ }
+ */
+
+/*
+ // Override to support editing the table view.
+ - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
+ if (editingStyle == UITableViewCellEditingStyleDelete) {
+ // Delete the row from the data source
+ [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
+ } else if (editingStyle == UITableViewCellEditingStyleInsert) {
+ // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
+ }
+ }
+ */
+
+/*
+ // Override to support rearranging the table view.
+ - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)fromIndexPath toIndexPath:(NSIndexPath *)toIndexPath {
+ }
+ */
+
+/*
+ // Override to support conditional rearranging of the table view.
+ - (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+ // Return NO if you do not want the item to be re-orderable.
+ return YES;
+ }
+ */
+
 
 //- (CGFloat)tableView:(UITableView*)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
 //    UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"simpleQuestionCell"];
