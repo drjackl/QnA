@@ -9,11 +9,12 @@
 #import "QuestionsViewController.h"
 #import <Firebase.h>
 #import "QuestionCell.h"
+#import "DataSource.h"
 
 @interface QuestionsViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic) Firebase* questionsRef;
 
-@property (nonatomic) NSArray* questionsArray;
+//@property (nonatomic) NSArray* questionsArray;
 // IBOutlets
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @end
@@ -28,7 +29,7 @@
     Firebase* appRef = [ref childByAppendingPath:@"web/data"];
     self.questionsRef = [appRef childByAppendingPath:@"questions"];
     
-    self.questionsArray = @[];
+    //self.questionsArray = @[];
     
     // since not a TableVC!
     self.tableView.delegate = self;
@@ -44,7 +45,8 @@
             [mutableQuestions addObject:object];
         }
         
-        self.questionsArray = mutableQuestions;
+        //self.questionsArray = mutableQuestions;
+        [DataSource onlySource].questions = mutableQuestions;
         
         [self.tableView reloadData];
     }];
@@ -65,7 +67,7 @@
 //}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.questionsArray.count;
+    return [DataSource onlySource].questions.count;//self.questionsArray.count;
 }
 
 
@@ -74,9 +76,17 @@
     
     // Configure the cell...
     
-    cell.textLabel.text = ((FDataSnapshot*)self.questionsArray[indexPath.row]).value;
+    //cell.textLabel.text = ((FDataSnapshot*)self.questionsArray[indexPath.row]).value;
+    cell.textLabel.text = ((FDataSnapshot*)[DataSource onlySource].questions[indexPath.row]).value;
     
     return cell;
+}
+
+// row (question) selection bring up that question's AnswerVC
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    // set the question as selected
+    
+    // segue to answerVC
 }
 
 
@@ -121,14 +131,18 @@
 //    return 100.0;
 //}
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+//    if ([segue.identifier isEqualToString:@"answersViewController"]) {
+//        self.
+//    }
 }
-*/
+
 
 @end

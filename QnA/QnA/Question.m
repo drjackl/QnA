@@ -1,13 +1,13 @@
 //
-//  TestViewController.h
+//  Question.m
 //  QnA
 //
 //  Created by Jack Li on 4/10/16.
 //  Copyright © 2016 Jack Li. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+#import "Question.h"
 
-@interface TestViewController : UIViewController
+@implementation Question
 
 @end

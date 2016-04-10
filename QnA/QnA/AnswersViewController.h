@@ -1,5 +1,5 @@
 //
-//  TestTableViewController.h
+//  AnswersViewController.h
 //  QnA
 //
 //  Created by Jack Li on 4/10/16.
@@ -8,6 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TestTableViewController : UITableViewController
+@interface AnswersViewController : UIViewController
 
 @end

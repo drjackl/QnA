@@ -1,18 +1,18 @@
 //
-//  TestViewController.m
+//  AnswersViewController.m
 //  QnA
 //
 //  Created by Jack Li on 4/10/16.
 //  Copyright © 2016 Jack Li. All rights reserved.
 //
 
-#import "TestViewController.h"
+#import "AnswersViewController.h"
 
-@interface TestViewController ()
+@interface AnswersViewController ()
 
 @end
 
-@implementation TestViewController
+@implementation AnswersViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
