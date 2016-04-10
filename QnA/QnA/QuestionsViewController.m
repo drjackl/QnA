@@ -10,7 +10,7 @@
 #import <Firebase.h>
 #import <FirebaseTableViewDataSource.h>
 
-@interface QuestionsViewController ()
+@interface QuestionsViewController () <UITableViewDelegate>
 @property (nonatomic) Firebase* questionsRef;
 @property (nonatomic) FirebaseTableViewDataSource* dataSource;
 // IBOutlets
@@ -31,15 +31,24 @@
     
     [self.dataSource populateCellWithBlock:^(__kindof UITableViewCell*_Nonnull cell, __kindof NSObject*_Nonnull object) {
         cell.textLabel.text = ((FDataSnapshot*)object).value;
+        cell.textLabel.font = [cell.textLabel.font fontWithSize:8.0]; // so this works, seems cell gets reset somehow
     }];
     
     [self.tableView setDataSource:self.dataSource];
+    
+    //self.tableView.delegate = self;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+//- (CGFloat)tableView:(UITableView*)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
+//    UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"simpleQuestionCell"];
+//    //cell.textLabel.text = ;
+//    return 100.0;
+//}
 
 /*
 #pragma mark - Navigation
