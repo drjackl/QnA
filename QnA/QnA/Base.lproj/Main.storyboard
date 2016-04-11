@@ -19,7 +19,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ceY-PY-a2s">
-                                <rect key="frame" x="206" y="249" width="188" height="101"/>
+                                <rect key="frame" x="206" y="70" width="188" height="101"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sign Up For An Account!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HS6-wt-AdT">
                                         <rect key="frame" x="0.0" y="0.0" width="188" height="21"/>
@@ -35,12 +35,12 @@
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="qLM-Xn-14b">
                                         <rect key="frame" x="0.0" y="71" width="188" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                 </subviews>
                             </stackView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HlO-wO-xFZ">
-                                <rect key="frame" x="265" y="360" width="70" height="27"/>
+                                <rect key="frame" x="265" y="181" width="70" height="27"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <state key="normal" title="Sign Me Up!"/>
                                 <connections>
@@ -60,10 +60,10 @@
                         <constraints>
                             <constraint firstItem="HlO-wO-xFZ" firstAttribute="top" secondItem="ceY-PY-a2s" secondAttribute="bottom" constant="10" id="Com-ED-4fR"/>
                             <constraint firstItem="zNK-N7-9YB" firstAttribute="top" secondItem="b0K-K7-7qd" secondAttribute="bottom" id="Nf7-oh-kMc"/>
+                            <constraint firstItem="ceY-PY-a2s" firstAttribute="top" secondItem="v3v-t7-RRl" secondAttribute="bottom" constant="50" id="WIq-51-pJr"/>
                             <constraint firstItem="b0K-K7-7qd" firstAttribute="trailing" secondItem="EtM-47-4b5" secondAttribute="trailingMargin" id="b4M-7J-ZHs"/>
                             <constraint firstItem="HlO-wO-xFZ" firstAttribute="centerX" secondItem="EtM-47-4b5" secondAttribute="centerX" id="qA5-mv-54r"/>
                             <constraint firstItem="ceY-PY-a2s" firstAttribute="centerX" secondItem="EtM-47-4b5" secondAttribute="centerX" id="vOa-TQ-cSp"/>
-                            <constraint firstItem="ceY-PY-a2s" firstAttribute="centerY" secondItem="EtM-47-4b5" secondAttribute="centerY" id="x1Q-oZ-4yV"/>
                         </constraints>
                     </view>
                     <connections>
@@ -104,7 +104,7 @@
                                     <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="password" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="rr9-yF-8b6">
                                         <rect key="frame" x="0.0" y="71" width="188" height="30"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
                                     </textField>
                                 </subviews>
                                 <constraints>

@@ -33,11 +33,16 @@
             NSLog(@"Error logging in: %@", error);
         } else {
             NSLog(@"We're logged in!");
+            [self showMainQuestions];
         }
     }];
 }
 
 - (IBAction) skipLogin {
+    [self showMainQuestions];
+}
+
+- (void) showMainQuestions {
     [self performSegueWithIdentifier:@"mainQuestions" sender:self];
 }
 

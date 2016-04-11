@@ -33,6 +33,7 @@
             NSLog(@"Error signing up: %@", error);
         } else {
             NSLog(@"We signed up!");
+            [self dismissViewControllerAnimated:YES completion:nil];
         }
     }];
 }
