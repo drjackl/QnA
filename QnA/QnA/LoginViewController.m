@@ -37,6 +37,9 @@
     }];
 }
 
+- (IBAction) skipLogin {
+    [self performSegueWithIdentifier:@"mainQuestions" sender:self];
+}
 
 /*
 #pragma mark - Navigation
