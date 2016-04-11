@@ -10,6 +10,7 @@
 #import <Firebase.h>
 #import "QuestionCell.h"
 #import "DataSource.h"
+#import "AnswersViewController.h"
 
 @interface QuestionsViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic) Firebase* questionsRef;
@@ -85,8 +86,10 @@
 // row (question) selection bring up that question's AnswerVC
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     // set the question as selected
+    [DataSource onlySource].selectedQuestion = [DataSource onlySource].questions[indexPath.row];
     
     // segue to answerVC
+    [self performSegueWithIdentifier:@"answerQuickSegue" sender:self];
 }
 
 
@@ -139,9 +142,11 @@
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
     
-//    if ([segue.identifier isEqualToString:@"answersViewController"]) {
-//        self.
-//    }
+    if ([segue.identifier isEqualToString:@"answerQuickSegue"]) {
+        // prep answersVC and push on nav stack
+        ((AnswersViewController*)segue.destinationViewController).question = [DataSource onlySource].selectedQuestion;
+        
+    }
 }
 
 

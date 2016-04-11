@@ -7,11 +7,13 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <FDataSnapshot.h>
 
 @interface DataSource : NSObject
 
 + (instancetype) onlySource;
 
 @property (nonatomic) NSArray* questions;
+@property (nonatomic) FDataSnapshot* selectedQuestion;
 
 @end

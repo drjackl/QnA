@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <FDataSnapshot.h>
 
 @interface AnswersViewController : UIViewController
+
+@property (nonatomic) FDataSnapshot* question;
 
 @end

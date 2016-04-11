@@ -1,40 +1,27 @@
 //
-//  AnswersViewController.m
+//  OneQuestionViewController.m
 //  QnA
 //
 //  Created by Jack Li on 4/10/16.
 //  Copyright © 2016 Jack Li. All rights reserved.
 //
 
-#import "AnswersViewController.h"
+#import "OneQuestionViewController.h"
 
-@interface AnswersViewController ()
-@property (weak, nonatomic) IBOutlet UILabel *questionLabel;
+@interface OneQuestionViewController ()
+
 @end
 
-@implementation AnswersViewController
+@implementation OneQuestionViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    
-    // don't forget, this needs to be both here (for first time loading) and setter
-    self.questionLabel.text = self.question.value;
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-- (void) setQuestion:(FDataSnapshot*)question {
-    _question = question;
-    
-    self.questionLabel.text = question.value;
-}
-
-- (IBAction)dismissAnswers:(id)sender {
-    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 /*
