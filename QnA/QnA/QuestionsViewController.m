@@ -14,8 +14,6 @@
 
 @interface QuestionsViewController () <UITableViewDelegate, UITableViewDataSource>
 @property (nonatomic) Firebase* questionsRef;
-
-//@property (nonatomic) NSArray* questionsArray;
 // IBOutlets
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @end
@@ -30,9 +28,7 @@
     Firebase* appRef = [ref childByAppendingPath:@"web/data"];
     self.questionsRef = [appRef childByAppendingPath:@"questions"];
     
-    //self.questionsArray = @[];
-    
-    // since not a TableVC!
+    // since not a TableVC! (*contains* a TableVC)
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
 }
@@ -46,7 +42,6 @@
             [mutableQuestions addObject:object];
         }
         
-        //self.questionsArray = mutableQuestions;
         [DataSource onlySource].questions = mutableQuestions;
         
         [self.tableView reloadData];
@@ -68,7 +63,7 @@
 //}
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return [DataSource onlySource].questions.count;//self.questionsArray.count;
+    return [DataSource onlySource].questions.count;
 }
 
 
@@ -77,7 +72,6 @@
     
     // Configure the cell...
     
-    //cell.textLabel.text = ((FDataSnapshot*)self.questionsArray[indexPath.row]).value;
     cell.textLabel.text = ((FDataSnapshot*)[DataSource onlySource].questions[indexPath.row]).value;
     
     return cell;
