@@ -1,18 +1,18 @@
 //
-//  OneQuestionViewController.m
+//  CreateAnswerViewController.m
 //  QnA
 //
-//  Created by Jack Li on 4/10/16.
+//  Created by Jack Li on 4/14/16.
 //  Copyright © 2016 Jack Li. All rights reserved.
 //
 
-#import "OneQuestionViewController.h"
+#import "CreateAnswerViewController.h"
 
-@interface OneQuestionViewController ()
+@interface CreateAnswerViewController ()
 
 @end
 
-@implementation OneQuestionViewController
+@implementation CreateAnswerViewController
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -22,6 +22,10 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction) cancel {
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 /*
