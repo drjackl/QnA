@@ -10,10 +10,12 @@
 #import <Firebase.h>
 #import "DataSource.h"
 
-@interface AnswersViewController ()
+@interface AnswersViewController () /*<UITableViewDataSource, UITableViewDelegate>*/ // works without declaration
 @property (nonatomic) Firebase* answersReference;
+@property (nonatomic) NSArray* answers;
 // IBOutlets
-@property (weak, nonatomic) IBOutlet UILabel *questionLabel;
+@property (weak, nonatomic) IBOutlet UILabel* questionLabel;
+@property (weak, nonatomic) IBOutlet UITableView* answersTableView;
 @end
 
 @implementation AnswersViewController
@@ -25,7 +27,12 @@
     // update UI - don't forget, this needs to be both here (for first time loading) and setter
     // (if this isn't in, question label is still the default ("Question Text"))
     self.questionLabel.text = self.question.value[@"text"];
+    
+    // hooked these up in storyboard
+    //self.answersTableView.dataSource = self;
+    //self.answersTableView.delegate = self;
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
@@ -38,6 +45,18 @@
     // set reference here
     NSString* allAnswersPath = [question.key stringByAppendingPathComponent:@"answers"]; // id/answers
     self.answersReference = [[DataSource onlySource].questionsReference childByAppendingPath:allAnswersPath]; // "questions/id/answers"
+    
+    // add read observer right away (if in viewDidAppear, answers would not show)
+    [self.answersReference observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+        NSMutableArray* mutableAnswers = [NSMutableArray new];
+        for (NSObject* object in snapshot.children) {
+            [mutableAnswers addObject:object];
+        }
+        
+        self.answers = mutableAnswers;
+        
+        [self.answersTableView reloadData];
+    }];
     
     // update UI (maybe this isn't necessary if in viewDidLoad)
     //self.questionLabel.text = question.value;
@@ -71,6 +90,16 @@
 
 // this method NEEDS to have UIStoryboardSegue* as an arg (not an id) or else you can't drag to Exit
 - (IBAction) unwindBackToAnswers:(UIStoryboardSegue*)sender {
+}
+
+- (NSInteger) tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.answers.count;
+}
+
+- (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {
+    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"simpleAnswerCell" forIndexPath:indexPath];
+    cell.textLabel.text = ((FDataSnapshot*)self.answers[indexPath.row]).value;
+    return cell;
 }
 
 /*

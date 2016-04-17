@@ -46,7 +46,7 @@
                                 @"question3" : question3,
                                 @"question4" : question4};
     
-    [questionsRef setValue:questions];
+    //[questionsRef setValue:questions];
     
     NSLog(@"test reached this line");
 

@@ -23,14 +23,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    // since not a TableVC! (*contains* a TableVC)
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-}
-
-- (void) viewDidAppear:(BOOL)animated {
-    [super viewDidAppear:animated];
-    
+    // add observer for reading data (no need to wait till viewDidAppear)
     [[DataSource onlySource].questionsReference observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         NSMutableArray* mutableQuestions = [NSMutableArray new];
         for (NSObject *object in snapshot.children) {
@@ -42,7 +35,11 @@
         [self.tableView reloadData];
     }];
     
+    // since not a TableVC! (*contains* a TableVC)
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
 }
+
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
