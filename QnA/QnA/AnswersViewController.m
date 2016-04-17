@@ -8,8 +8,10 @@
 
 #import "AnswersViewController.h"
 #import <Firebase.h>
+#import "DataSource.h"
 
 @interface AnswersViewController ()
+@property (nonatomic) Firebase* answersReference;
 // IBOutlets
 @property (weak, nonatomic) IBOutlet UILabel *questionLabel;
 @end
@@ -22,7 +24,7 @@
     
     // update UI - don't forget, this needs to be both here (for first time loading) and setter
     // (if this isn't in, question label is still the default ("Question Text"))
-    self.questionLabel.text = self.question.value;
+    self.questionLabel.text = self.question.value[@"text"];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -34,6 +36,8 @@
     _question = question;
     
     // set reference here
+    NSString* allAnswersPath = [question.key stringByAppendingPathComponent:@"answers"]; // id/answers
+    self.answersReference = [[DataSource onlySource].questionsReference childByAppendingPath:allAnswersPath]; // "questions/id/answers"
     
     // update UI (maybe this isn't necessary if in viewDidLoad)
     //self.questionLabel.text = question.value;
@@ -45,11 +49,14 @@
     NSString* message = NSLocalizedString(messageString, @"Directions for user to create an answer for this question");
     UIAlertController* alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
     
+    // text field for entering answer
     [alertController addTextFieldWithConfigurationHandler:nil];
     
     UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Cancel action") style:UIAlertActionStyleCancel handler:nil];
     UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Add Answer", @"Add Answer action") style:UIAlertActionStyleDefault handler:^(UIAlertAction*_Nonnull action) {
         NSLog(@"Pressed Add Answer!");
+        Firebase* answerReference = self.answersReference.childByAutoId;
+        [answerReference setValue:alertController.textFields[0].text];
     }];
     [alertController addAction:defaultAction];
     [alertController addAction:cancelAction];
@@ -64,7 +71,6 @@
 
 // this method NEEDS to have UIStoryboardSegue* as an arg (not an id) or else you can't drag to Exit
 - (IBAction) unwindBackToAnswers:(UIStoryboardSegue*)sender {
-    
 }
 
 /*

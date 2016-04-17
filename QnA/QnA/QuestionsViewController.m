@@ -67,7 +67,7 @@
     
     // Configure the cell...
     
-    cell.textLabel.text = ((FDataSnapshot*)[DataSource onlySource].questions[indexPath.row]).value;
+    cell.textLabel.text = ((FDataSnapshot*)[DataSource onlySource].questions[indexPath.row]).value[@"text"];
     
     return cell;
 }

@@ -534,6 +534,8 @@
 			baseConfigurationReference = 3A8FDD7CB6BF71DE56AD9491 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BUNDLE_LOADER = "";
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				INFOPLIST_FILE = QnA/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.drjackl.QnA;
@@ -546,6 +548,8 @@
 			baseConfigurationReference = 272EA30CA0E068434B2438F2 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				BUNDLE_LOADER = "";
+				GCC_SYMBOLS_PRIVATE_EXTERN = YES;
 				INFOPLIST_FILE = QnA/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.drjackl.QnA;
