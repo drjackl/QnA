@@ -7,7 +7,8 @@
 //
 
 #import "LoginViewController.h"
-#import <Firebase/Firebase.h>
+#import <Firebase.h>
+#import "DataSource.h"
 
 @interface LoginViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
@@ -27,8 +28,7 @@
 }
 
 - (IBAction) login {
-    Firebase* reference = [[Firebase alloc] initWithUrl:@"https://qna-app.firebaseio.com"];
-    [reference authUser:self.emailField.text password:self.passwordField.text withCompletionBlock:^(NSError *error, FAuthData *authData) {
+    [[DataSource onlySource].reference authUser:self.emailField.text password:self.passwordField.text withCompletionBlock:^(NSError *error, FAuthData *authData) {
         if (error) {
             NSLog(@"Error logging in: %@", error);
         } else {

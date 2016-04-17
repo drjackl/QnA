@@ -7,8 +7,10 @@
 //
 
 #import "AnswersViewController.h"
+#import <Firebase.h>
 
 @interface AnswersViewController ()
+// IBOutlets
 @property (weak, nonatomic) IBOutlet UILabel *questionLabel;
 @end
 
@@ -18,7 +20,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    // don't forget, this needs to be both here (for first time loading) and setter
+    // update UI - don't forget, this needs to be both here (for first time loading) and setter
+    // (if this isn't in, question label is still the default ("Question Text"))
     self.questionLabel.text = self.question.value;
 }
 
@@ -30,7 +33,10 @@
 - (void) setQuestion:(FDataSnapshot*)question {
     _question = question;
     
-    self.questionLabel.text = question.value;
+    // set reference here
+    
+    // update UI (maybe this isn't necessary if in viewDidLoad)
+    //self.questionLabel.text = question.value;
 }
 
 - (IBAction) addAnswer {

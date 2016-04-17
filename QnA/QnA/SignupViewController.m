@@ -8,6 +8,7 @@
 
 #import "SignupViewController.h"
 #import <Firebase.h>
+#import "DataSource.h"
 
 @interface SignupViewController ()
 @property (weak, nonatomic) IBOutlet UITextField *emailField;
@@ -27,8 +28,7 @@
 }
 
 - (IBAction) signMeUp {
-    Firebase* reference = [[Firebase alloc] initWithUrl:@"https://qna-app.firebaseio.com"];
-    [reference createUser:self.emailField.text password:self.passwordField.text withCompletionBlock:^(NSError *error) {
+    [[DataSource onlySource].reference createUser:self.emailField.text password:self.passwordField.text withCompletionBlock:^(NSError *error) {
         if (error) {
             NSLog(@"Error signing up: %@", error);
         } else {

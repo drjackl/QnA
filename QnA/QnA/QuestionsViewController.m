@@ -13,7 +13,6 @@
 #import "AnswersViewController.h"
 
 @interface QuestionsViewController () <UITableViewDelegate, UITableViewDataSource>
-@property (nonatomic) Firebase* questionsRef;
 // IBOutlets
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
 @end
@@ -24,10 +23,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    Firebase* ref = [[Firebase alloc] initWithUrl:@"https://qna-app.firebaseio.com"];
-    Firebase* appRef = [ref childByAppendingPath:@"web/data"];
-    self.questionsRef = [appRef childByAppendingPath:@"questions"];
-    
     // since not a TableVC! (*contains* a TableVC)
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
@@ -36,7 +31,7 @@
 - (void) viewDidAppear:(BOOL)animated {
     [super viewDidAppear:animated];
     
-    [self.questionsRef observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+    [[DataSource onlySource].questionsReference observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         NSMutableArray* mutableQuestions = [NSMutableArray new];
         for (NSObject *object in snapshot.children) {
             [mutableQuestions addObject:object];

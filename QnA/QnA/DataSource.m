@@ -7,6 +7,7 @@
 //
 
 #import "DataSource.h"
+#import <Firebase/Firebase.h>
 
 @implementation DataSource
 
@@ -22,6 +23,10 @@
 - (instancetype) init {
     self = [super init];
     if (self) {
+        self.reference = [[Firebase alloc] initWithUrl:@"https://qna-app.firebaseio.com"];
+        Firebase* appReference = [self.reference childByAppendingPath:@"web/data"];
+        self.questionsReference = [appReference childByAppendingPath:@"questions"];
+        
         self.questions = @[];
     }
     return self;
