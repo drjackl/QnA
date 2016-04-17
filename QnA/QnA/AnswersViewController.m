@@ -33,6 +33,25 @@
     self.questionLabel.text = question.value;
 }
 
+- (IBAction) addAnswer {
+    NSString* title = NSLocalizedString(@"Add An Answer", @"Title for user to create an answer for this question");
+    NSString* messageString = [NSString stringWithFormat:@"Give an answer to the question \"%@\"", self.questionLabel.text];
+    NSString* message = NSLocalizedString(messageString, @"Directions for user to create an answer for this question");
+    UIAlertController* alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    
+    [alertController addTextFieldWithConfigurationHandler:nil];
+    
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Cancel action") style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Add Answer", @"Add Answer action") style:UIAlertActionStyleDefault handler:^(UIAlertAction*_Nonnull action) {
+        NSLog(@"Pressed Add Answer!");
+    }];
+    [alertController addAction:defaultAction];
+    [alertController addAction:cancelAction];
+    
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
+
 - (IBAction)dismissAnswers:(id)sender {
     [self dismissViewControllerAnimated:YES completion:nil];
 }

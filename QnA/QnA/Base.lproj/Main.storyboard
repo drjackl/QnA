@@ -298,8 +298,8 @@
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="ufc-li-o02">
                                 <rect key="frame" x="5" y="0.0" width="595" height="600"/>
                                 <subviews>
-                                    <stackView opaque="NO" contentMode="scaleToFill" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="9nA-mQ-OSb">
-                                        <rect key="frame" x="0.0" y="0.0" width="102" height="30"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="9nA-mQ-OSb">
+                                        <rect key="frame" x="0.0" y="0.0" width="112" height="30"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D3W-Z0-REt">
                                                 <rect key="frame" x="0.0" y="0.0" width="52" height="30"/>
@@ -309,10 +309,17 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qqk-PD-mUa">
-                                                <rect key="frame" x="72" y="0.0" width="30" height="30"/>
+                                                <rect key="frame" x="52" y="0.0" width="30" height="30"/>
                                                 <state key="normal" title="+"/>
                                                 <connections>
                                                     <segue destination="Ipp-cU-FXT" kind="presentation" id="968-hE-WoS"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="W2j-oX-1t6">
+                                                <rect key="frame" x="82" y="0.0" width="30" height="30"/>
+                                                <state key="normal" title="+A"/>
+                                                <connections>
+                                                    <action selector="addAnswer" destination="42d-5c-6Ck" eventType="touchUpInside" id="hN5-zO-oHI"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -332,9 +339,9 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="ufc-li-o02" firstAttribute="top" secondItem="OmE-7c-xOL" secondAttribute="top" id="JA7-KB-nrg"/>
                             <constraint firstItem="ufc-li-o02" firstAttribute="leading" secondItem="OmE-7c-xOL" secondAttribute="leading" constant="5" id="XF5-ej-4MK"/>
                             <constraint firstItem="fFG-Ix-uRe" firstAttribute="top" secondItem="ufc-li-o02" secondAttribute="bottom" id="mn2-yk-vt4"/>
+                            <constraint firstItem="ufc-li-o02" firstAttribute="top" secondItem="eb2-8c-6iD" secondAttribute="bottom" constant="-20" id="tqI-tl-enX"/>
                             <constraint firstAttribute="trailing" secondItem="ufc-li-o02" secondAttribute="trailing" id="zPm-61-Noa"/>
                         </constraints>
                     </view>
