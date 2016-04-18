@@ -73,8 +73,9 @@
     
     UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Cancel action") style:UIAlertActionStyleCancel handler:nil];
     UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Post Answer", @"Post Answer action") style:UIAlertActionStyleDefault handler:^(UIAlertAction*_Nonnull action) {
-        NSLog(@"Pressed Add Answer!");
-        Firebase* answerReference = self.answersReference.childByAutoId;
+        
+        // posting answer to backend
+        Firebase* answerReference = [self.answersReference childByAutoId];
         [answerReference setValue:alertController.textFields[0].text];
     }];
     [alertController addAction:cancelAction];

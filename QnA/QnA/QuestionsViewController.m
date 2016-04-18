@@ -64,8 +64,9 @@
     // post/cancel buttons
     UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Cancel action") style:UIAlertActionStyleCancel handler:nil];
     UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Post Question", @"Post Question action") style:UIAlertActionStyleDefault handler:^(UIAlertAction*_Nonnull action) {
-        NSLog(@"Question posted!");
-        Firebase* postReference = [DataSource onlySource].questionsReference.childByAutoId;
+        
+        // posting question to backend
+        Firebase* postReference = [[DataSource onlySource].questionsReference childByAutoId];
         NSDictionary* post = [[DataSource onlySource] createPostWithText:alertController.textFields[0].text];//@{@"text" : alertController.textFields[0].text};
         [postReference setValue:post];
     }];
