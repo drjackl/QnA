@@ -19,4 +19,6 @@
 @property (nonatomic) NSArray* questions;
 @property (nonatomic) FDataSnapshot* selectedQuestion;
 
+- (NSDictionary*) createPostWithText:(NSString*)text;
+
 @end

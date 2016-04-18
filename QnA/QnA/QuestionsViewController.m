@@ -26,7 +26,7 @@
     // add observer for reading data (no need to wait till viewDidAppear)
     [[DataSource onlySource].questionsReference observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         NSMutableArray* mutableQuestions = [NSMutableArray new];
-        for (NSObject *object in snapshot.children) {
+        for (NSObject* object in snapshot.children) {
             [mutableQuestions addObject:object];
         }
         
@@ -45,6 +45,37 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
+- (IBAction) addQuestionModal {
+    // title
+    NSString* title = NSLocalizedString(@"Add A Question", @"Title for user to create a question");
+    
+    // message
+    NSAttributedString* exampleText = [[NSAttributedString alloc] initWithString:@"Is Apple a better technology company than Google?" attributes:@{NSFontAttributeName : [UIFont italicSystemFontOfSize:[UIFont systemFontSize]]}];
+    NSString* messageText = [@"Ask the world a question.\nExample: " stringByAppendingString:exampleText.string];
+    NSString* message = NSLocalizedString(messageText, @"Description for user to create a question");
+    
+    // alert controller
+    UIAlertController* alertController = [UIAlertController alertControllerWithTitle:title message:message preferredStyle:UIAlertControllerStyleAlert];
+    
+    // text field for question
+    [alertController addTextFieldWithConfigurationHandler:nil];
+    
+    // post/cancel buttons
+    UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Cancel action") style:UIAlertActionStyleCancel handler:nil];
+    UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Post Question", @"Post Question action") style:UIAlertActionStyleDefault handler:^(UIAlertAction*_Nonnull action) {
+        NSLog(@"Question posted!");
+        Firebase* postReference = [DataSource onlySource].questionsReference.childByAutoId;
+        NSDictionary* post = [[DataSource onlySource] createPostWithText:alertController.textFields[0].text];//@{@"text" : alertController.textFields[0].text};
+        [postReference setValue:post];
+    }];
+    [alertController addAction:cancelAction];
+    [alertController addAction:defaultAction];
+    
+    // present dialog
+    [self presentViewController:alertController animated:YES completion:nil];
+}
+
 
 #pragma mark - Table view data source
 
