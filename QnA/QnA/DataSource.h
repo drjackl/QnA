@@ -13,8 +13,13 @@
 
 + (instancetype) onlySource;
 
-@property (nonatomic) Firebase* reference;
-@property (nonatomic) Firebase* questionsReference;
+@property (readonly, nonatomic) Firebase* reference;
+@property (readonly, nonatomic) Firebase* appReference;
+@property (readonly, nonatomic) Firebase* questionsReference;
+
+@property (nonatomic) Firebase* loggedInUserReference;
+
+@property (nonatomic) NSString* loggedInUser;
 
 @property (nonatomic) NSArray* questions;
 @property (nonatomic) FDataSnapshot* selectedQuestion;

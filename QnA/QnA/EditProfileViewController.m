@@ -7,9 +7,11 @@
 //
 
 #import "EditProfileViewController.h"
+#import <Firebase.h>
+#import "DataSource.h"
 
 @interface EditProfileViewController ()
-
+@property (weak, nonatomic) IBOutlet UITextView *descriptionTextView;
 @end
 
 @implementation EditProfileViewController
@@ -22,6 +24,11 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction) saveProfile {
+    NSDictionary* profile = @{@"description" : self.descriptionTextView.text};
+    [[DataSource onlySource].loggedInUserReference setValue:profile];
 }
 
 /*

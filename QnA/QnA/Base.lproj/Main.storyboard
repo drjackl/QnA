@@ -170,7 +170,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ZmF-Ed-KT7">
+                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ZmF-Ed-KT7">
                                 <rect key="frame" x="20" y="20" width="240" height="149"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About Me" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4NW-8w-8Zb">
@@ -188,13 +188,19 @@
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="5Kd-zB-NSH">
                                         <rect key="frame" x="0.0" y="119" width="240" height="30"/>
                                         <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b83-MF-WJs">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b83-MF-WJs">
                                                 <rect key="frame" x="0.0" y="0.0" width="48" height="30"/>
                                                 <state key="normal" title="Cancel"/>
+                                                <connections>
+                                                    <segue destination="HPH-1x-qzl" kind="unwind" unwindAction="unwindBackToQuestionsViewController:" id="CbW-UB-Upj"/>
+                                                </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g8D-gQ-NsP">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g8D-gQ-NsP">
                                                 <rect key="frame" x="206" y="0.0" width="34" height="30"/>
                                                 <state key="normal" title="Save"/>
+                                                <connections>
+                                                    <action selector="saveProfile" destination="bj2-nP-sZe" eventType="touchUpInside" id="h4m-62-SeS"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                     </stackView>
@@ -211,8 +217,12 @@
                             <constraint firstItem="ZmF-Ed-KT7" firstAttribute="top" secondItem="1nx-SI-2ee" secondAttribute="bottom" id="eDG-GK-YJp"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="descriptionTextView" destination="kTM-bf-6tc" id="vaf-Fy-liO"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4NE-pV-nGr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="HPH-1x-qzl" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1253" y="-35"/>
         </scene>
@@ -238,7 +248,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="570" height="30"/>
                                                 <state key="normal" title="Edit Profile"/>
                                                 <connections>
-                                                    <segue destination="bj2-nP-sZe" kind="presentation" id="i76-er-jwV"/>
+                                                    <segue destination="bj2-nP-sZe" kind="presentation" modalPresentationStyle="pageSheet" modalTransitionStyle="flipHorizontal" id="i76-er-jwV"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" ambiguous="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jtr-Zc-gyU">

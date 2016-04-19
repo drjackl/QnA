@@ -9,6 +9,13 @@
 #import "DataSource.h"
 #import <Firebase/Firebase.h>
 
+@interface DataSource ()
+// redeclare as readwrite to set for this .m
+@property (nonatomic) Firebase* reference;
+@property (nonatomic) Firebase* appReference;
+@property (nonatomic) Firebase* questionsReference;
+@end
+
 @implementation DataSource
 
 + (instancetype) onlySource {
@@ -24,14 +31,28 @@
     self = [super init];
     if (self) {
         self.reference = [[Firebase alloc] initWithUrl:@"https://qna-app.firebaseio.com"];
-        Firebase* appReference = [self.reference childByAppendingPath:@"web/data"];
-        self.questionsReference = [appReference childByAppendingPath:@"questions"];
+        self.appReference = [self.reference childByAppendingPath:@"web/data"];
+        self.questionsReference = [self.appReference childByAppendingPath:@"questions"];
         
-        //[self loadBoilerplateData];
+        self.loggedInUser = nil;
         
         self.questions = @[];
+        
+        // uncomment to reset the data to boilerplate
+        //[self loadBoilerplateData];
     }
     return self;
+}
+
+- (void) setLoggedInUser:(NSString*)loggedInUser {
+    _loggedInUser = loggedInUser;
+    
+    if (loggedInUser) {
+        Firebase* usersReference = [self.appReference childByAppendingPath:@"users"];
+        self.loggedInUserReference = [usersReference childByAppendingPath:loggedInUser];
+    } else {
+        self.loggedInUserReference = nil;
+    }
 }
 
 - (NSDictionary*) createPostWithText:(NSString*)text {
@@ -44,9 +65,9 @@
     NSString* question3Text = @"What can I learn/know right now in 10 minutes that will be useful for the rest of my life?";
     //NSString* question4Text = @"Why not?";
     
-    NSDictionary* question1 = [self createPostWithText:question1Text];//@{@"text" : question1Text};
-    NSDictionary* question2 = [self createPostWithText:question2Text];//@{@"text" : question2Text};
-    NSDictionary* question3 = [self createPostWithText:question3Text];//@{@"text" : question3Text};
+    NSDictionary* question1 = [self createPostWithText:question1Text];
+    NSDictionary* question2 = [self createPostWithText:question2Text];
+    NSDictionary* question3 = [self createPostWithText:question3Text];
     //NSDictionary* question4 = @{@"text" : question4Text};
     
     NSDictionary* questions = @{@"question1" : question1,

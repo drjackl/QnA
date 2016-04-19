@@ -46,10 +46,6 @@
     // Dispose of any resources that can be recreated.
 }
 
-//- (IBAction)editProfileModal:(id)sender {
-//    [self performSegueWithIdentifier:@"EditProfileViewController" sender:self];
-//}
-
 - (IBAction) addQuestionModal {
     // title
     NSString* title = NSLocalizedString(@"Add A Question", @"Title for user to create a question");
@@ -79,6 +75,9 @@
     
     // present dialog
     [self presentViewController:alertController animated:YES completion:nil];
+}
+
+- (IBAction) unwindBackToQuestionsViewController:(UIStoryboardSegue*)segue {
 }
 
 
@@ -167,7 +166,6 @@
     if ([segue.identifier isEqualToString:@"answerQuickSegue"]) {
         // prep answersVC and push on nav stack
         ((AnswersViewController*)segue.destinationViewController).question = [DataSource onlySource].selectedQuestion;
-        
     }
 }
 

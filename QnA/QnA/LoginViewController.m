@@ -28,11 +28,14 @@
 }
 
 - (IBAction) login {
-    [[DataSource onlySource].reference authUser:self.emailField.text password:self.passwordField.text withCompletionBlock:^(NSError *error, FAuthData *authData) {
+    [[DataSource onlySource].reference authUser:self.emailField.text password:self.passwordField.text withCompletionBlock:^(NSError* error, FAuthData* authData) {
         if (error) {
             NSLog(@"Error logging in: %@", error);
         } else {
             NSLog(@"We're logged in!");
+            
+            [DataSource onlySource].loggedInUser = authData.uid;
+            
             [self showMainQuestions];
         }
     }];
