@@ -46,6 +46,10 @@
     // Dispose of any resources that can be recreated.
 }
 
+//- (IBAction)editProfileModal:(id)sender {
+//    [self performSegueWithIdentifier:@"EditProfileViewController" sender:self];
+//}
+
 - (IBAction) addQuestionModal {
     // title
     NSString* title = NSLocalizedString(@"Add A Question", @"Title for user to create a question");
