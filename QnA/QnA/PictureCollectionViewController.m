@@ -7,9 +7,10 @@
 //
 
 #import "PictureCollectionViewController.h"
+#import <Photos/Photos.h>
 
 @interface PictureCollectionViewController ()
-
+@property (nonatomic) PHFetchResult* picturesResult;
 @end
 
 @implementation PictureCollectionViewController
@@ -28,7 +29,36 @@ static NSString*const reuseIdentifier = @"picCell";
     
     // Do any additional setup after loading the view.
     
-    self.navigationItem.title = @"Test";
+    //self.navigationItem.title = @"Test";
+}
+
+// NOT viewDIDAppear
+- (void) viewWillAppear:(BOOL)animated {
+    [super viewWillAppear:animated];
+    
+    // if authorization not determined, request authorization
+    if (PHPhotoLibrary.authorizationStatus == PHAuthorizationStatusNotDetermined) {
+        [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
+            if ([PHPhotoLibrary authorizationStatus] == PHAuthorizationStatusAuthorized) {
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    [self loadAssets];
+                    [self.collectionView reloadData];
+                }); // end dispatch_async
+            } // end if authorized to access Photo Library
+        }]; // end requestAuthorization block
+    }
+    
+    // else if authorized, just load assets
+    else if (PHPhotoLibrary.authorizationStatus == PHAuthorizationStatusAuthorized) {
+        [self loadAssets];
+    }
+}
+
+- (void) loadAssets {
+    PHFetchOptions* options = [PHFetchOptions new];
+    options.sortDescriptors = @[[NSSortDescriptor sortDescriptorWithKey:@"creationDate" ascending:YES]];
+    
+    self.picturesResult = [PHAsset fetchAssetsWithMediaType:PHAssetMediaTypeImage options:options];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -46,6 +76,7 @@ static NSString*const reuseIdentifier = @"picCell";
 }
 */
 
+
 #pragma mark <UICollectionViewDataSource>
 
 // default is 1 like in table?
@@ -56,15 +87,33 @@ static NSString*const reuseIdentifier = @"picCell";
 
 
 - (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
-#warning Incomplete implementation, return the number of items
-    return 1;
+//#warning Incomplete implementation, return the number of items
+    return self.picturesResult.count;
 }
 
-- (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
-    UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
+- (UICollectionViewCell*) collectionView:(UICollectionView*)collectionView cellForItemAtIndexPath:(NSIndexPath*)indexPath {
+    UICollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     // Configure the cell
     
+    if (cell.tag != 0) {
+        [[PHImageManager defaultManager] cancelImageRequest:(PHImageRequestID)cell.tag];
+    }
+    
+    UICollectionViewFlowLayout* flowLayout = (UICollectionViewFlowLayout*)self.collectionViewLayout;
+    PHAsset* asset = self.picturesResult[indexPath.row];
+    
+    cell.tag = [[PHImageManager defaultManager] requestImageForAsset:asset targetSize:flowLayout.itemSize contentMode:PHImageContentModeAspectFill options:nil resultHandler:^(UIImage*_Nullable result, NSDictionary*_Nullable info) {
+        // not sure it's really necessary to check if there's a cell here
+        //UICollectionViewCell* cellToUpdate = [collectionView cellForItemAtIndexPath:indexPath];
+        
+        //if (cellToUpdate) {
+            UIImageView* imageView = (UIImageView*)[cell viewWithTag:321];
+            imageView.image = result;
+        //}
+        
+    }];
+
     return cell;
 }
 
