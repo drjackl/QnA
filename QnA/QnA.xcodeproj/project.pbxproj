@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0414010D1CC0962200974E9C /* CreateAnswerViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 0414010C1CC0962200974E9C /* CreateAnswerViewController.m */; };
+		046F991A1CC72C4F00B52D18 /* PictureCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046F99191CC72C4F00B52D18 /* PictureCollectionViewController.m */; };
 		04B94D311CBAB3FC00C4A85C /* QuestionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B94D301CBAB3FC00C4A85C /* QuestionCell.m */; };
 		04B94D361CBB08A100C4A85C /* AnswersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B94D351CBB08A100C4A85C /* AnswersViewController.m */; };
 		04B94D391CBB0C7C00C4A85C /* DataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B94D381CBB0C7C00C4A85C /* DataSource.m */; };
@@ -46,6 +47,8 @@
 /* Begin PBXFileReference section */
 		0414010B1CC0962200974E9C /* CreateAnswerViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CreateAnswerViewController.h; sourceTree = "<group>"; };
 		0414010C1CC0962200974E9C /* CreateAnswerViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CreateAnswerViewController.m; sourceTree = "<group>"; };
+		046F99181CC72C4F00B52D18 /* PictureCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PictureCollectionViewController.h; sourceTree = "<group>"; };
+		046F99191CC72C4F00B52D18 /* PictureCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PictureCollectionViewController.m; sourceTree = "<group>"; };
 		04B94D2F1CBAB3FC00C4A85C /* QuestionCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuestionCell.h; sourceTree = "<group>"; };
 		04B94D301CBAB3FC00C4A85C /* QuestionCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuestionCell.m; sourceTree = "<group>"; };
 		04B94D341CBB08A100C4A85C /* AnswersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnswersViewController.h; sourceTree = "<group>"; };
@@ -148,6 +151,8 @@
 				0414010C1CC0962200974E9C /* CreateAnswerViewController.m */,
 				04F325611CC5626300B86C94 /* EditProfileViewController.h */,
 				04F325621CC5626300B86C94 /* EditProfileViewController.m */,
+				046F99181CC72C4F00B52D18 /* PictureCollectionViewController.h */,
+				046F99191CC72C4F00B52D18 /* PictureCollectionViewController.m */,
 				04B94D371CBB0C7C00C4A85C /* DataSource.h */,
 				04B94D381CBB0C7C00C4A85C /* DataSource.m */,
 				04B94D3A1CBB0E8000C4A85C /* Question.h */,
@@ -393,6 +398,7 @@
 				04B94D361CBB08A100C4A85C /* AnswersViewController.m in Sources */,
 				04B94D391CBB0C7C00C4A85C /* DataSource.m in Sources */,
 				04B94D311CBAB3FC00C4A85C /* QuestionCell.m in Sources */,
+				046F991A1CC72C4F00B52D18 /* PictureCollectionViewController.m in Sources */,
 				04D00A861CB9DCC700A81AEE /* QuestionsViewController.m in Sources */,
 				0414010D1CC0962200974E9C /* CreateAnswerViewController.m in Sources */,
 				04D00A801CB8C85D00A81AEE /* SignupViewController.m in Sources */,
