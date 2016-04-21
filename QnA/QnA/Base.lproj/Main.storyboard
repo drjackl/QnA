@@ -253,7 +253,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Bg7-Fu-dOI">
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="1" minimumInteritemSpacing="1" id="Bg7-Fu-dOI">
                             <size key="itemSize" width="100" height="100"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -267,17 +267,17 @@
                                     <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <imageView userInteractionEnabled="NO" tag="321" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fPV-AF-IUj">
-                                            <rect key="frame" x="8" y="8" width="84" height="84"/>
+                                        <imageView autoresizesSubviews="NO" userInteractionEnabled="NO" tag="321" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fPV-AF-IUj">
+                                            <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                         </imageView>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 </view>
                                 <constraints>
-                                    <constraint firstItem="fPV-AF-IUj" firstAttribute="leading" secondItem="JQo-6b-jxh" secondAttribute="leadingMargin" id="Sfa-fl-gls"/>
-                                    <constraint firstAttribute="trailingMargin" secondItem="fPV-AF-IUj" secondAttribute="trailing" id="TYT-39-243"/>
-                                    <constraint firstItem="fPV-AF-IUj" firstAttribute="top" secondItem="JQo-6b-jxh" secondAttribute="topMargin" id="b8t-CV-Lo7"/>
-                                    <constraint firstAttribute="bottomMargin" secondItem="fPV-AF-IUj" secondAttribute="bottom" id="hgT-50-npU"/>
+                                    <constraint firstItem="fPV-AF-IUj" firstAttribute="leading" secondItem="JQo-6b-jxh" secondAttribute="leading" id="6Ww-p2-Qh2"/>
+                                    <constraint firstAttribute="bottom" secondItem="fPV-AF-IUj" secondAttribute="bottom" id="AKb-dz-HaA"/>
+                                    <constraint firstAttribute="trailing" secondItem="fPV-AF-IUj" secondAttribute="trailing" id="Huf-MV-Tj4"/>
+                                    <constraint firstItem="fPV-AF-IUj" firstAttribute="top" secondItem="JQo-6b-jxh" secondAttribute="top" id="Qft-iw-x5g"/>
                                 </constraints>
                             </collectionViewCell>
                         </cells>

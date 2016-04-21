@@ -32,6 +32,25 @@ static NSString*const reuseIdentifier = @"picCell";
     //self.navigationItem.title = @"Test";
 }
 
+- (void) viewWillLayoutSubviews {
+    [super viewWillLayoutSubviews];
+    
+    // calculate and set width of cell
+    static CGFloat maxCellLength = 100;
+    CGFloat viewWidth = CGRectGetWidth(self.view.bounds);
+    int itemsPerRow = ceil(viewWidth / maxCellLength); // add one if not exact (get ceiling)
+    
+    CGFloat cellLength = viewWidth / itemsPerRow - 1; // -1 ensures it fits (floor seems to work too ... not if minCellLength though)
+    
+    UICollectionViewFlowLayout* flowLayout = (UICollectionViewFlowLayout*)self.collectionViewLayout;
+    flowLayout.itemSize = CGSizeMake(cellLength, cellLength);
+    
+    // taken care of in storyboard (flowLayout or cell)
+    //flowLayout.minimumInteritemSpacing = 1;
+    //flowLayout.minimumLineSpacing = 1; // originally, no (0) spacing between cells
+
+}
+
 // NOT viewDIDAppear
 - (void) viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
@@ -39,7 +58,7 @@ static NSString*const reuseIdentifier = @"picCell";
     // if authorization not determined, request authorization
     if (PHPhotoLibrary.authorizationStatus == PHAuthorizationStatusNotDetermined) {
         [PHPhotoLibrary requestAuthorization:^(PHAuthorizationStatus status) {
-            if ([PHPhotoLibrary authorizationStatus] == PHAuthorizationStatusAuthorized) {
+            if (PHPhotoLibrary.authorizationStatus == PHAuthorizationStatusAuthorized) {
                 dispatch_async(dispatch_get_main_queue(), ^{
                     [self loadAssets];
                     [self.collectionView reloadData];
@@ -95,9 +114,15 @@ static NSString*const reuseIdentifier = @"picCell";
     UICollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     // Configure the cell
+    UIImageView* imageView = (UIImageView*)[cell viewWithTag:321];
+    //imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth; // this looks not needed since parent does this
+    
+    // these are taken care of in storyboard now
+    //imageView.contentMode = UIViewContentModeScaleAspectFill;
+    //imageView.clipsToBounds = YES; // this looks not needed since parent does this
     
     if (cell.tag != 0) {
-        [[PHImageManager defaultManager] cancelImageRequest:(PHImageRequestID)cell.tag];
+        [PHImageManager.defaultManager cancelImageRequest:(PHImageRequestID)cell.tag];
     }
     
     UICollectionViewFlowLayout* flowLayout = (UICollectionViewFlowLayout*)self.collectionViewLayout;
@@ -108,7 +133,7 @@ static NSString*const reuseIdentifier = @"picCell";
         //UICollectionViewCell* cellToUpdate = [collectionView cellForItemAtIndexPath:indexPath];
         
         //if (cellToUpdate) {
-            UIImageView* imageView = (UIImageView*)[cell viewWithTag:321];
+            //UIImageView* imageView = (UIImageView*)[cell viewWithTag:321];
             imageView.image = result;
         //}
         
