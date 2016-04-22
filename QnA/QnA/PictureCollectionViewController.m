@@ -114,7 +114,7 @@ static NSString*const reuseIdentifier = @"picCell";
     UICollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     // Configure the cell
-    UIImageView* imageView = (UIImageView*)[cell viewWithTag:321];
+    //UIImageView* imageView = (UIImageView*)[cell viewWithTag:321];
     //imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth; // this looks not needed since parent does this
     
     // these are taken care of in storyboard now
@@ -133,7 +133,7 @@ static NSString*const reuseIdentifier = @"picCell";
         //UICollectionViewCell* cellToUpdate = [collectionView cellForItemAtIndexPath:indexPath];
         
         //if (cellToUpdate) {
-            //UIImageView* imageView = (UIImageView*)[cell viewWithTag:321];
+            UIImageView* imageView = (UIImageView*)[cell viewWithTag:321];
             imageView.image = result;
         //}
         

@@ -158,7 +158,7 @@
             </objects>
             <point key="canvasLocation" x="221" y="1019"/>
         </scene>
-        <!--Edit Profile View Controller-->
+        <!--Edit your profile-->
         <scene sceneID="yt8-Qz-Amr">
             <objects>
                 <viewController storyboardIdentifier="EditProfileViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="bj2-nP-sZe" customClass="EditProfileViewController" sceneMemberID="viewController">
@@ -171,7 +171,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="ZmF-Ed-KT7">
-                                <rect key="frame" x="20" y="0.0" width="300" height="140"/>
+                                <rect key="frame" x="20" y="74" width="300" height="140"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="About Me" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4NW-8w-8Zb">
                                         <rect key="frame" x="0.0" y="0.0" width="300" height="20"/>
@@ -193,7 +193,7 @@
                                                 <rect key="frame" x="90" y="0.0" width="30" height="90"/>
                                                 <state key="normal" title="img"/>
                                                 <connections>
-                                                    <segue destination="LIG-RA-L4V" kind="presentation" id="2IV-67-43T"/>
+                                                    <segue destination="LIG-RA-L4V" kind="show" id="2IV-67-43T"/>
                                                 </connections>
                                             </button>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="kTM-bf-6tc">
@@ -236,6 +236,9 @@
                             <constraint firstItem="ZmF-Ed-KT7" firstAttribute="top" secondItem="1nx-SI-2ee" secondAttribute="bottom" id="eDG-GK-YJp"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Edit your profile" prompt="Express Yourself" id="sFz-dc-LIM">
+                        <barButtonItem key="backBarButtonItem" title="Edit" id="kVJ-KI-b2b"/>
+                    </navigationItem>
                     <connections>
                         <outlet property="descriptionTextView" destination="kTM-bf-6tc" id="vaf-Fy-liO"/>
                     </connections>
@@ -243,7 +246,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4NE-pV-nGr" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="HPH-1x-qzl" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="1253" y="-35"/>
+            <point key="canvasLocation" x="2065" y="-35"/>
         </scene>
         <!--Select a picture for your profile-->
         <scene sceneID="WYb-uj-Vvn">
@@ -261,7 +264,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="picCell" id="JQo-6b-jxh">
-                                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                <rect key="frame" x="0.0" y="44" width="100" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
@@ -286,11 +289,13 @@
                             <outlet property="delegate" destination="LIG-RA-L4V" id="O7D-pm-0a7"/>
                         </connections>
                     </collectionView>
-                    <navigationItem key="navigationItem" title="Select a picture for your profile" prompt="Hi" id="65B-kp-iJ0"/>
+                    <navigationItem key="navigationItem" title="Select a picture for your profile" prompt="Show Your Face" id="65B-kp-iJ0">
+                        <barButtonItem key="backBarButtonItem" title="Back" id="yXG-F8-c4v"/>
+                    </navigationItem>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N8Z-UK-zQZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1919" y="-34"/>
+            <point key="canvasLocation" x="2731" y="-34"/>
         </scene>
         <!--Questions View Controller-->
         <scene sceneID="806-7u-Ji9">
@@ -314,7 +319,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="570" height="30"/>
                                                 <state key="normal" title="Edit Profile"/>
                                                 <connections>
-                                                    <segue destination="bj2-nP-sZe" kind="presentation" modalPresentationStyle="formSheet" modalTransitionStyle="flipHorizontal" id="i76-er-jwV"/>
+                                                    <segue destination="Jty-CF-MCq" kind="presentation" modalPresentationStyle="formSheet" modalTransitionStyle="flipHorizontal" id="i76-er-jwV"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" ambiguous="YES" contentHorizontalAlignment="right" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jtr-Zc-gyU">
@@ -439,7 +444,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aJK-XE-KR8" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="BfY-ZR-H7X" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
-            <point key="canvasLocation" x="2549" y="282"/>
+            <point key="canvasLocation" x="2647" y="1056"/>
         </scene>
         <!--Answers View Controller-->
         <scene sceneID="znf-Tp-K4C">
@@ -534,6 +539,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qnn-cD-uWa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1750" y="722"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="ahx-BJ-FGj">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Jty-CF-MCq" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="5BK-J6-zNi">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="bj2-nP-sZe" kind="relationship" relationship="rootViewController" id="ahD-yL-QmH"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fNm-NS-VY4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1253" y="-35"/>
         </scene>
     </scenes>
 </document>
