@@ -12,8 +12,8 @@
 #import "PictureCollectionViewController.h"
 
 @interface EditProfileViewController () <PictureCollectionViewControllerDelegate>
-@property (weak, nonatomic) IBOutlet UITextView *descriptionTextView;
-@property (weak, nonatomic) IBOutlet UIImageView *profileImageView;
+@property (weak, nonatomic) IBOutlet UITextView* descriptionTextView;
+@property (weak, nonatomic) IBOutlet UIImageView* profileImageView;
 @end
 
 @implementation EditProfileViewController
@@ -21,6 +21,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedImage)];
+    [self.profileImageView addGestureRecognizer:tapRecognizer];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -31,6 +34,10 @@
 - (IBAction) saveProfile {
     NSDictionary* profile = @{@"description" : self.descriptionTextView.text};
     [[DataSource onlySource].loggedInUserReference setValue:profile];
+}
+
+- (void) tappedImage {
+    [self performSegueWithIdentifier:@"picturePicker" sender:self];
 }
 
 
