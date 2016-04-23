@@ -101,11 +101,11 @@ static NSString*const reuseIdentifier = @"picCell";
 // default is 1 like in table?
 //- (NSInteger)numberOfSectionsInCollectionView:(UICollectionView *)collectionView {
 //#warning Incomplete implementation, return the number of sections
-//    return 1;
+//    return 0;
 //}
 
 
-- (NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section {
+- (NSInteger) collectionView:(UICollectionView*)collectionView numberOfItemsInSection:(NSInteger)section {
 //#warning Incomplete implementation, return the number of items
     return self.picturesResult.count;
 }
@@ -114,12 +114,7 @@ static NSString*const reuseIdentifier = @"picCell";
     UICollectionViewCell* cell = [collectionView dequeueReusableCellWithReuseIdentifier:reuseIdentifier forIndexPath:indexPath];
     
     // Configure the cell
-    //UIImageView* imageView = (UIImageView*)[cell viewWithTag:321];
-    //imageView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth; // this looks not needed since parent does this
-    
-    // these are taken care of in storyboard now
-    //imageView.contentMode = UIViewContentModeScaleAspectFill;
-    //imageView.clipsToBounds = YES; // this looks not needed since parent does this
+    // no need to set imageView's clipsToBounds or autoresize since parent takes does this (also, content mode set in storyboard)
     
     if (cell.tag != 0) {
         [PHImageManager.defaultManager cancelImageRequest:(PHImageRequestID)cell.tag];
@@ -128,7 +123,7 @@ static NSString*const reuseIdentifier = @"picCell";
     UICollectionViewFlowLayout* flowLayout = (UICollectionViewFlowLayout*)self.collectionViewLayout;
     PHAsset* asset = self.picturesResult[indexPath.row];
     
-    cell.tag = [[PHImageManager defaultManager] requestImageForAsset:asset targetSize:flowLayout.itemSize contentMode:PHImageContentModeAspectFill options:nil resultHandler:^(UIImage*_Nullable result, NSDictionary*_Nullable info) {
+    cell.tag = [PHImageManager.defaultManager requestImageForAsset:asset targetSize:flowLayout.itemSize contentMode:PHImageContentModeAspectFill options:nil resultHandler:^(UIImage*_Nullable result, NSDictionary*_Nullable info) {
         // not sure it's really necessary to check if there's a cell here
         //UICollectionViewCell* cellToUpdate = [collectionView cellForItemAtIndexPath:indexPath];
         
@@ -143,6 +138,19 @@ static NSString*const reuseIdentifier = @"picCell";
 }
 
 #pragma mark <UICollectionViewDelegate>
+
+- (void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath {
+    PHAsset* asset = self.picturesResult[indexPath.row];
+    
+    PHImageRequestOptions* options = [PHImageRequestOptions new];
+    options.synchronous = YES;
+    options.deliveryMode = PHImageRequestOptionsDeliveryModeHighQualityFormat;// default is Opportunistic I think
+    
+    // make max size the maxCellSize
+    [PHImageManager.defaultManager requestImageForAsset:asset targetSize:CGSizeMake(100, 100) contentMode:PHImageContentModeDefault options:options resultHandler:^(UIImage*_Nullable result, NSDictionary*_Nullable info) {
+        [self.delegate didGetImage:result];
+    }];
+}
 
 /*
 // Uncomment this method to specify if the specified item should be highlighted during tracking

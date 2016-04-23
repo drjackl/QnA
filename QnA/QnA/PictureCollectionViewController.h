@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PictureCollectionViewController : UICollectionViewController
+@protocol PictureCollectionViewControllerDelegate <NSObject>
+- (void) didGetImage:(UIImage*)image;
+@end
 
+@interface PictureCollectionViewController : UICollectionViewController
+@property (weak, nonatomic) id<PictureCollectionViewControllerDelegate> delegate;
 @end

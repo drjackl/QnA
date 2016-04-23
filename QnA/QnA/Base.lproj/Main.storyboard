@@ -193,7 +193,7 @@
                                                 <rect key="frame" x="90" y="0.0" width="30" height="90"/>
                                                 <state key="normal" title="img"/>
                                                 <connections>
-                                                    <segue destination="LIG-RA-L4V" kind="show" id="2IV-67-43T"/>
+                                                    <segue destination="LIG-RA-L4V" kind="show" identifier="picturePicker" id="2IV-67-43T"/>
                                                 </connections>
                                             </button>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="kTM-bf-6tc">
@@ -241,6 +241,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="descriptionTextView" destination="kTM-bf-6tc" id="vaf-Fy-liO"/>
+                        <outlet property="profileImageView" destination="scu-d1-q4t" id="1gp-hY-i3V"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4NE-pV-nGr" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -264,7 +265,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="picCell" id="JQo-6b-jxh">
-                                <rect key="frame" x="0.0" y="44" width="100" height="100"/>
+                                <rect key="frame" x="0.0" y="74" width="100" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
