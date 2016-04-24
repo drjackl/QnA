@@ -24,7 +24,7 @@
     // Do any additional setup after loading the view.
     
     // add observer for reading data (no need to wait till viewDidAppear)
-    [[DataSource onlySource].questionsReference observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+    [[DataSource onlySource].questionsReference observeEventType:FEventTypeValue withBlock:^(FDataSnapshot* snapshot) {
         NSMutableArray* mutableQuestions = [NSMutableArray new];
         for (NSObject* object in snapshot.children) {
             [mutableQuestions addObject:object];
