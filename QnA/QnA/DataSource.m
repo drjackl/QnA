@@ -34,7 +34,7 @@
         self.appReference = [self.reference childByAppendingPath:@"web/data"];
         self.questionsReference = [self.appReference childByAppendingPath:@"questions"];
         
-        self.loggedInUser = nil;
+        self.loggedInUser = nil; // this might not be necessary
         
         self.questions = @[];
         
