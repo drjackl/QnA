@@ -45,11 +45,13 @@
 
 - (void) loadProfile {
     [[DataSource onlySource].loggedInUserReference observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot* snapshot) {
+        
         // must check for null value in case a profile was never set, else accessing bad value
-        if (snapshot.value != [NSNull null]) {
+        if (snapshot.value != [NSNull null]) { // apple doc
             self.descriptionTextView.text = snapshot.value[@"description"];
             [self loadProfilePicture:snapshot.value[@"imageUrl"]]; // method checks if imageID is nil
         }
+        
     }];
 }
 
@@ -59,8 +61,8 @@
     }
     
     // otherwise setup url to try and download
-//    CLCloudinary* cloudinary = [self createCloudinaryReference];
-//    NSString* imageURLString = publicID;//[cloudinary url:publicID];
+//    CLCloudinary* cloudinary = [self createCloudinaryReference]; // storing url, not publicID
+//    NSString* imageURLString = publicID;//[cloudinary url:publicID]; // so no need for cloudinary
     NSURL* imageURL = [NSURL URLWithString:imageURLString];
     
     // now download image from url and then set it
