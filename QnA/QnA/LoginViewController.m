@@ -34,7 +34,7 @@
         } else {
             NSLog(@"We're logged in!");
             
-            [DataSource onlySource].loggedInUser = authData.uid;
+            [DataSource onlySource].loggedInUserID = authData.uid;
             
             [self showMainQuestions];
         }

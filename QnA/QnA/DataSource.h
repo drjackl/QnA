@@ -19,7 +19,7 @@
 
 @property (nonatomic) Firebase* loggedInUserReference;
 
-@property (nonatomic) NSString* loggedInUser;
+@property (nonatomic) NSString* loggedInUserID;
 
 @property (nonatomic) NSArray* questions;
 @property (nonatomic) FDataSnapshot* selectedQuestion;

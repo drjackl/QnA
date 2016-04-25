@@ -34,7 +34,7 @@
         self.appReference = [self.reference childByAppendingPath:@"web/data"];
         self.questionsReference = [self.appReference childByAppendingPath:@"questions"];
         
-        self.loggedInUser = nil; // this might not be necessary
+        self.loggedInUserID = nil; // this might not be necessary
         
         self.questions = @[];
         
@@ -44,19 +44,20 @@
     return self;
 }
 
-- (void) setLoggedInUser:(NSString*)loggedInUser {
-    _loggedInUser = loggedInUser;
+- (void) setLoggedInUserID:(NSString*)loggedInUserID {
+    _loggedInUserID = loggedInUserID;
     
-    if (loggedInUser) {
+    if (loggedInUserID) {
         Firebase* usersReference = [self.appReference childByAppendingPath:@"users"];
-        self.loggedInUserReference = [usersReference childByAppendingPath:loggedInUser];
+        self.loggedInUserReference = [usersReference childByAppendingPath:loggedInUserID];
     } else {
         self.loggedInUserReference = nil;
     }
 }
 
 - (NSDictionary*) createPostWithText:(NSString*)text {
-    return @{@"text" : text};
+    return @{@"text" : text,
+             @"uid" : self.loggedInUserID ? self.loggedInUserID : [NSNull null]}; // surprised this compiles
 }
 
 - (void) loadBoilerplateData {
