@@ -190,22 +190,18 @@
                                                 <subviews>
                                                     <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="scu-d1-q4t">
                                                         <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
-                                                        <color key="backgroundColor" white="0.88" alpha="1" colorSpace="calibratedWhite"/>
-                                                        <gestureRecognizers/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="100" id="9oe-MU-wAB"/>
                                                             <constraint firstAttribute="width" constant="100" id="GMB-Al-cCu"/>
                                                         </constraints>
-                                                        <connections>
-                                                            <outletCollection property="gestureRecognizers" destination="IKp-vy-qSU" appends="YES" id="O8y-4C-HCB"/>
-                                                        </connections>
                                                     </imageView>
                                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I7P-uu-kVU">
                                                         <rect key="frame" x="0.0" y="100" width="100" height="26"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="11"/>
                                                         <state key="normal" title="Photos ..."/>
                                                         <connections>
-                                                            <segue destination="LIG-RA-L4V" kind="show" id="r2u-K4-gXh"/>
+                                                            <segue destination="LIG-RA-L4V" kind="show" identifier="picturePicker" id="r2u-K4-gXh"/>
                                                         </connections>
                                                     </button>
                                                 </subviews>
@@ -230,7 +226,7 @@
                                             </label>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="kTM-bf-6tc">
                                                 <rect key="frame" x="110" y="0.0" width="450" height="130"/>
-                                                <color key="backgroundColor" white="0.88" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="130" id="9Ei-5B-0x0"/>
                                                 </constraints>
@@ -278,11 +274,6 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4NE-pV-nGr" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="HPH-1x-qzl" userLabel="Exit" sceneMemberID="exit"/>
-                <tapGestureRecognizer id="IKp-vy-qSU">
-                    <connections>
-                        <segue destination="LIG-RA-L4V" kind="show" id="wBE-hq-OR6"/>
-                    </connections>
-                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2065" y="-35"/>
         </scene>
@@ -302,7 +293,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="picCell" id="JQo-6b-jxh">
-                                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
+                                <rect key="frame" x="0.0" y="74" width="100" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
@@ -725,7 +716,4 @@
             <point key="canvasLocation" x="2065" y="-713"/>
         </scene>
     </scenes>
-    <inferredMetricsTieBreakers>
-        <segue reference="wBE-hq-OR6"/>
-    </inferredMetricsTieBreakers>
 </document>

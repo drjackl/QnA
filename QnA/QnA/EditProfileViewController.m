@@ -24,19 +24,18 @@
     // load description and download profile pic
     [self loadProfile];
     
-    // for editable
-    self.navigationItem.prompt = NSLocalizedString(@"Express Yourself", @"Edit your profile prompt");
-    self.navigationItem.title = NSLocalizedString(@"Edit your profile", @"Edit your profile title");
-    
-    self.profileImageView.backgroundColor = [UIColor whiteColor];
-    self.descriptionTextView.backgroundColor = [UIColor whiteColor];
-    
-    
+    // allow user to tap on profile pic as alternate way to set pic
+    UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedImage)];
+    [self.profileImageView addGestureRecognizer:tapRecognizer];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (void) tappedImage {
+    [self performSegueWithIdentifier:@"picturePicker" sender:self];
 }
 
 
