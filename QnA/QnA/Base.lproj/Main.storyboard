@@ -191,10 +191,14 @@
                                                     <imageView contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="scu-d1-q4t">
                                                         <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <gestureRecognizers/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="100" id="9oe-MU-wAB"/>
                                                             <constraint firstAttribute="width" constant="100" id="GMB-Al-cCu"/>
                                                         </constraints>
+                                                        <connections>
+                                                            <outletCollection property="gestureRecognizers" destination="hK7-ug-KgA" appends="YES" id="pDm-0C-74P"/>
+                                                        </connections>
                                                     </imageView>
                                                     <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I7P-uu-kVU">
                                                         <rect key="frame" x="0.0" y="100" width="100" height="26"/>
@@ -274,6 +278,11 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4NE-pV-nGr" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="HPH-1x-qzl" userLabel="Exit" sceneMemberID="exit"/>
+                <tapGestureRecognizer id="hK7-ug-KgA">
+                    <connections>
+                        <segue destination="LIG-RA-L4V" kind="show" id="8FP-hy-4kc"/>
+                    </connections>
+                </tapGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="2065" y="-35"/>
         </scene>
@@ -716,4 +725,7 @@
             <point key="canvasLocation" x="2065" y="-713"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="r2u-K4-gXh"/>
+    </inferredMetricsTieBreakers>
 </document>
