@@ -47,7 +47,7 @@
     [[DataSource onlySource].loggedInUserReference observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot* snapshot) {
         
         // must check for null value in case a profile was never set, else accessing bad value
-        if (snapshot.value != [NSNull null]) { // apple doc
+        if (snapshot.value != NSNull.null) { // apple doc
             self.descriptionTextView.text = snapshot.value[@"description"];
             [self loadProfilePicture:snapshot.value[@"imageUrl"]]; // method checks if imageID is nil
         }

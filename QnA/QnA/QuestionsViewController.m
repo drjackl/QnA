@@ -99,9 +99,32 @@
     
     // Configure the cell...
     
-    cell.textLabel.text = ((FDataSnapshot*)[DataSource onlySource].questions[indexPath.row]).value[@"text"];
+    FDataSnapshot* questionData = [DataSource onlySource].questions[indexPath.row];
+    cell.textLabel.text = questionData.value[@"text"];
+    //cell.detailTextLabel.text = questionData.value[@"uid"];
+    
+    NSString* uid = questionData.value[@"uid"];
+    if (uid) {
+        Firebase* uidReference = [[DataSource onlySource].usersReference childByAppendingPath:uid];
+        [uidReference observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot* snapshot) {
+            //cell.detailTextLabel.text = snapshot.value[@"email"];
+            cell.detailTextLabel.text = [self createNameFromEmail:snapshot.value[@"email"]];
+        }];
+    } else {
+        cell.detailTextLabel.text = @"Anony of House Mous";
+    }
     
     return cell;
+}
+
+- (NSString*) createNameFromEmail:(NSString*)email {
+    NSRange atSymbolRange = [email rangeOfString:@"@"];
+    NSString* username = [email substringToIndex:atSymbolRange.location];
+    NSString* domain = [email substringFromIndex:atSymbolRange.location+atSymbolRange.length];
+    
+    NSString* houseWithDots = [domain substringToIndex:[domain rangeOfString:@"." options:NSBackwardsSearch].location];
+    NSString* house = [houseWithDots stringByReplacingOccurrencesOfString:@"." withString:@" "];
+    return [username.capitalizedString stringByAppendingFormat:@" of House %@", house.capitalizedString];
 }
 
 // row (question) selection bring up that question's AnswerVC
