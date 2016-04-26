@@ -11,8 +11,8 @@
 #import "DataSource.h"
 
 @interface LoginViewController ()
-@property (weak, nonatomic) IBOutlet UITextField *emailField;
-@property (weak, nonatomic) IBOutlet UITextField *passwordField;
+@property (weak, nonatomic) IBOutlet UITextField* emailField;
+@property (weak, nonatomic) IBOutlet UITextField* passwordField;
 @end
 
 @implementation LoginViewController

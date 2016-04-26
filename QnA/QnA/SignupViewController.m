@@ -28,11 +28,17 @@
 }
 
 - (IBAction) signMeUp {
-    [[DataSource onlySource].reference createUser:self.emailField.text password:self.passwordField.text withCompletionBlock:^(NSError *error) {
+    [[DataSource onlySource].reference createUser:self.emailField.text password:self.passwordField.text withValueCompletionBlock:^(NSError* error, NSDictionary* result) {
+        NSLog(@"resultDictionary: %@", result);
         if (error) {
             NSLog(@"Error signing up: %@", error);
         } else {
             NSLog(@"We signed up!");
+            
+            NSString* uid = result[@"uid"];
+            Firebase* uidReference = [[DataSource onlySource].usersReference childByAppendingPath:uid];
+            [uidReference setValue:@{@"email" : self.emailField.text}];
+            
             [self dismissViewControllerAnimated:YES completion:nil];
         }
     }];

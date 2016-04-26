@@ -16,6 +16,7 @@
 @property (readonly, nonatomic) Firebase* reference;
 @property (readonly, nonatomic) Firebase* appReference;
 @property (readonly, nonatomic) Firebase* questionsReference;
+@property (readonly, nonatomic) Firebase* usersReference;
 
 @property (nonatomic) Firebase* loggedInUserReference;
 

@@ -14,6 +14,7 @@
 @property (nonatomic) Firebase* reference;
 @property (nonatomic) Firebase* appReference;
 @property (nonatomic) Firebase* questionsReference;
+@property (nonatomic) Firebase* usersReference;
 @end
 
 @implementation DataSource
@@ -33,6 +34,7 @@
         self.reference = [[Firebase alloc] initWithUrl:@"https://qna-app.firebaseio.com"];
         self.appReference = [self.reference childByAppendingPath:@"web/data"];
         self.questionsReference = [self.appReference childByAppendingPath:@"questions"];
+        self.usersReference = [self.appReference childByAppendingPath:@"users"];
         
         self.loggedInUserID = nil; // this might not be necessary
         
@@ -48,8 +50,7 @@
     _loggedInUserID = loggedInUserID;
     
     if (loggedInUserID) {
-        Firebase* usersReference = [self.appReference childByAppendingPath:@"users"];
-        self.loggedInUserReference = [usersReference childByAppendingPath:loggedInUserID];
+        self.loggedInUserReference = [self.usersReference childByAppendingPath:loggedInUserID];
     } else {
         self.loggedInUserReference = nil;
     }
