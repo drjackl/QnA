@@ -8,9 +8,11 @@
 
 #import "QuestionsViewController.h"
 #import <Firebase.h>
-#import "QuestionCell.h"
+//#import "QuestionCell.h"
 #import "DataSource.h"
 #import "AnswersViewController.h"
+#import "ProfileViewController.h"
+
 
 @interface QuestionsViewController () <UITableViewDelegate, UITableViewDataSource>
 // IBOutlets
@@ -189,6 +191,9 @@
     if ([segue.identifier isEqualToString:@"answerQuickSegue"]) {
         // prep answersVC and push on nav stack
         ((AnswersViewController*)segue.destinationViewController).question = [DataSource onlySource].selectedQuestion;
+    } else if ([segue.identifier isEqualToString:@"viewProfile"]) {
+        //((ProfileViewController*)segue.destinationViewController).userID =
+        NSLog(@"segue sender: %@", sender);
     }
 }
 

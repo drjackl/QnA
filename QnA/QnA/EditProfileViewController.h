@@ -9,6 +9,11 @@
 #import <UIKit/UIKit.h>
 
 @interface EditProfileViewController : UIViewController
+
+// IBOutlets
 @property (weak, nonatomic) IBOutlet UITextView* descriptionTextView;
 @property (weak, nonatomic) IBOutlet UIImageView* profileImageView;
+
+- (void) loadProfilePicture:(NSString*)imageURLString;
+
 @end
