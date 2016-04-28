@@ -7,8 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Firebase.h>
 
 @interface EditProfileViewController : UIViewController
+
+@property (nonatomic) Firebase* userReference;
 
 // IBOutlets
 @property (weak, nonatomic) IBOutlet UITextView* descriptionTextView;

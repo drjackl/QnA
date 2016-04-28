@@ -8,7 +8,7 @@
 
 #import "QuestionsViewController.h"
 #import <Firebase.h>
-//#import "QuestionCell.h"
+#import "QuestionCell.h"
 #import "DataSource.h"
 #import "AnswersViewController.h"
 #import "ProfileViewController.h"
@@ -97,12 +97,15 @@
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"simpleQuestionCell" forIndexPath:indexPath];
+    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"simpleQuestionCell" forIndexPath:indexPath];
+    QuestionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"questionCell" forIndexPath:indexPath];
     
     // Configure the cell...
     
     FDataSnapshot* questionData = [DataSource onlySource].questions[indexPath.row];
-    cell.textLabel.text = questionData.value[@"text"];
+    //cell.textLabel.text = questionData.value[@"text"];
+    cell.questionText.text = questionData.value[@"text"];
+    
     //cell.detailTextLabel.text = questionData.value[@"uid"];
     
     NSString* uid = questionData.value[@"uid"];
@@ -110,10 +113,13 @@
         Firebase* uidReference = [[DataSource onlySource].usersReference childByAppendingPath:uid];
         [uidReference observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot* snapshot) {
             //cell.detailTextLabel.text = snapshot.value[@"email"];
-            cell.detailTextLabel.text = [self createNameFromEmail:snapshot.value[@"email"]];
+            //cell.detailTextLabel.text = [self createNameFromEmail:snapshot.value[@"email"]];
+            [cell.askerButton setTitle:[self createNameFromEmail:snapshot.value[@"email"]] forState:UIControlStateNormal];
+
         }];
     } else {
-        cell.detailTextLabel.text = @"Anony of House Mous";
+        //cell.detailTextLabel.text = @"Anony of House Mous";
+        [cell.askerButton setTitle:@"Anony of House Mous" forState:UIControlStateNormal];
     }
     
     return cell;
@@ -194,6 +200,9 @@
     } else if ([segue.identifier isEqualToString:@"viewProfile"]) {
         //((ProfileViewController*)segue.destinationViewController).userID =
         NSLog(@"segue sender: %@", sender);
+    } else if ([segue.identifier isEqualToString:@"editProfile"]) {
+        UINavigationController* navigationController = segue.destinationViewController;
+        ((EditProfileViewController*)navigationController.viewControllers[0]).userReference = [DataSource onlySource].loggedInUserReference;
     }
 }
 

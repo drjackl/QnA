@@ -11,5 +11,7 @@
 @interface QuestionCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel *questionText;
+@property (weak, nonatomic) IBOutlet UIImageView *userImageView;
+@property (weak, nonatomic) IBOutlet UIButton *askerButton;
 
 @end

@@ -7,7 +7,7 @@
 //
 
 #import "EditProfileViewController.h"
-#import <Firebase.h>
+//#import <Firebase.h>
 #import <Cloudinary.h>
 #import "DataSource.h"
 #import "PictureCollectionViewController.h"
@@ -39,15 +39,20 @@
 #pragma mark - Loading Profile
 
 - (void) loadProfile {
-    [[DataSource onlySource].loggedInUserReference observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot* snapshot) {
+    
+    if (self.userReference) {
         
-        // must check for null value in case a profile was never set, else accessing bad value
-        if (snapshot.value != NSNull.null) { // apple doc
-            self.descriptionTextView.text = snapshot.value[@"description"];
-            [self loadProfilePicture:snapshot.value[@"imageUrl"]]; // method checks if imageID is nil
-        }
+        [self.userReference observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot* snapshot) {
+            
+            // must check for null value in case a profile was never set, else accessing bad value
+            if (snapshot.value != NSNull.null) { // apple doc
+                self.descriptionTextView.text = snapshot.value[@"description"];
+                [self loadProfilePicture:snapshot.value[@"imageUrl"]]; // method checks if imageID is nil
+            }
+            
+        }];
         
-    }];
+    }
 }
 
 - (void) loadProfilePicture:(NSString*)imageURLString {
