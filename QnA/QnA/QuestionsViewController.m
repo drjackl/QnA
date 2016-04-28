@@ -16,7 +16,7 @@
 
 @interface QuestionsViewController () <UITableViewDelegate, UITableViewDataSource>
 // IBOutlets
-@property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet UITableView* tableView;
 @end
 
 @implementation QuestionsViewController
@@ -120,6 +120,7 @@
             // necessary for new posts since initially set to NO when first created somehow
             cell.askerButton.enabled = YES;
             
+            // this won't work since action needs to know the userID
             //[cell.askerButton addTarget:<#(nullable id)#> action:<#(nonnull SEL)#> forControlEvents:<#(UIControlEvents)#>]
 
         }];
@@ -207,7 +208,9 @@
     } else if ([segue.identifier isEqualToString:@"viewProfile"]) {
         NSLog(@"segue sender: %@", sender);
         if ([sender isKindOfClass:[UserButton class]]) {
-            ((ProfileViewController*)segue.destinationViewController).userReference = ((UserButton*)sender).userReference;
+            UserButton* button = sender;
+            ((ProfileViewController*)segue.destinationViewController).userReference = button.userReference;
+            ((ProfileViewController*)segue.destinationViewController).userName = button.titleLabel.text;
         }
     } else if ([segue.identifier isEqualToString:@"editProfile"]) {
         UINavigationController* navigationController = segue.destinationViewController;
