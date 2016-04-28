@@ -22,23 +22,23 @@
     // Dispose of any resources that can be recreated.
 }
 
-- (void) loadProfile {
-    if (self.userID) {
-        
-        Firebase* userProfileReference = [[DataSource onlySource].usersReference childByAppendingPath:self.userID];
-        
-        [userProfileReference observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot* snapshot) {
-            
-            // must check for null value in case a profile was never set, else accessing bad value
-            if (snapshot.value != NSNull.null) { // apple doc
-                self.descriptionTextView.text = snapshot.value[@"description"];
-                [self loadProfilePicture:snapshot.value[@"imageUrl"]]; // method checks if imageID is nil
-            }
-            
-        }];
-        
-    }
-}
+//- (void) loadProfile {
+//    if (self.userID) {
+//        
+//        Firebase* userProfileReference = [[DataSource onlySource].usersReference childByAppendingPath:self.userID];
+//        
+//        [userProfileReference observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot* snapshot) {
+//            
+//            // must check for null value in case a profile was never set, else accessing bad value
+//            if (snapshot.value != NSNull.null) { // apple doc
+//                self.descriptionTextView.text = snapshot.value[@"description"];
+//                [self loadProfilePicture:snapshot.value[@"imageUrl"]]; // method checks if imageID is nil
+//            }
+//            
+//        }];
+//        
+//    }
+//}
 
 /*
 #pragma mark - Navigation

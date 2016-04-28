@@ -100,6 +100,8 @@
     [[DataSource onlySource].loggedInUserReference updateChildValues:profile]; // better than setValue since won't override photo in case can't save photo (which happens with 4th sample pic)
     
     [self saveProfilePicture];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 - (void) saveProfilePicture {

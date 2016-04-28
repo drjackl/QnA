@@ -115,11 +115,18 @@
             //cell.detailTextLabel.text = snapshot.value[@"email"];
             //cell.detailTextLabel.text = [self createNameFromEmail:snapshot.value[@"email"]];
             [cell.askerButton setTitle:[self createNameFromEmail:snapshot.value[@"email"]] forState:UIControlStateNormal];
+            cell.askerButton.userReference = uidReference;
+            
+            // necessary for new posts since initially set to NO when first created somehow
+            cell.askerButton.enabled = YES;
+            
+            //[cell.askerButton addTarget:<#(nullable id)#> action:<#(nonnull SEL)#> forControlEvents:<#(UIControlEvents)#>]
 
         }];
     } else {
         //cell.detailTextLabel.text = @"Anony of House Mous";
         [cell.askerButton setTitle:@"Anony of House Mous" forState:UIControlStateNormal];
+        cell.askerButton.enabled = NO;
     }
     
     return cell;
@@ -198,8 +205,10 @@
         // prep answersVC and push on nav stack
         ((AnswersViewController*)segue.destinationViewController).question = [DataSource onlySource].selectedQuestion;
     } else if ([segue.identifier isEqualToString:@"viewProfile"]) {
-        //((ProfileViewController*)segue.destinationViewController).userID =
         NSLog(@"segue sender: %@", sender);
+        if ([sender isKindOfClass:[UserButton class]]) {
+            ((ProfileViewController*)segue.destinationViewController).userReference = ((UserButton*)sender).userReference;
+        }
     } else if ([segue.identifier isEqualToString:@"editProfile"]) {
         UINavigationController* navigationController = segue.destinationViewController;
         ((EditProfileViewController*)navigationController.viewControllers[0]).userReference = [DataSource onlySource].loggedInUserReference;

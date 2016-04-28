@@ -280,7 +280,7 @@
                 <exit id="HPH-1x-qzl" userLabel="Exit" sceneMemberID="exit"/>
                 <tapGestureRecognizer id="hK7-ug-KgA">
                     <connections>
-                        <segue destination="LIG-RA-L4V" kind="show" id="8FP-hy-4kc"/>
+                        <segue destination="LIG-RA-L4V" kind="show" identifier="picturePicker" id="8FP-hy-4kc"/>
                     </connections>
                 </tapGestureRecognizer>
             </objects>
@@ -302,7 +302,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="picCell" id="JQo-6b-jxh">
-                                <rect key="frame" x="0.0" y="94" width="100" height="100"/>
+                                <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                     <rect key="frame" x="0.0" y="0.0" width="100" height="100"/>
@@ -357,7 +357,7 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="495" height="30"/>
                                                 <state key="normal" title="View Profile"/>
                                                 <connections>
-                                                    <segue destination="ImX-TR-ZXy" kind="show" id="X8n-Xa-Zrl"/>
+                                                    <segue destination="ImX-TR-ZXy" kind="show" identifier="viewProfile" id="X8n-Xa-Zrl"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="N1W-qo-H8a">
@@ -421,9 +421,12 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="v2a-4N-Ruv">
                                                             <rect key="frame" x="496" y="5" width="97" height="128"/>
                                                             <subviews>
-                                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MbG-Nu-gJc">
+                                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MbG-Nu-gJc" customClass="UserButton">
                                                                     <rect key="frame" x="0.0" y="0.0" width="97" height="30"/>
                                                                     <state key="normal" title="Asker"/>
+                                                                    <connections>
+                                                                        <segue destination="ImX-TR-ZXy" kind="show" identifier="viewProfile" id="gPE-7i-tEE"/>
+                                                                    </connections>
                                                                 </button>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8lW-u8-uAa">
                                                                     <rect key="frame" x="0.0" y="30" width="97" height="98"/>
@@ -435,12 +438,12 @@
                                                         <constraint firstAttribute="trailingMargin" secondItem="v2a-4N-Ruv" secondAttribute="trailing" id="7Pv-fk-0fA"/>
                                                         <constraint firstItem="Xxs-CF-h8X" firstAttribute="top" secondItem="jNx-g8-b8v" secondAttribute="topMargin" id="9Gh-Nd-Bbf"/>
                                                         <constraint firstItem="Xxs-CF-h8X" firstAttribute="leading" secondItem="jNx-g8-b8v" secondAttribute="leadingMargin" id="PHn-Fz-t1J"/>
-                                                        <constraint firstItem="v2a-4N-Ruv" firstAttribute="leading" secondItem="Xxs-CF-h8X" secondAttribute="trailing" id="STF-XS-wNJ"/>
+                                                        <constraint firstItem="v2a-4N-Ruv" firstAttribute="leading" secondItem="Xxs-CF-h8X" secondAttribute="trailing" constant="10" id="STF-XS-wNJ"/>
                                                         <constraint firstItem="v2a-4N-Ruv" firstAttribute="top" secondItem="jNx-g8-b8v" secondAttribute="topMargin" id="Twa-du-qvn"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
-                                                    <outlet property="askerButton" destination="MbG-Nu-gJc" id="1na-Xw-pfZ"/>
+                                                    <outlet property="askerButton" destination="MbG-Nu-gJc" id="i0R-yR-ps5"/>
                                                     <outlet property="questionText" destination="Xxs-CF-h8X" id="Nat-B7-6JL"/>
                                                     <outlet property="userImageView" destination="8lW-u8-uAa" id="D54-ty-XKP"/>
                                                 </connections>
@@ -742,6 +745,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="r2u-K4-gXh"/>
+        <segue reference="X8n-Xa-Zrl"/>
+        <segue reference="8FP-hy-4kc"/>
     </inferredMetricsTieBreakers>
 </document>

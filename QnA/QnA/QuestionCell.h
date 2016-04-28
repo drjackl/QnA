@@ -7,11 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "UserButton.h"
 
 @interface QuestionCell : UITableViewCell
 
-@property (weak, nonatomic) IBOutlet UILabel *questionText;
-@property (weak, nonatomic) IBOutlet UIImageView *userImageView;
-@property (weak, nonatomic) IBOutlet UIButton *askerButton;
+@property (weak, nonatomic) IBOutlet UILabel* questionText;
+@property (weak, nonatomic) IBOutlet UIImageView* userImageView;
+//@property (weak, nonatomic) IBOutlet UIButton* askerButton;
+//@property (weak, nonatomic) IBOutlet UserButton* askerButton;
+@property (weak, nonatomic) IBOutlet UserButton *askerButton;
+
 
 @end
