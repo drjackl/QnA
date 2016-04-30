@@ -40,6 +40,10 @@
     // since not a TableVC! (*contains* a TableVC)
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    
+    // both needs to be set
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
+    self.tableView.estimatedRowHeight = 44;
 }
 
 
