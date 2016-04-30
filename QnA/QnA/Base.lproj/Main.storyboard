@@ -398,10 +398,10 @@
                                                     </subviews>
                                                 </tableViewCellContentView>
                                             </tableViewCell>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="questionCell" id="jXe-Kf-RK2" customClass="QuestionCell">
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="240" selectionStyle="default" indentationWidth="10" reuseIdentifier="questionCell" id="jXe-Kf-RK2" customClass="QuestionCell">
                                                 <rect key="frame" x="0.0" y="72" width="600" height="44"/>
                                                 <autoresizingMask key="autoresizingMask"/>
-                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="jXe-Kf-RK2" id="jNx-g8-b8v">
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" verticalHuggingPriority="240" tableViewCell="jXe-Kf-RK2" id="jNx-g8-b8v">
                                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
@@ -412,17 +412,18 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <stackView opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="v2a-4N-Ruv">
-                                                            <rect key="frame" x="496" y="5" width="97" height="128"/>
+                                                            <rect key="frame" x="496" y="5" width="112" height="128"/>
                                                             <subviews>
                                                                 <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MbG-Nu-gJc" customClass="UserButton">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="97" height="30"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="112" height="30"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                     <state key="normal" title="Asker"/>
                                                                     <connections>
                                                                         <segue destination="ImX-TR-ZXy" kind="show" identifier="viewProfile" id="gPE-7i-tEE"/>
                                                                     </connections>
                                                                 </button>
                                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8lW-u8-uAa">
-                                                                    <rect key="frame" x="0.0" y="30" width="97" height="98"/>
+                                                                    <rect key="frame" x="0.0" y="30" width="112" height="98"/>
                                                                 </imageView>
                                                             </subviews>
                                                         </stackView>
@@ -454,7 +455,18 @@
                             <constraint firstAttribute="trailing" secondItem="AJG-zf-cEN" secondAttribute="trailing" id="rOv-7Y-bu6"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Questions" id="Dyp-eQ-Zkn"/>
+                    <navigationItem key="navigationItem" title="Questions" id="Dyp-eQ-Zkn">
+                        <barButtonItem key="leftBarButtonItem" title="Edit Profile" id="uq0-Hi-Joc">
+                            <connections>
+                                <segue destination="hZ0-Xk-EgV" kind="presentation" identifier="editProfile" modalTransitionStyle="flipHorizontal" id="c7x-RJ-1Yr"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="+Q" id="s5Z-CO-6n4">
+                            <connections>
+                                <action selector="addQuestionModal" destination="kWL-2H-fCL" id="lj4-Ws-acU"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="qJ4-Tg-5HK" id="bMV-Mi-s7j"/>
                         <segue destination="42d-5c-6Ck" kind="show" identifier="answerQuickSegue" id="Wgd-F3-YJQ"/>
@@ -549,7 +561,13 @@
                             <constraint firstAttribute="trailing" secondItem="ufc-li-o02" secondAttribute="trailing" id="zPm-61-Noa"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Author asks ..." id="q7R-rU-iKh"/>
+                    <navigationItem key="navigationItem" title="Author asks ..." id="q7R-rU-iKh">
+                        <barButtonItem key="rightBarButtonItem" title="+A" id="gzZ-vj-Bx7">
+                            <connections>
+                                <action selector="addAnswer" destination="42d-5c-6Ck" id="bwk-dQ-WgV"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="answersTableView" destination="JS1-BO-ZIP" id="2Nd-UH-33B"/>
                         <outlet property="questionLabel" destination="zDc-D6-Fp5" id="9ey-kH-mpX"/>
@@ -689,6 +707,7 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
+        <segue reference="19h-2F-cqI"/>
         <segue reference="8FP-hy-4kc"/>
     </inferredMetricsTieBreakers>
 </document>
