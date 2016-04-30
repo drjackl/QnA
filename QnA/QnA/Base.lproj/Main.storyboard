@@ -383,28 +383,28 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="2Uo-pd-Oex">
+                                                <stackView opaque="NO" contentMode="scaleToFill" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="2Uo-pd-Oex">
                                                     <rect key="frame" x="8" y="8" width="584" height="27"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Question Text" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xxs-CF-h8X">
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Question Text" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xxs-CF-h8X">
                                                             <rect key="frame" x="0.0" y="0.0" width="292" height="20"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="v2a-4N-Ruv">
+                                                        <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="255" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="v2a-4N-Ruv">
                                                             <rect key="frame" x="292" y="0.0" width="292" height="27"/>
                                                             <subviews>
-                                                                <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MbG-Nu-gJc" customClass="UserButton">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="292" height="0.0"/>
+                                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="200" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MbG-Nu-gJc" customClass="UserButton">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="292" height="27"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                     <state key="normal" title="Asker"/>
                                                                     <connections>
                                                                         <segue destination="ImX-TR-ZXy" kind="show" identifier="viewProfile" id="gPE-7i-tEE"/>
                                                                     </connections>
                                                                 </button>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8lW-u8-uAa">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="292" height="27"/>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8lW-u8-uAa">
+                                                                    <rect key="frame" x="0.0" y="27" width="292" height="0.0"/>
                                                                 </imageView>
                                                             </subviews>
                                                         </stackView>

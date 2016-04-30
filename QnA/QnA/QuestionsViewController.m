@@ -102,7 +102,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"simpleQuestionCell" forIndexPath:indexPath];
-    QuestionCell *cell = [tableView dequeueReusableCellWithIdentifier:@"questionCell" forIndexPath:indexPath];
+    QuestionCell* cell = [tableView dequeueReusableCellWithIdentifier:@"questionCell" forIndexPath:indexPath];
     
     // Configure the cell...
     
@@ -126,12 +126,17 @@
             
             // this won't work since action needs to know the userID
             //[cell.askerButton addTarget:<#(nullable id)#> action:<#(nonnull SEL)#> forControlEvents:<#(UIControlEvents)#>]
+            
+            [self downloadImageAt:snapshot.value[@"imageUrl"] andSetImageView:cell.userImageView];
 
         }];
     } else {
         //cell.detailTextLabel.text = @"Anony of House Mous";
         [cell.askerButton setTitle:@"Anony of House Mous" forState:UIControlStateNormal];
         cell.askerButton.enabled = NO;
+        
+        // if image not set to nil, will have leftover image from previous cell
+        cell.userImageView.image = nil;
     }
     
     return cell;
@@ -145,6 +150,30 @@
     NSString* houseWithDots = [domain substringToIndex:[domain rangeOfString:@"." options:NSBackwardsSearch].location];
     NSString* house = [houseWithDots stringByReplacingOccurrencesOfString:@"." withString:@" "];
     return [username.capitalizedString stringByAppendingFormat:@" of House %@", house.capitalizedString];
+}
+
+- (void) downloadImageAt:(NSString*)imageUrlString andSetImageView:(UIImageView*)imageView {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSURL* imageURL = [NSURL URLWithString:imageUrlString];
+        NSURLRequest* request = [NSURLRequest requestWithURL:imageURL];
+        NSURLResponse* response;
+        NSError* error;
+        
+        NSData* imageData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        if (imageData) {
+            UIImage* image = [UIImage imageWithData:imageData];
+            if (image) {
+                
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    imageView.image = image;
+                });
+            } else {
+                NSLog(@"Image downloaded but couldn't be turned into UIImage");
+            }
+        } else { // no imageData
+            NSLog(@"No image was able to be downloaded");
+        }
+    });
 }
 
 // row (question) selection bring up that question's AnswerVC
