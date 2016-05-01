@@ -170,8 +170,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="1pg-ds-0MW">
-                                <rect key="frame" x="20" y="94" width="560" height="336"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="25" translatesAutoresizingMaskIntoConstraints="NO" id="1pg-ds-0MW">
+                                <rect key="frame" x="20" y="114" width="560" height="281"/>
                                 <subviews>
                                     <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="0Dc-CO-H1K" userLabel="Avatar Row">
                                         <rect key="frame" x="0.0" y="0.0" width="560" height="126"/>
@@ -239,25 +239,6 @@
                                             </textView>
                                         </subviews>
                                     </stackView>
-                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" translatesAutoresizingMaskIntoConstraints="NO" id="5Kd-zB-NSH" userLabel="Cancel/Save Row">
-                                        <rect key="frame" x="0.0" y="306" width="560" height="30"/>
-                                        <subviews>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b83-MF-WJs">
-                                                <rect key="frame" x="0.0" y="0.0" width="280" height="30"/>
-                                                <state key="normal" title="Cancel"/>
-                                                <connections>
-                                                    <segue destination="HPH-1x-qzl" kind="unwind" unwindAction="unwindBackToQuestionsViewController:" id="CbW-UB-Upj"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g8D-gQ-NsP">
-                                                <rect key="frame" x="280" y="0.0" width="280" height="30"/>
-                                                <state key="normal" title="Save"/>
-                                                <connections>
-                                                    <action selector="saveProfile" destination="bj2-nP-sZe" eventType="touchUpInside" id="h4m-62-SeS"/>
-                                                </connections>
-                                            </button>
-                                        </subviews>
-                                    </stackView>
                                 </subviews>
                             </stackView>
                         </subviews>
@@ -270,6 +251,16 @@
                     </view>
                     <navigationItem key="navigationItem" title="Edit your profile" prompt="Express Yourself" id="sFz-dc-LIM">
                         <barButtonItem key="backBarButtonItem" title="Edit" id="kVJ-KI-b2b"/>
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="NIg-Dv-x0w">
+                            <connections>
+                                <segue destination="HPH-1x-qzl" kind="unwind" unwindAction="unwindBackToQuestionsViewController:" id="uJ7-7a-u5d"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="LXa-Ik-Vp4">
+                            <connections>
+                                <action selector="saveProfile" destination="bj2-nP-sZe" id="V6q-rY-f0L"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="descriptionTextView" destination="kTM-bf-6tc" id="vaf-Fy-liO"/>
@@ -383,8 +374,8 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="2Uo-pd-Oex">
-                                                    <rect key="frame" x="8" y="8" width="584" height="27"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="2Uo-pd-Oex">
+                                                    <rect key="frame" x="8" y="9" width="584" height="81"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Question Text" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xxs-CF-h8X">
                                                             <rect key="frame" x="0.0" y="0.0" width="292" height="20"/>
@@ -392,20 +383,24 @@
                                                             <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="255" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="v2a-4N-Ruv">
-                                                            <rect key="frame" x="292" y="0.0" width="292" height="27"/>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="255" verticalHuggingPriority="255" horizontalCompressionResistancePriority="740" verticalCompressionResistancePriority="740" misplaced="YES" axis="vertical" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="v2a-4N-Ruv">
+                                                            <rect key="frame" x="292" y="0.0" width="292" height="81"/>
                                                             <subviews>
-                                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="200" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MbG-Nu-gJc" customClass="UserButton">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="292" height="27"/>
+                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="261" verticalHuggingPriority="261" horizontalCompressionResistancePriority="730" verticalCompressionResistancePriority="730" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="8lW-u8-uAa">
+                                                                    <rect key="frame" x="116" y="0.0" width="60" height="51"/>
+                                                                    <constraints>
+                                                                        <constraint firstAttribute="height" constant="60" id="5ge-0j-TCt"/>
+                                                                        <constraint firstAttribute="width" constant="60" id="MhY-yS-t33"/>
+                                                                    </constraints>
+                                                                </imageView>
+                                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="270" verticalHuggingPriority="270" horizontalCompressionResistancePriority="720" verticalCompressionResistancePriority="720" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MbG-Nu-gJc" customClass="UserButton">
+                                                                    <rect key="frame" x="127" y="51" width="39" height="30"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                                     <state key="normal" title="Asker"/>
                                                                     <connections>
                                                                         <segue destination="ImX-TR-ZXy" kind="show" identifier="viewProfile" id="gPE-7i-tEE"/>
                                                                     </connections>
                                                                 </button>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8lW-u8-uAa">
-                                                                    <rect key="frame" x="0.0" y="27" width="292" height="0.0"/>
-                                                                </imageView>
                                                             </subviews>
                                                         </stackView>
                                                     </subviews>

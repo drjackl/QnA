@@ -115,7 +115,7 @@
     NSString* uid = questionData.value[@"uid"];
     if (uid) {
         Firebase* uidReference = [[DataSource onlySource].usersReference childByAppendingPath:uid];
-        [uidReference observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot* snapshot) {
+        [uidReference observeEventType:FEventTypeValue withBlock:^(FDataSnapshot* snapshot) {
             //cell.detailTextLabel.text = snapshot.value[@"email"];
             //cell.detailTextLabel.text = [self createNameFromEmail:snapshot.value[@"email"]];
             [cell.askerButton setTitle:[self createNameFromEmail:snapshot.value[@"email"]] forState:UIControlStateNormal];
@@ -132,7 +132,7 @@
         }];
     } else {
         //cell.detailTextLabel.text = @"Anony of House Mous";
-        [cell.askerButton setTitle:@"Anony of House Mous" forState:UIControlStateNormal];
+        [cell.askerButton setTitle:@"Anon of House Mous" forState:UIControlStateNormal];
         cell.askerButton.enabled = NO;
         
         // if image not set to nil, will have leftover image from previous cell
