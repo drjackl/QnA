@@ -7,9 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Firebase.h>
 
 @interface AnswerCell : UITableViewCell
+
+// IBOutlets
 @property (weak, nonatomic) IBOutlet UILabel* answerLabel;
 @property (weak, nonatomic) IBOutlet UILabel* votesLabel;
+
+@property (nonatomic) Firebase* votesReference;
+
+//@property (nonatomic) FDataSnapshot* answerData;
 
 @end

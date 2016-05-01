@@ -48,8 +48,8 @@
     _question = question;
     
     // set reference here
-    NSString* allAnswersPath = [question.key stringByAppendingPathComponent:@"answers"]; // id/answers
-    self.answersReference = [[DataSource onlySource].questionsReference childByAppendingPath:allAnswersPath]; // "questions/id/answers"
+    NSString* allAnswersPath = [question.key stringByAppendingPathComponent:@"answers"]; // qid/answers
+    self.answersReference = [[DataSource onlySource].questionsReference childByAppendingPath:allAnswersPath]; // "questions/qid/answers"
     
     // add read observer right away (if in viewDidAppear, answers would not show)
     [self.answersReference observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
@@ -110,12 +110,23 @@
     AnswerCell* cell = [tableView dequeueReusableCellWithIdentifier:@"answerCell" forIndexPath:indexPath];
     
     FDataSnapshot* answer = self.answers[indexPath.row];
+    //cell.answerData = self.answers[indexPath.row];
     
+    // old answer value was just the answer text
     //cell.textLabel.text = ((FDataSnapshot*)self.answers[indexPath.row]).value;
     //cell.answerLabel.text = ((FDataSnapshot*)self.answers[indexPath.row]).value;
+    
+    // new answer value is a tuple with text and votes
     cell.answerLabel.text = answer.value[@"text"];
     
     cell.votesLabel.text = [answer.value[@"votes"] stringValue];
+    
+    Firebase* aidReference = [self.answersReference childByAppendingPath:answer.key];
+    cell.votesReference = [aidReference childByAppendingPath:@"votes"];
+    
+//    [cell.votesReference observeEventType:FEventTypeValue withBlock:^(FDataSnapshot* snapshot) {
+//        <#code#>
+//    }];
     
     return cell;
 }

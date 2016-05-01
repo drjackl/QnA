@@ -8,6 +8,11 @@
 
 #import "AnswerCell.h"
 
+@interface AnswerCell ()
+@property (nonatomic) int votes;
+@end
+
+
 @implementation AnswerCell
 
 - (void)awakeFromNib {
@@ -18,6 +23,34 @@
     [super setSelected:selected animated:animated];
 
     // Configure the view for the selected state
+}
+
+//- (void) setAnswerData:(FDataSnapshot*)answerData {
+//    _answerData = answerData;
+//    
+//    self.answerLabel.text = answerData.value[@"text"];
+//    self.votesLabel.text = answerData.value[@"votes"];
+//    self.votesReference = 
+//}
+
+- (void) setVotesReference:(Firebase*)votesReference {
+    _votesReference = votesReference;
+    
+    [votesReference observeEventType:FEventTypeValue withBlock:^(FDataSnapshot* snapshot) {
+        self.votes = ((NSNumber*)snapshot.value).intValue;
+    }];
+}
+
+- (IBAction) voteSwitchToggled:(UISwitch*)sender {
+    // so it seems switch has already been switched by the time this method is reached
+    if (sender.isOn) {
+        // increment
+        self.votes++;
+    } else {
+        // decrement
+        self.votes--;
+    }
+    [self.votesReference setValue:[NSNumber numberWithInt:self.votes]];
 }
 
 @end

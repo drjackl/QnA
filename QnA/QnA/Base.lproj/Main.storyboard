@@ -536,6 +536,9 @@
                                                                         </stackView>
                                                                         <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="xLX-Vn-bx5">
                                                                             <rect key="frame" x="535" y="0.0" width="51" height="27"/>
+                                                                            <connections>
+                                                                                <action selector="voteSwitchToggled:" destination="gyJ-Tk-pgb" eventType="valueChanged" id="Bfi-ev-gBY"/>
+                                                                            </connections>
                                                                         </switch>
                                                                     </subviews>
                                                                 </stackView>

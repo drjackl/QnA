@@ -17,5 +17,4 @@
 //@property (weak, nonatomic) IBOutlet UserButton* askerButton;
 @property (weak, nonatomic) IBOutlet UserButton *askerButton;
 
-
 @end
