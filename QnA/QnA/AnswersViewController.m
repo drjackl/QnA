@@ -32,6 +32,10 @@
     // hooked these up in storyboard
     //self.answersTableView.dataSource = self;
     //self.answersTableView.delegate = self;
+    
+    // necessary for packing row height
+    self.answersTableView.estimatedRowHeight = 50;
+    self.answersTableView.rowHeight = UITableViewAutomaticDimension;
 }
 
 

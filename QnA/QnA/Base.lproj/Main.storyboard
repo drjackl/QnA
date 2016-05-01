@@ -507,17 +507,49 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Answer" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WE7-uZ-kFE">
-                                                            <rect key="frame" x="8" y="8" width="584" height="21"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="UJI-XS-6sA">
+                                                            <rect key="frame" x="8" y="8" width="584" height="27"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Answer" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WE7-uZ-kFE">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="57" height="0.0"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="hkD-hP-so7">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="584" height="27"/>
+                                                                    <subviews>
+                                                                        <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SDJ-8T-hro">
+                                                                            <rect key="frame" x="0.0" y="0.0" width="133" height="27"/>
+                                                                            <subviews>
+                                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nrP-UZ-Mhb">
+                                                                                    <rect key="frame" x="0.0" y="0.0" width="47" height="27"/>
+                                                                                    <state key="normal" title="Author"/>
+                                                                                </button>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vote Count" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tuT-eu-1j3">
+                                                                                    <rect key="frame" x="47" y="0.0" width="86" height="27"/>
+                                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                    <nil key="highlightedColor"/>
+                                                                                </label>
+                                                                            </subviews>
+                                                                        </stackView>
+                                                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="xLX-Vn-bx5">
+                                                                            <rect key="frame" x="535" y="0.0" width="51" height="27"/>
+                                                                        </switch>
+                                                                    </subviews>
+                                                                </stackView>
+                                                            </subviews>
+                                                            <constraints>
+                                                                <constraint firstAttribute="trailing" secondItem="hkD-hP-so7" secondAttribute="trailing" id="eDa-hC-4cE"/>
+                                                            </constraints>
+                                                        </stackView>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="WE7-uZ-kFE" firstAttribute="leading" secondItem="er7-sC-Hm6" secondAttribute="leadingMargin" id="1vC-hg-5x4"/>
-                                                        <constraint firstAttribute="trailingMargin" secondItem="WE7-uZ-kFE" secondAttribute="trailing" id="PSX-8s-VHO"/>
-                                                        <constraint firstItem="WE7-uZ-kFE" firstAttribute="top" secondItem="er7-sC-Hm6" secondAttribute="topMargin" id="pct-OJ-2qV"/>
+                                                        <constraint firstItem="UJI-XS-6sA" firstAttribute="leading" secondItem="er7-sC-Hm6" secondAttribute="leadingMargin" id="1yV-b7-Xw2"/>
+                                                        <constraint firstAttribute="trailingMargin" secondItem="UJI-XS-6sA" secondAttribute="trailing" id="4Jn-ax-QLF"/>
+                                                        <constraint firstItem="UJI-XS-6sA" firstAttribute="top" secondItem="er7-sC-Hm6" secondAttribute="topMargin" id="Fgt-SQ-PdT"/>
+                                                        <constraint firstAttribute="bottomMargin" secondItem="UJI-XS-6sA" secondAttribute="bottom" id="UDZ-gX-BO2"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
                                                 <connections>
