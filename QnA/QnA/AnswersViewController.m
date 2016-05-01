@@ -9,6 +9,7 @@
 #import "AnswersViewController.h"
 #import <Firebase.h>
 #import "DataSource.h"
+#import "AnswerCell.h"
 
 @interface AnswersViewController () /*<UITableViewDataSource, UITableViewDelegate>*/ // works without declaration
 @property (nonatomic) Firebase* answersReference;
@@ -98,8 +99,11 @@
 }
 
 - (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {
-    UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"simpleAnswerCell" forIndexPath:indexPath];
-    cell.textLabel.text = ((FDataSnapshot*)self.answers[indexPath.row]).value;
+    //UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"simpleAnswerCell" forIndexPath:indexPath];
+    AnswerCell* cell = [tableView dequeueReusableCellWithIdentifier:@"answerCell" forIndexPath:indexPath];
+    
+    //cell.textLabel.text = ((FDataSnapshot*)self.answers[indexPath.row]).value;
+    cell.answerLabel.text = ((FDataSnapshot*)self.answers[indexPath.row]).value;
     return cell;
 }
 

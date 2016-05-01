@@ -132,7 +132,7 @@
         }];
     } else {
         //cell.detailTextLabel.text = @"Anony of House Mous";
-        [cell.askerButton setTitle:@"Anon of House Mous" forState:UIControlStateNormal];
+        [cell.askerButton setTitle:@"Anon E. Mous" forState:UIControlStateNormal];
         cell.askerButton.enabled = NO;
         
         // if image not set to nil, will have leftover image from previous cell
