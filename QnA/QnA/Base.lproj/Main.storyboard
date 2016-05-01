@@ -520,14 +520,14 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="584" height="27"/>
                                                                     <subviews>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SDJ-8T-hro">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="133" height="27"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="104" height="27"/>
                                                                             <subviews>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nrP-UZ-Mhb">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="47" height="27"/>
                                                                                     <state key="normal" title="Author"/>
                                                                                 </button>
-                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Vote Count" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tuT-eu-1j3">
-                                                                                    <rect key="frame" x="47" y="0.0" width="86" height="27"/>
+                                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="# votes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tuT-eu-1j3">
+                                                                                    <rect key="frame" x="47" y="0.0" width="57" height="27"/>
                                                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                                     <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                                     <nil key="highlightedColor"/>
@@ -554,6 +554,7 @@
                                                 </tableViewCellContentView>
                                                 <connections>
                                                     <outlet property="answerLabel" destination="WE7-uZ-kFE" id="7T3-eZ-dfq"/>
+                                                    <outlet property="votesLabel" destination="tuT-eu-1j3" id="VbB-md-EXa"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>

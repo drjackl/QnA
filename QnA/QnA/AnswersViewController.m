@@ -81,7 +81,10 @@
         
         // posting answer to backend
         Firebase* answerReference = [self.answersReference childByAutoId];
-        [answerReference setValue:alertController.textFields[0].text];
+        NSDictionary* answerValue = @{@"text" : alertController.textFields[0].text,
+                                      @"votes" : @0};
+        //[answerReference setValue:alertController.textFields[0].text];
+        [answerReference setValue:answerValue];
     }];
     [alertController addAction:cancelAction];
     [alertController addAction:defaultAction];
@@ -106,8 +109,14 @@
     //UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"simpleAnswerCell" forIndexPath:indexPath];
     AnswerCell* cell = [tableView dequeueReusableCellWithIdentifier:@"answerCell" forIndexPath:indexPath];
     
+    FDataSnapshot* answer = self.answers[indexPath.row];
+    
     //cell.textLabel.text = ((FDataSnapshot*)self.answers[indexPath.row]).value;
-    cell.answerLabel.text = ((FDataSnapshot*)self.answers[indexPath.row]).value;
+    //cell.answerLabel.text = ((FDataSnapshot*)self.answers[indexPath.row]).value;
+    cell.answerLabel.text = answer.value[@"text"];
+    
+    cell.votesLabel.text = [answer.value[@"votes"] stringValue];
+    
     return cell;
 }
 

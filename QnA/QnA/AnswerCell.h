@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 
 @interface AnswerCell : UITableViewCell
-@property (weak, nonatomic) IBOutlet UILabel *answerLabel;
+@property (weak, nonatomic) IBOutlet UILabel* answerLabel;
+@property (weak, nonatomic) IBOutlet UILabel* votesLabel;
 
 @end
