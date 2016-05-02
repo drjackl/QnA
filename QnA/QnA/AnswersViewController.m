@@ -51,11 +51,15 @@
     NSString* allAnswersPath = [question.key stringByAppendingPathComponent:@"answers"]; // qid/answers
     self.answersReference = [[DataSource onlySource].questionsReference childByAppendingPath:allAnswersPath]; // "questions/qid/answers"
     
+    // sort according to number of votes
+    FQuery* queryReference = [self.answersReference queryOrderedByChild:@"votes"];
+    
     // add read observer right away (if in viewDidAppear, answers would not show)
-    [self.answersReference observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+    [queryReference observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         NSMutableArray* mutableAnswers = [NSMutableArray new];
         for (NSObject* object in snapshot.children) {
-            [mutableAnswers addObject:object];
+            //[mutableAnswers addObject:object];
+            [mutableAnswers insertObject:object atIndex:0]; // insert in reverse order
         }
         
         self.answers = mutableAnswers;
@@ -119,7 +123,8 @@
     // new answer value is a tuple with text and votes
     cell.answerLabel.text = answer.value[@"text"];
     
-    cell.votesLabel.text = [answer.value[@"votes"] stringValue];
+    NSNumber* votes = answer.value[@"votes"];
+    cell.votesLabel.text = [votes.stringValue stringByAppendingString:@" votes"];
     
     Firebase* aidReference = [self.answersReference childByAppendingPath:answer.key];
     cell.votesReference = [aidReference childByAppendingPath:@"votes"];

@@ -520,16 +520,16 @@
                                                                     <rect key="frame" x="0.0" y="0.0" width="584" height="27"/>
                                                                     <subviews>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SDJ-8T-hro">
-                                                                            <rect key="frame" x="0.0" y="0.0" width="104" height="27"/>
+                                                                            <rect key="frame" x="0.0" y="0.0" width="92" height="27"/>
                                                                             <subviews>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nrP-UZ-Mhb">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="47" height="27"/>
                                                                                     <state key="normal" title="Author"/>
                                                                                 </button>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="# votes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tuT-eu-1j3">
-                                                                                    <rect key="frame" x="47" y="0.0" width="57" height="27"/>
-                                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                                                    <rect key="frame" x="47" y="0.0" width="45" height="27"/>
+                                                                                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                                                                                    <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                             </subviews>
