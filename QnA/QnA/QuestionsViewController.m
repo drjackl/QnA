@@ -38,12 +38,13 @@
     }];
     
     // since not a TableVC! (*contains* a TableVC)
+    // could be hooked up in storyboard (see AnswersVC)
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
     // both needs to be set
-    self.tableView.rowHeight = UITableViewAutomaticDimension;
     self.tableView.estimatedRowHeight = 44;
+    self.tableView.rowHeight = UITableViewAutomaticDimension;
 }
 
 
@@ -95,12 +96,12 @@
 //    return 0;
 //}
 
-- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+- (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
     return [DataSource onlySource].questions.count;
 }
 
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+- (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {
     //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"simpleQuestionCell" forIndexPath:indexPath];
     QuestionCell* cell = [tableView dequeueReusableCellWithIdentifier:@"questionCell" forIndexPath:indexPath];
     
@@ -167,6 +168,7 @@
                 dispatch_async(dispatch_get_main_queue(), ^{
                     imageView.image = image;
                 });
+                
             } else {
                 NSLog(@"Image downloaded but couldn't be turned into UIImage");
             }

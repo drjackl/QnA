@@ -86,8 +86,8 @@
         // posting answer to backend
         Firebase* answerReference = [self.answersReference childByAutoId];
         NSDictionary* answerValue = @{@"text" : alertController.textFields[0].text,
-                                      @"votes" : @0};
-        //[answerReference setValue:alertController.textFields[0].text];
+                                      @"votes" : @0}; // new value: answer and votes tuple
+        //[answerReference setValue:alertController.textFields[0].text]; // old value: ans text
         [answerReference setValue:answerValue];
     }];
     [alertController addAction:cancelAction];
@@ -117,21 +117,14 @@
     //cell.answerData = self.answers[indexPath.row];
     
     // old answer value was just the answer text
-    //cell.textLabel.text = ((FDataSnapshot*)self.answers[indexPath.row]).value;
-    //cell.answerLabel.text = ((FDataSnapshot*)self.answers[indexPath.row]).value;
-    
     // new answer value is a tuple with text and votes
     cell.answerLabel.text = answer.value[@"text"];
-    
     NSNumber* votes = answer.value[@"votes"];
     cell.votesLabel.text = [votes.stringValue stringByAppendingString:@" votes"];
     
+    // cell needs to know votesReference to update votes count when voting
     Firebase* aidReference = [self.answersReference childByAppendingPath:answer.key];
     cell.votesReference = [aidReference childByAppendingPath:@"votes"];
-    
-//    [cell.votesReference observeEventType:FEventTypeValue withBlock:^(FDataSnapshot* snapshot) {
-//        <#code#>
-//    }];
     
     return cell;
 }

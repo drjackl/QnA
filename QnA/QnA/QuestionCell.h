@@ -13,8 +13,8 @@
 
 @property (weak, nonatomic) IBOutlet UILabel* questionText;
 @property (weak, nonatomic) IBOutlet UIImageView* userImageView;
-//@property (weak, nonatomic) IBOutlet UIButton* askerButton;
-//@property (weak, nonatomic) IBOutlet UserButton* askerButton;
-@property (weak, nonatomic) IBOutlet UserButton *askerButton;
+
+// must ensure this button is id'ed as UserButton in storyboard
+@property (weak, nonatomic) IBOutlet UserButton* askerButton;
 
 @end
