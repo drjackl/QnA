@@ -39,6 +39,9 @@
     
     [votesReference observeEventType:FEventTypeValue withBlock:^(FDataSnapshot* snapshot) {
         self.votes = ((NSNumber*)snapshot.value).intValue;
+        
+        // necessary now that not constantly observing changes
+        self.votesLabel.text = [NSString stringWithFormat:@"%d votes", self.votes];
     }];
 }
 
@@ -51,7 +54,25 @@
         // decrement
         self.votes--;
     }
+    
     [self.votesReference setValue:[NSNumber numberWithInt:self.votes]];
+    [self.delegate cell:self didFinishUpdatingVote:self.votes];
+    
+//    [self.tableView beginUpdates];
+//    [self.votesReference setValue:[NSNumber numberWithInt:self.votes]];
+//    
+//    // get original index path
+//    NSIndexPath* originalIndexPath = [self.tableView indexPathForCell:self];
+//    
+//    // then get index of first value with self.votes-1
+////    int i = 0;
+////    while (i < self.answers)) {
+////        <#statements#>
+////    }
+//    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
+//    
+//    [self.tableView moveRowAtIndexPath:originalIndexPath toIndexPath:indexPath];
+//    [self.tableView endUpdates];
 }
 
 @end

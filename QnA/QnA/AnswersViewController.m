@@ -11,9 +11,9 @@
 #import "DataSource.h"
 #import "AnswerCell.h"
 
-@interface AnswersViewController () /*<UITableViewDataSource, UITableViewDelegate>*/ // works without declaration
+@interface AnswersViewController () <AnswerCellDelegate, UITableViewDataSource, UITableViewDelegate> // works without declaration, but declare to autocomplete moveRowAtIndexPath method
 @property (nonatomic) Firebase* answersReference;
-@property (nonatomic) NSArray* answers;
+@property (nonatomic) NSMutableArray* answers;
 // IBOutlets
 @property (weak, nonatomic) IBOutlet UILabel* questionLabel;
 @property (weak, nonatomic) IBOutlet UITableView* answersTableView;
@@ -55,7 +55,7 @@
     FQuery* queryReference = [self.answersReference queryOrderedByChild:@"votes"];
     
     // add read observer right away (if in viewDidAppear, answers would not show)
-    [queryReference observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+    [queryReference observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         NSMutableArray* mutableAnswers = [NSMutableArray new];
         for (NSObject* object in snapshot.children) {
             //[mutableAnswers addObject:object];
@@ -126,7 +126,36 @@
     Firebase* aidReference = [self.answersReference childByAppendingPath:answer.key];
     cell.votesReference = [aidReference childByAppendingPath:@"votes"];
     
+    //cell.tableView = tableView;
+    cell.delegate = self;
+    
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
+    FDataSnapshot* answerToMove = self.answers[sourceIndexPath.row];
+    [self.answers removeObjectAtIndex:sourceIndexPath.row];
+    [self.answers insertObject:answerToMove atIndex:destinationIndexPath.row];
+}
+
+- (void) cell:(AnswerCell*)cell didFinishUpdatingVote:(int)voteCount {
+    NSIndexPath* originalIndexPath = [self.answersTableView indexPathForCell:cell];
+    int i = 0;
+    while (i < self.answers.count) {
+        FDataSnapshot* answerData = self.answers[i];
+        if ([answerData.value[@"votes"] intValue] <= voteCount-1) {
+            break;
+        }
+        i++;
+    }
+    
+    if (i != originalIndexPath.row) {
+        [self.answersTableView beginUpdates];
+        
+        [self.answersTableView moveRowAtIndexPath:originalIndexPath toIndexPath:[NSIndexPath indexPathForRow:i inSection:originalIndexPath.section]];
+        
+        [self.answersTableView endUpdates];
+    }
 }
 
 /*
