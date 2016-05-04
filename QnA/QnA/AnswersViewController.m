@@ -138,24 +138,71 @@
     [self.answers insertObject:answerToMove atIndex:destinationIndexPath.row];
 }
 
-- (void) cell:(AnswerCell*)cell didFinishUpdatingVote:(int)voteCount {
+- (void) cell:(AnswerCell*)cell didUpdateVoteOriginalVote:(int)originalVote increasing:(BOOL)increasing votesReference:(Firebase *)votesReference {
     NSIndexPath* originalIndexPath = [self.answersTableView indexPathForCell:cell];
-    int i = 0;
-    while (i < self.answers.count) {
-        FDataSnapshot* answerData = self.answers[i];
-        if ([answerData.value[@"votes"] intValue] <= voteCount-1) {
+    
+    int replaceIndex = 0;
+    while (replaceIndex < self.answers.count) {
+        FDataSnapshot* answerData = self.answers[replaceIndex];
+        if ([answerData.value[@"votes"] intValue] <= originalVote-1) {
             break;
         }
-        i++;
+        replaceIndex++;
     }
     
-    if (i != originalIndexPath.row) {
+    //int replaceIndex = [self findReplaceIndexWithOriginalVote:originalVote increasing:increasing];
+    
+    // once replaceIndex found, can update votes
+//    int vote;
+//    if (increasing) {
+//        vote = originalVote+1;
+//    } else {
+//        vote = originalVote-1;
+//    }
+//    [votesReference setValue:[NSNumber numberWithInt:vote]];
+    
+    if (replaceIndex != originalIndexPath.row) {
+        if (replaceIndex > originalIndexPath.row) {
+            replaceIndex--;
+        }
+        
         [self.answersTableView beginUpdates];
         
-        [self.answersTableView moveRowAtIndexPath:originalIndexPath toIndexPath:[NSIndexPath indexPathForRow:i inSection:originalIndexPath.section]];
+        [self.answersTableView moveRowAtIndexPath:originalIndexPath toIndexPath:[NSIndexPath indexPathForRow:replaceIndex inSection:originalIndexPath.section]];
         
         [self.answersTableView endUpdates];
     }
+}
+
+- (int) findReplaceIndexWithOriginalVote:(int)originalVote increasing:(BOOL)increasing {
+    int replaceIndex = 0;
+    
+    while (replaceIndex < self.answers.count) {
+        FDataSnapshot* answerData = self.answers[replaceIndex];
+        int answerVotes = [answerData.value[@"votes"] intValue];
+        
+        // if increasing, want the first original value index
+        if (increasing &&
+            answerVotes == originalVote) {
+            break;
+        }
+        
+        // if decreasing, want the last original value index
+        if (!increasing &&
+            answerVotes < originalVote) {
+            replaceIndex--; // 1 before the next lesser value
+            break;
+        }
+        
+        replaceIndex++;
+    }
+    
+    // if you get to the end (eg, decrementing the last element), it's just the last index  
+    if (replaceIndex == self.answers.count) {
+        replaceIndex--;
+    }
+    
+    return replaceIndex;
 }
 
 /*

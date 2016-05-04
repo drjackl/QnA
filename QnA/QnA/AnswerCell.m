@@ -47,6 +47,7 @@
 
 - (IBAction) voteSwitchToggled:(UISwitch*)sender {
     // so it seems switch has already been switched by the time this method is reached
+    int originalVote = self.votes;
     if (sender.isOn) {
         // increment
         self.votes++;
@@ -56,7 +57,7 @@
     }
     
     [self.votesReference setValue:[NSNumber numberWithInt:self.votes]];
-    [self.delegate cell:self didFinishUpdatingVote:self.votes];
+    [self.delegate cell:self didUpdateVoteOriginalVote:originalVote increasing:sender.isOn votesReference:self.votesReference];
     
 //    [self.tableView beginUpdates];
 //    [self.votesReference setValue:[NSNumber numberWithInt:self.votes]];

@@ -12,7 +12,7 @@
 @class AnswerCell;
 
 @protocol AnswerCellDelegate <NSObject>
-- (void) cell:(AnswerCell*)cell didFinishUpdatingVote:(int)voteCount;
+- (void) cell:(AnswerCell*)cell didUpdateVoteOriginalVote:(int)originalVote increasing:(BOOL)increasing votesReference:(Firebase*)votesReference;
 @end
 
 @interface AnswerCell : UITableViewCell
