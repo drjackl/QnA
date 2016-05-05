@@ -49,32 +49,16 @@
     // so it seems switch has already been switched by the time this method is reached
     int originalVote = self.votes;
     if (sender.isOn) {
-        // increment
         self.votes++;
     } else {
-        // decrement
         self.votes--;
     }
     
+    // wait to set value (though if not observing, shouldn't matter when this is done anymore)
     //[self.votesReference setValue:[NSNumber numberWithInt:self.votes]];
     
+    // use delegate method to have access to tableView
     [self.delegate cell:self didUpdateVoteOriginalVote:originalVote increasing:sender.isOn votesReference:self.votesReference];
-    
-//    [self.tableView beginUpdates];
-//    [self.votesReference setValue:[NSNumber numberWithInt:self.votes]];
-//    
-//    // get original index path
-//    NSIndexPath* originalIndexPath = [self.tableView indexPathForCell:self];
-//    
-//    // then get index of first value with self.votes-1
-////    int i = 0;
-////    while (i < self.answers)) {
-////        <#statements#>
-////    }
-//    NSIndexPath* indexPath = [NSIndexPath indexPathForRow:0 inSection:0];
-//    
-//    [self.tableView moveRowAtIndexPath:originalIndexPath toIndexPath:indexPath];
-//    [self.tableView endUpdates];
 }
 
 @end

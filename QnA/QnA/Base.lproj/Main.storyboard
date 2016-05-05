@@ -277,10 +277,10 @@
             </objects>
             <point key="canvasLocation" x="3605" y="-15"/>
         </scene>
-        <!--Select a picture for your profile-->
+        <!--Picture Picker-->
         <scene sceneID="WYb-uj-Vvn">
             <objects>
-                <collectionViewController id="LIG-RA-L4V" customClass="PictureCollectionViewController" sceneMemberID="viewController">
+                <collectionViewController id="LIG-RA-L4V" userLabel="Picture Picker" customClass="PictureCollectionViewController" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="r9K-uJ-Pyh">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -374,7 +374,7 @@
                                             <rect key="frame" x="0.0" y="0.0" width="600" height="129"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="2Uo-pd-Oex">
+                                                <stackView opaque="NO" contentMode="scaleToFill" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="2Uo-pd-Oex">
                                                     <rect key="frame" x="8" y="8" width="584" height="113"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Question Text" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xxs-CF-h8X">
@@ -451,10 +451,10 @@
             </objects>
             <point key="canvasLocation" x="1855" y="722"/>
         </scene>
-        <!--Author asks ...-->
+        <!--Answers-->
         <scene sceneID="znf-Tp-K4C">
             <objects>
-                <viewController id="42d-5c-6Ck" customClass="AnswersViewController" sceneMemberID="viewController">
+                <viewController id="42d-5c-6Ck" userLabel="Answers" customClass="AnswersViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="eb2-8c-6iD"/>
                         <viewControllerLayoutGuide type="bottom" id="fFG-Ix-uRe"/>
@@ -685,10 +685,10 @@
             </objects>
             <point key="canvasLocation" x="2023" y="-15"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Nav: Questions-->
         <scene sceneID="hu6-zU-s7R">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Rvf-0M-GJD" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Rvf-0M-GJD" userLabel="Nav: Questions" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ohf-xr-tZU">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -703,10 +703,10 @@
             </objects>
             <point key="canvasLocation" x="1043" y="722"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Nav: Edit Profile-->
         <scene sceneID="QMC-DC-0Ci">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hZ0-Xk-EgV" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="hZ0-Xk-EgV" userLabel="Nav: Edit Profile" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="LAJ-Te-fpa">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

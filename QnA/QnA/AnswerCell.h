@@ -26,6 +26,7 @@
 //@property (weak, nonatomic) UITableView* tableView;
 @property (weak, nonatomic) id<AnswerCellDelegate> delegate;
 
+// use this property to be cleaner (if don't want to set in tableView)
 //@property (nonatomic) FDataSnapshot* answerData;
 
 @end

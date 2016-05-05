@@ -26,7 +26,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    // update UI - don't forget, this needs to be both here (for first time loading) and setter
+    // apparently doesn't need to be in setter, just here
     // (if this isn't in, question label is still the default ("Question Text"))
     self.questionLabel.text = self.question.value[@"text"];
     
@@ -59,8 +59,10 @@
     [queryReference observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         NSMutableArray* mutableAnswers = [NSMutableArray new];
         for (FDataSnapshot* data in snapshot.children) {
+            // before answers were ordered, just added to end
             //[mutableAnswers addObject:object];
             
+            // before using Answer array
             //[mutableAnswers insertObject:data atIndex:0]; // insert in reverse order
             
             Answer* answer = [[Answer alloc] initWithText:data.value[@"text"] voteCount:[data.value[@"votes"] intValue] uid:data.key];
@@ -72,6 +74,17 @@
         [self.answersTableView reloadData];
     }];
     
+    // still a problem since this is called the first time as well
+//    [queryReference observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot* snapshot) {
+//
+//        // since new answer just add it to end
+//        Answer* answer = [[Answer alloc] initWithText:snapshot.value[@"text"] voteCount:[snapshot.value[@"votes"] intValue] uid:snapshot.key];
+//        [self.answers addObject:answer];
+//        
+//        [self.answersTableView reloadData];
+//    }];
+    
+    // had a problem with this method called multiple times per move
 //    [queryReference observeEventType:FEventTypeChildMoved andPreviousSiblingKeyWithBlock:^(FDataSnapshot *snapshot, NSString *prevKey) {
 //        NSIndexPath* oldIndexPath = [self findIndexPathOfKey:prevKey];
 //        NSIndexPath* newIndexPath = [self findIndexPathOfKey:snapshot.key];
@@ -112,6 +125,11 @@
                                       @"votes" : @0}; // new value: answer and votes tuple
         //[answerReference setValue:alertController.textFields[0].text]; // old value: ans text
         [answerReference setValue:answerValue];
+        
+        // sync model in app (since not syncing with query)
+        Answer* answer = [[Answer alloc] initWithText:answerValue[@"text"] voteCount:0 uid:answerReference.key];
+        [self.answers addObject:answer];
+        [self.answersTableView reloadData];
     }];
     [alertController addAction:cancelAction];
     [alertController addAction:defaultAction];
@@ -127,6 +145,9 @@
 // this method NEEDS to have UIStoryboardSegue* as an arg (not an id) or else you can't drag to Exit
 - (IBAction) unwindBackToAnswers:(UIStoryboardSegue*)segue {
 }
+
+
+#pragma mark - UITableView data source and delegate methods
 
 - (NSInteger) tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
     return self.answers.count;
@@ -166,21 +187,11 @@
     [self.answers insertObject:answerToMove atIndex:destinationIndexPath.row];
 }
 
-- (void) cell:(AnswerCell*)cell didUpdateVoteOriginalVote:(int)originalVote increasing:(BOOL)increasing votesReference:(Firebase *)votesReference {
+
+#pragma mark - AnswerCell delegate methods
+
+- (void) cell:(AnswerCell*)cell didUpdateVoteOriginalVote:(int)originalVote increasing:(BOOL)increasing votesReference:(Firebase*)votesReference {
     NSIndexPath* originalIndexPath = [self.answersTableView indexPathForCell:cell];
-    
-//    int replaceIndex = 0;
-//    while (replaceIndex < self.answers.count) {
-//        //FDataSnapshot* answerData = self.answers[replaceIndex];
-//        Answer* answer = self.answers[replaceIndex];
-////        if ([answerData.value[@"votes"] intValue] <= originalVote-1) {
-////            break;
-////        }
-//        if (answer.voteCount <= originalVote-1) {
-//            break;
-//        }
-//        replaceIndex++;
-//    }
     
     int replaceIndex = [self findReplaceIndexWithOriginalVote:originalVote increasing:increasing];
     
@@ -199,19 +210,24 @@
     answer.voteCount = vote;
     
     if (replaceIndex != originalIndexPath.row) {
-        if (replaceIndex > originalIndexPath.row) {
-            replaceIndex--;
-        }
+        // this is wrong because if replaceIndex greater (decrementing), you put it one *after* the last, so decrementing replaceIndex puts it one off
+//        if (replaceIndex > originalIndexPath.row) {
+//            replaceIndex--;
+//        }
         
         [self.answersTableView beginUpdates];
         
+        // this does the actual animation
         [self.answersTableView moveRowAtIndexPath:originalIndexPath toIndexPath:[NSIndexPath indexPathForRow:replaceIndex inSection:originalIndexPath.section]];
+        
+        // this updates the model (implemented delegate method above)
         [self tableView:self.answersTableView moveRowAtIndexPath:originalIndexPath toIndexPath:[NSIndexPath indexPathForRow:replaceIndex inSection:originalIndexPath.section]];
         
         [self.answersTableView endUpdates];
     }
 }
 
+// replaceIndex is first index with originalVoteCount if increasing, or last index with originalVoteCount if decreasing
 - (int) findReplaceIndexWithOriginalVote:(int)originalVote increasing:(BOOL)increasing {
     int replaceIndex = 0;
     
