@@ -56,7 +56,8 @@
         self.votes--;
     }
     
-    [self.votesReference setValue:[NSNumber numberWithInt:self.votes]];
+    //[self.votesReference setValue:[NSNumber numberWithInt:self.votes]];
+    
     [self.delegate cell:self didUpdateVoteOriginalVote:originalVote increasing:sender.isOn votesReference:self.votesReference];
     
 //    [self.tableView beginUpdates];

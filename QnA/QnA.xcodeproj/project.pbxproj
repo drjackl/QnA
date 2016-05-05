@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0414EFDF1CD67F250018218D /* AnswerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 0414EFDE1CD67F250018218D /* AnswerCell.m */; };
+		041936AB1CDA8AEA001296C9 /* Answer.m in Sources */ = {isa = PBXBuildFile; fileRef = 041936AA1CDA8AEA001296C9 /* Answer.m */; };
 		046F991A1CC72C4F00B52D18 /* PictureCollectionViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046F99191CC72C4F00B52D18 /* PictureCollectionViewController.m */; };
 		046F99231CD058E300B52D18 /* ProfileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 046F99221CD058E200B52D18 /* ProfileViewController.m */; };
 		046F99261CD2610C00B52D18 /* UserButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 046F99251CD2610C00B52D18 /* UserButton.m */; };
@@ -48,6 +49,8 @@
 /* Begin PBXFileReference section */
 		0414EFDD1CD67F250018218D /* AnswerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AnswerCell.h; sourceTree = "<group>"; };
 		0414EFDE1CD67F250018218D /* AnswerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnswerCell.m; sourceTree = "<group>"; };
+		041936A91CDA8AEA001296C9 /* Answer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Answer.h; sourceTree = "<group>"; };
+		041936AA1CDA8AEA001296C9 /* Answer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Answer.m; sourceTree = "<group>"; };
 		046F99181CC72C4F00B52D18 /* PictureCollectionViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PictureCollectionViewController.h; sourceTree = "<group>"; };
 		046F99191CC72C4F00B52D18 /* PictureCollectionViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PictureCollectionViewController.m; sourceTree = "<group>"; };
 		046F99211CD058E200B52D18 /* ProfileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileViewController.h; sourceTree = "<group>"; };
@@ -154,6 +157,8 @@
 				04B94D351CBB08A100C4A85C /* AnswersViewController.m */,
 				0414EFDD1CD67F250018218D /* AnswerCell.h */,
 				0414EFDE1CD67F250018218D /* AnswerCell.m */,
+				041936A91CDA8AEA001296C9 /* Answer.h */,
+				041936AA1CDA8AEA001296C9 /* Answer.m */,
 				04F325611CC5626300B86C94 /* EditProfileViewController.h */,
 				04F325621CC5626300B86C94 /* EditProfileViewController.m */,
 				046F99211CD058E200B52D18 /* ProfileViewController.h */,
@@ -399,6 +404,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				04D00A831CB8CC2600A81AEE /* LoginViewController.m in Sources */,
+				041936AB1CDA8AEA001296C9 /* Answer.m in Sources */,
 				04F325631CC5626300B86C94 /* EditProfileViewController.m in Sources */,
 				04B94D361CBB08A100C4A85C /* AnswersViewController.m in Sources */,
 				0414EFDF1CD67F250018218D /* AnswerCell.m in Sources */,

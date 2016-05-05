@@ -9,6 +9,7 @@
 #import "AnswersViewController.h"
 #import <Firebase.h>
 #import "DataSource.h"
+#import "Answer.h"
 #import "AnswerCell.h"
 
 @interface AnswersViewController () <AnswerCellDelegate, UITableViewDataSource, UITableViewDelegate> // works without declaration, but declare to autocomplete moveRowAtIndexPath method
@@ -57,9 +58,13 @@
     // add read observer right away (if in viewDidAppear, answers would not show)
     [queryReference observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         NSMutableArray* mutableAnswers = [NSMutableArray new];
-        for (NSObject* object in snapshot.children) {
+        for (FDataSnapshot* data in snapshot.children) {
             //[mutableAnswers addObject:object];
-            [mutableAnswers insertObject:object atIndex:0]; // insert in reverse order
+            
+            //[mutableAnswers insertObject:data atIndex:0]; // insert in reverse order
+            
+            Answer* answer = [[Answer alloc] initWithText:data.value[@"text"] voteCount:[data.value[@"votes"] intValue] uid:data.key];
+            [mutableAnswers insertObject:answer atIndex:0]; // insert in reverse order
         }
         
         self.answers = mutableAnswers;
@@ -67,8 +72,26 @@
         [self.answersTableView reloadData];
     }];
     
+//    [queryReference observeEventType:FEventTypeChildMoved andPreviousSiblingKeyWithBlock:^(FDataSnapshot *snapshot, NSString *prevKey) {
+//        NSIndexPath* oldIndexPath = [self findIndexPathOfKey:prevKey];
+//        NSIndexPath* newIndexPath = [self findIndexPathOfKey:snapshot.key];
+//        if (oldIndexPath.row < newIndexPath.row) {
+//            newIndexPath = [NSIndexPath indexPathForRow:newIndexPath.row-1 inSection:newIndexPath.section];
+//        }
+//        [self.answersTableView moveRowAtIndexPath:oldIndexPath toIndexPath:newIndexPath];
+//    }];
+    
     // update UI (maybe this isn't necessary if in viewDidLoad)
     //self.questionLabel.text = question.value;
+}
+
+- (NSIndexPath*) findIndexPathOfKey:(NSString*)key {
+    for (int i = 0; i < self.answers.count; i++) {
+        if ([key isEqualToString:((Answer*)self.answers[i]).uid]) {
+            return [NSIndexPath indexPathForRow:i inSection:0];
+        }
+    }
+    return nil;
 }
 
 - (IBAction) addAnswer {
@@ -113,17 +136,21 @@
     //UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"simpleAnswerCell" forIndexPath:indexPath];
     AnswerCell* cell = [tableView dequeueReusableCellWithIdentifier:@"answerCell" forIndexPath:indexPath];
     
-    FDataSnapshot* answer = self.answers[indexPath.row];
     //cell.answerData = self.answers[indexPath.row];
+    //FDataSnapshot* answer = self.answers[indexPath.row];
+    Answer* answer = self.answers[indexPath.row];
     
     // old answer value was just the answer text
     // new answer value is a tuple with text and votes
-    cell.answerLabel.text = answer.value[@"text"];
-    NSNumber* votes = answer.value[@"votes"];
-    cell.votesLabel.text = [votes.stringValue stringByAppendingString:@" votes"];
+    cell.answerLabel.text = answer.text;//answer.value[@"text"];
+    //NSNumber* votes = answer.value[@"votes"];
+    //cell.votesLabel.text = [votes.stringValue stringByAppendingString:@" votes"];
+    int votes = answer.voteCount;
+    cell.votesLabel.text = [NSString stringWithFormat:@"%d votes", votes];
     
     // cell needs to know votesReference to update votes count when voting
-    Firebase* aidReference = [self.answersReference childByAppendingPath:answer.key];
+    //Firebase* aidReference = [self.answersReference childByAppendingPath:answer.key];
+    Firebase* aidReference = [self.answersReference childByAppendingPath:answer.uid];
     cell.votesReference = [aidReference childByAppendingPath:@"votes"];
     
     //cell.tableView = tableView;
@@ -133,7 +160,8 @@
 }
 
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
-    FDataSnapshot* answerToMove = self.answers[sourceIndexPath.row];
+    //FDataSnapshot* answerToMove = self.answers[sourceIndexPath.row];
+    Answer* answerToMove = self.answers[sourceIndexPath.row];
     [self.answers removeObjectAtIndex:sourceIndexPath.row];
     [self.answers insertObject:answerToMove atIndex:destinationIndexPath.row];
 }
@@ -141,25 +169,34 @@
 - (void) cell:(AnswerCell*)cell didUpdateVoteOriginalVote:(int)originalVote increasing:(BOOL)increasing votesReference:(Firebase *)votesReference {
     NSIndexPath* originalIndexPath = [self.answersTableView indexPathForCell:cell];
     
-    int replaceIndex = 0;
-    while (replaceIndex < self.answers.count) {
-        FDataSnapshot* answerData = self.answers[replaceIndex];
-        if ([answerData.value[@"votes"] intValue] <= originalVote-1) {
-            break;
-        }
-        replaceIndex++;
-    }
+//    int replaceIndex = 0;
+//    while (replaceIndex < self.answers.count) {
+//        //FDataSnapshot* answerData = self.answers[replaceIndex];
+//        Answer* answer = self.answers[replaceIndex];
+////        if ([answerData.value[@"votes"] intValue] <= originalVote-1) {
+////            break;
+////        }
+//        if (answer.voteCount <= originalVote-1) {
+//            break;
+//        }
+//        replaceIndex++;
+//    }
     
-    //int replaceIndex = [self findReplaceIndexWithOriginalVote:originalVote increasing:increasing];
+    int replaceIndex = [self findReplaceIndexWithOriginalVote:originalVote increasing:increasing];
     
     // once replaceIndex found, can update votes
-//    int vote;
-//    if (increasing) {
-//        vote = originalVote+1;
-//    } else {
-//        vote = originalVote-1;
-//    }
-//    [votesReference setValue:[NSNumber numberWithInt:vote]];
+    int vote;
+    if (increasing) {
+        vote = originalVote+1;
+    } else {
+        vote = originalVote-1;
+    }
+    [votesReference setValue:[NSNumber numberWithInt:vote]];
+    
+    //FDataSnapshot* answerData = self.answers[originalIndexPath.row];
+    //answerData.value[@"votes"];
+    Answer* answer = self.answers[originalIndexPath.row];
+    answer.voteCount = vote;
     
     if (replaceIndex != originalIndexPath.row) {
         if (replaceIndex > originalIndexPath.row) {
@@ -169,6 +206,7 @@
         [self.answersTableView beginUpdates];
         
         [self.answersTableView moveRowAtIndexPath:originalIndexPath toIndexPath:[NSIndexPath indexPathForRow:replaceIndex inSection:originalIndexPath.section]];
+        [self tableView:self.answersTableView moveRowAtIndexPath:originalIndexPath toIndexPath:[NSIndexPath indexPathForRow:replaceIndex inSection:originalIndexPath.section]];
         
         [self.answersTableView endUpdates];
     }
@@ -178,8 +216,10 @@
     int replaceIndex = 0;
     
     while (replaceIndex < self.answers.count) {
-        FDataSnapshot* answerData = self.answers[replaceIndex];
-        int answerVotes = [answerData.value[@"votes"] intValue];
+        //FDataSnapshot* answerData = self.answers[replaceIndex];
+        Answer* answer = self.answers[replaceIndex];
+        //int answerVotes = [answerData.value[@"votes"] intValue];
+        int answerVotes = answer.voteCount;
         
         // if increasing, want the first original value index
         if (increasing &&
