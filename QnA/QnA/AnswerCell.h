@@ -20,6 +20,7 @@
 // IBOutlets
 @property (weak, nonatomic) IBOutlet UILabel* answerLabel;
 @property (weak, nonatomic) IBOutlet UILabel* votesLabel;
+@property (weak, nonatomic) IBOutlet UISwitch *votesSwitch; // expose so can disable if no one logged in
 
 @property (nonatomic) Firebase* votesReference;
 

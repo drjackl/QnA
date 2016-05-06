@@ -203,12 +203,18 @@
     Firebase* aidReference = [self.answersReference childByAppendingPath:answer.uid];
     cell.votesReference = [aidReference childByAppendingPath:@"votes"];
     
-    //cell.tableView = tableView;
-    //cell.delegate = self;
+    // disallow voting if not logged in
+    if (![DataSource onlySource].loggedInUserID) {
+        cell.votesSwitch.enabled = NO;
+    }
+    
+    //cell.tableView = tableView; // passing VCs or tableViews not right, breaking MVC
+    //cell.delegate = self; // not necessary if using FB
     
     return cell;
 }
 
+// called manually (since user can't reorder table manually)
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
     //FDataSnapshot* answerToMove = self.answers[sourceIndexPath.row];
     Answer* answerToMove = self.answers[sourceIndexPath.row];

@@ -558,6 +558,7 @@
                                                 <connections>
                                                     <outlet property="answerLabel" destination="WE7-uZ-kFE" id="7T3-eZ-dfq"/>
                                                     <outlet property="votesLabel" destination="tuT-eu-1j3" id="VbB-md-EXa"/>
+                                                    <outlet property="votesSwitch" destination="xLX-Vn-bx5" id="hKL-v1-gIc"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
