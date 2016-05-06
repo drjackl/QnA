@@ -47,7 +47,7 @@
 
 - (IBAction) voteSwitchToggled:(UISwitch*)sender {
     // so it seems switch has already been switched by the time this method is reached
-    int originalVote = self.votes;
+    //int originalVote = self.votes;
     if (sender.isOn) {
         self.votes++;
     } else {
@@ -55,10 +55,10 @@
     }
     
     // wait to set value (though if not observing, shouldn't matter when this is done anymore)
-    //[self.votesReference setValue:[NSNumber numberWithInt:self.votes]];
+    [self.votesReference setValue:[NSNumber numberWithInt:self.votes]];
     
     // use delegate method to have access to tableView
-    [self.delegate cell:self didUpdateVoteOriginalVote:originalVote increasing:sender.isOn votesReference:self.votesReference];
+    //[self.delegate cell:self didUpdateVoteOriginalVote:originalVote increasing:sender.isOn votesReference:self.votesReference];
 }
 
 @end
