@@ -58,14 +58,17 @@
     // add read observer right away (if in viewDidAppear, answers would not show)
     [queryReference observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
         NSMutableArray* mutableAnswers = [NSMutableArray new];
-        for (FDataSnapshot* data in snapshot.children) {
+        for (FDataSnapshot* answerData in snapshot.children) {
             // before answers were ordered, just added to end
             //[mutableAnswers addObject:object];
             
             // before using Answer array
-            //[mutableAnswers insertObject:data atIndex:0]; // insert in reverse order
+            //[mutableAnswers insertObject:answerData atIndex:0]; // insert in reverse order
             
-            Answer* answer = [[Answer alloc] initWithText:data.value[@"text"] voteCount:[data.value[@"votes"] intValue] uid:data.key];
+            // when votes were just the voteCount, not a list of uids
+            //Answer* answer = [[Answer alloc] initWithText:answerData.value[@"text"] voteCount:[answerData.value[@"votes"] intValue] uid:answerData.key];
+            
+            Answer* answer = [[Answer alloc] initWithText:answerData.value[@"text"] voteCount:((FDataSnapshot*)answerData.value[@"votes"]).childrenCount uid:answerData.key];
             [mutableAnswers insertObject:answer atIndex:0]; // insert in reverse order
         }
         
@@ -150,8 +153,11 @@
         
         // posting answer to backend
         Firebase* answerReference = [self.answersReference childByAutoId];
-        NSDictionary* answerValue = @{@"text" : alertController.textFields[0].text,
-                                      @"votes" : @0}; // new value: answer and votes tuple
+//        NSDictionary* answerValue = @{@"text" : alertController.textFields[0].text,
+//                                      @"votes" : @0}; // new value: answer and votes tuple
+        
+        // no longer setting votes to be @0 since not using voteCount
+        NSDictionary* answerValue = @{@"text" : alertController.textFields[0].text}; // new value: answer and votes tuple
         //[answerReference setValue:alertController.textFields[0].text]; // old value: ans text
         [answerReference setValue:answerValue];
         

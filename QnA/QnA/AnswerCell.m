@@ -7,6 +7,7 @@
 //
 
 #import "AnswerCell.h"
+#import "DataSource.h"
 
 @interface AnswerCell ()
 @property (nonatomic) int votes;
@@ -38,27 +39,36 @@
     _votesReference = votesReference;
     
     [votesReference observeEventType:FEventTypeValue withBlock:^(FDataSnapshot* snapshot) {
-        self.votes = ((NSNumber*)snapshot.value).intValue;
+//        self.votes = ((NSNumber*)snapshot.value).intValue;
+//        
+//        // necessary now that not constantly observing changes
+//        self.votesLabel.text = [NSString stringWithFormat:@"%d votes", self.votes];
         
-        // necessary now that not constantly observing changes
-        self.votesLabel.text = [NSString stringWithFormat:@"%d votes", self.votes];
+        self.votesLabel.text = [NSString stringWithFormat:@"%lu votes", snapshot.childrenCount];
     }];
 }
 
 - (IBAction) voteSwitchToggled:(UISwitch*)sender {
     // so it seems switch has already been switched by the time this method is reached
-    //int originalVote = self.votes;
+    Firebase* idVoteReference = [self.votesReference childByAppendingPath:[DataSource onlySource].loggedInUserID];
     if (sender.isOn) {
-        self.votes++;
+        [idVoteReference setValue:[DataSource onlySource].loggedInUserID];
     } else {
-        self.votes--;
+        [idVoteReference removeValue];
     }
     
-    // wait to set value (though if not observing, shouldn't matter when this is done anymore)
-    [self.votesReference setValue:[NSNumber numberWithInt:self.votes]];
-    
-    // use delegate method to have access to tableView
-    //[self.delegate cell:self didUpdateVoteOriginalVote:originalVote increasing:sender.isOn votesReference:self.votesReference];
+//    //int originalVote = self.votes;
+//    if (sender.isOn) {
+//        self.votes++;
+//    } else {
+//        self.votes--;
+//    }
+//    
+//    // wait to set value (though if not observing, shouldn't matter when this is done anymore)
+//    [self.votesReference setValue:[NSNumber numberWithInt:self.votes]];
+//    
+//    // use delegate method to have access to tableView
+//    //[self.delegate cell:self didUpdateVoteOriginalVote:originalVote increasing:sender.isOn votesReference:self.votesReference];
 }
 
 @end
