@@ -28,18 +28,7 @@
 
 // could set answerData to be cleaner (rather than setting in tableView delegate method), but it works ok without. votesReference is what's really needed (as implemented below)
 //- (void) setAnswerData:(FDataSnapshot*)answerData {
-//    _answerData = answerData;
-//    
-//    self.answerLabel.text = answerData.value[@"text"];
-//    self.votesLabel.text = answerData.value[@"votes"];
-//    self.votesReference = 
-//}
 
-//// won't work as can't just set answerID since need the aidReference too
-//- (void) setAnswerID:(NSString*)answerID {
-//    Firebase* aidReference = [self.answersReference childByAppendingPath:answer.uid];
-//    cell.votesReference = [aidReference childByAppendingPath:@"votes"];
-//}
 
 - (void) setVotesReference:(Firebase*)votesReference {
     _votesReference = votesReference;
@@ -57,13 +46,6 @@
 
 - (IBAction) voteSwitchToggled:(UISwitch*)sender {
     // so it seems switch has already been switched by the time this method is reached
-    //Firebase* idVoteReference = [self.votesReference childByAppendingPath:[DataSource onlySource].loggedInUserID];
-//    if (sender.isOn) {
-//        [answerVotesReference setValue:[DataSource onlySource].loggedInUserID];
-//    } else {
-//        [answerVotesReference removeValue];
-//    }
-
     //int originalVote = self.votes;
     Firebase* answerVotesReference = [[DataSource onlySource].loggedInUserReference childByAppendingPath:@"answers_voted"];
     Firebase* answerIDReference = [answerVotesReference childByAppendingPath:self.answerID];

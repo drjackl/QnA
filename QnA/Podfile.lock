@@ -65,11 +65,13 @@ PODS:
   - GoogleSymbolUtilities (1.1.0)
   - GoogleUtilities (1.2.0):
     - GoogleSymbolUtilities (~> 1.0)
+  - UICKeyChainStore (2.1.0)
 
 DEPENDENCIES:
   - Cloudinary
   - Firebase (>= 2.5.1)
   - FirebaseUI (~> 0.3)
+  - UICKeyChainStore
 
 SPEC CHECKSUMS:
   Bolts: a0058fa3b331c5a1e4402d534f2dae36dbff31e4
@@ -86,5 +88,6 @@ SPEC CHECKSUMS:
   GoogleSignIn: 3d571172b8603be39dcb1705d8217146bb76fe62
   GoogleSymbolUtilities: eb3965ea12710569c7b80db198a39e39b18613f7
   GoogleUtilities: 85f8ad6b251544286a97163133d042ec95f889c5
+  UICKeyChainStore: f1cbd42216a113f0165de1e733e62905b8823432
 
 COCOAPODS: 0.39.0

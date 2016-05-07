@@ -89,15 +89,7 @@
 //        [self.answersTableView reloadData];
 //    }];
     
-    // had a problem with this method called multiple times per move
-//    [queryReference observeEventType:FEventTypeChildMoved andPreviousSiblingKeyWithBlock:^(FDataSnapshot *snapshot, NSString *prevKey) {
-//        NSIndexPath* oldIndexPath = [self findIndexPathOfKey:prevKey];
-//        NSIndexPath* newIndexPath = [self findIndexPathOfKey:snapshot.key];
-//        if (oldIndexPath.row < newIndexPath.row) {
-//            newIndexPath = [NSIndexPath indexPathForRow:newIndexPath.row-1 inSection:newIndexPath.section];
-//        }
-//        [self.answersTableView moveRowAtIndexPath:oldIndexPath toIndexPath:newIndexPath];
-//    }];
+    // had a problem with this method called multiple times per move, but that was probably due to model being changed doubly accidentally
     [queryReference observeEventType:FEventTypeChildMoved andPreviousSiblingKeyWithBlock:^(FDataSnapshot *snapshot, NSString *prevKey) {
         NSLog(@"Moved snapshot: %@, from prevKey: %@", snapshot, prevKey);
         
@@ -232,6 +224,7 @@
     return cell;
 }
 
+// thsi doesn't work since the block doesn't execute synchronously
 //- (BOOL) loggedInUserVotedFor:(Firebase*)votesReference {
 //    __block BOOL voted = NO;
 //    [votesReference observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot* snapshot) {

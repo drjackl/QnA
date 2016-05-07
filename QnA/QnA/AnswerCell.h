@@ -11,9 +11,10 @@
 
 @class AnswerCell;
 
-@protocol AnswerCellDelegate <NSObject>
-- (void) cell:(AnswerCell*)cell didUpdateVoteOriginalVote:(int)originalVote increasing:(BOOL)increasing votesReference:(Firebase*)votesReference;
-@end
+// not using delegate anymore since can just observe query
+//@protocol AnswerCellDelegate <NSObject>
+//- (void) cell:(AnswerCell*)cell didUpdateVoteOriginalVote:(int)originalVote increasing:(BOOL)increasing votesReference:(Firebase*)votesReference;
+//@end
 
 @interface AnswerCell : UITableViewCell
 
@@ -25,8 +26,8 @@
 @property (nonatomic) NSString* answerID;
 @property (nonatomic) Firebase* votesReference;
 
-//@property (weak, nonatomic) UITableView* tableView;
-@property (weak, nonatomic) id<AnswerCellDelegate> delegate;
+//@property (weak, nonatomic) UITableView* tableView; // this was wrong, but easy for getting something to quickly work
+//@property (weak, nonatomic) id<AnswerCellDelegate> delegate;
 
 // use this property to be cleaner (if don't want to set in tableView)
 //@property (nonatomic) FDataSnapshot* answerData;

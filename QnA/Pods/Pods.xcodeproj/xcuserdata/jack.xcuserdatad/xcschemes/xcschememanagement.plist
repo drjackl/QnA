@@ -39,6 +39,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>UICKeyChainStore.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
@@ -62,17 +67,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>59D7759EC84AA28FC0F514D2B693E29F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>81D7FE2A0FD9258247B1232874B837DA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C43DEF8E5BFEC36D943258BA3F21834D</key>
+		<key>87454DACDDBB726F95CEC30BB5D473CC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D4602E0815E11C2780FF6A81514970CB</key>
+		<key>C43DEF8E5BFEC36D943258BA3F21834D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
