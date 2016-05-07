@@ -35,40 +35,51 @@
 //    self.votesReference = 
 //}
 
+//// won't work as can't just set answerID since need the aidReference too
+//- (void) setAnswerID:(NSString*)answerID {
+//    Firebase* aidReference = [self.answersReference childByAppendingPath:answer.uid];
+//    cell.votesReference = [aidReference childByAppendingPath:@"votes"];
+//}
+
 - (void) setVotesReference:(Firebase*)votesReference {
     _votesReference = votesReference;
     
     [votesReference observeEventType:FEventTypeValue withBlock:^(FDataSnapshot* snapshot) {
-//        self.votes = ((NSNumber*)snapshot.value).intValue;
-//        
-//        // necessary now that not constantly observing changes
-//        self.votesLabel.text = [NSString stringWithFormat:@"%d votes", self.votes];
+        self.votes = ((NSNumber*)snapshot.value).intValue;
         
-        self.votesLabel.text = [NSString stringWithFormat:@"%lu votes", snapshot.childrenCount];
+        // necessary now that not constantly observing changes
+        self.votesLabel.text = [NSString stringWithFormat:@"%d votes", self.votes];
+        
+        // when votes had a list of uids of who answered
+        //self.votesLabel.text = [NSString stringWithFormat:@"%lu votes", snapshot.childrenCount];
     }];
 }
 
 - (IBAction) voteSwitchToggled:(UISwitch*)sender {
     // so it seems switch has already been switched by the time this method is reached
-    Firebase* idVoteReference = [self.votesReference childByAppendingPath:[DataSource onlySource].loggedInUserID];
+    //Firebase* idVoteReference = [self.votesReference childByAppendingPath:[DataSource onlySource].loggedInUserID];
+//    if (sender.isOn) {
+//        [answerVotesReference setValue:[DataSource onlySource].loggedInUserID];
+//    } else {
+//        [answerVotesReference removeValue];
+//    }
+
+    //int originalVote = self.votes;
+    Firebase* answerVotesReference = [[DataSource onlySource].loggedInUserReference childByAppendingPath:@"answers_voted"];
+    Firebase* answerIDReference = [answerVotesReference childByAppendingPath:self.answerID];
     if (sender.isOn) {
-        [idVoteReference setValue:[DataSource onlySource].loggedInUserID];
+        self.votes++;
+        [answerIDReference setValue:self.answerID];
     } else {
-        [idVoteReference removeValue];
+        self.votes--;
+        [answerIDReference removeValue];
     }
     
-//    //int originalVote = self.votes;
-//    if (sender.isOn) {
-//        self.votes++;
-//    } else {
-//        self.votes--;
-//    }
-//    
-//    // wait to set value (though if not observing, shouldn't matter when this is done anymore)
-//    [self.votesReference setValue:[NSNumber numberWithInt:self.votes]];
-//    
-//    // use delegate method to have access to tableView
-//    //[self.delegate cell:self didUpdateVoteOriginalVote:originalVote increasing:sender.isOn votesReference:self.votesReference];
+    // wait to set value (though if not observing, shouldn't matter when this is done anymore)
+    [self.votesReference setValue:[NSNumber numberWithInt:self.votes]];
+    
+    // use delegate method to have access to tableView
+    //[self.delegate cell:self didUpdateVoteOriginalVote:originalVote increasing:sender.isOn votesReference:self.votesReference];
 }
 
 @end

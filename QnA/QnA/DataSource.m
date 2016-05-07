@@ -51,6 +51,15 @@
     
     if (loggedInUserID) {
         self.loggedInUserReference = [self.usersReference childByAppendingPath:loggedInUserID];
+        
+        Firebase* answersVoteReference = [self.loggedInUserReference childByAppendingPath:@"answers_voted"];
+        [answersVoteReference observeEventType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+            NSMutableDictionary* answersVotedFor = [NSMutableDictionary dictionary];
+            for (FDataSnapshot* answerIDData in snapshot.children) {
+                answersVotedFor[answerIDData.key] = answerIDData.key;
+            }
+            self.answersVotedFor = answersVotedFor;
+        }];
     } else {
         self.loggedInUserReference = nil;
     }

@@ -19,6 +19,7 @@
 @property (readonly, nonatomic) Firebase* usersReference;
 
 @property (nonatomic) Firebase* loggedInUserReference;
+@property (nonatomic) NSDictionary* answersVotedFor;
 
 @property (nonatomic) NSString* loggedInUserID;
 

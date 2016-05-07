@@ -10,18 +10,18 @@
 
 @implementation Answer
 
-- (instancetype) initWithText:(NSString*)text voteCount:(int)voteCount uid:(NSString*)uid {
+- (instancetype) initWithText:(NSString*)text voteCount:(int)voteCount answerID:(NSString*)answerID {
     self = [super init];
     if (self) {
         self.text = text;
         self.voteCount = voteCount;
-        self.uid = uid;
+        self.answerID = answerID;
     }
     return self;
 }
 
 - (NSString*) description {
-    return [NSString stringWithFormat:@"votes: %d, text: %@, uid: %@", self.voteCount, self.text, self.uid];
+    return [NSString stringWithFormat:@"votes: %d, text: %@, answerID: %@", self.voteCount, self.text, self.answerID];
 }
 
 @end

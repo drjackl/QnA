@@ -68,7 +68,9 @@
             // when votes were just the voteCount, not a list of uids
             //Answer* answer = [[Answer alloc] initWithText:answerData.value[@"text"] voteCount:[answerData.value[@"votes"] intValue] uid:answerData.key];
             
-            Answer* answer = [[Answer alloc] initWithText:answerData.value[@"text"] voteCount:((FDataSnapshot*)answerData.value[@"votes"]).childrenCount uid:answerData.key];
+            //Answer* answer = [[Answer alloc] initWithText:answerData.value[@"text"] voteCount:((NSDictionary*)answerData.value[@"votes"]).count uid:answerData.key];
+            
+            Answer* answer = [[Answer alloc] initWithText:answerData.value[@"text"] voteCount:[answerData.value[@"votes"] intValue] answerID:answerData.key];
             [mutableAnswers insertObject:answer atIndex:0]; // insert in reverse order
         }
         
@@ -132,7 +134,7 @@
 
 - (NSIndexPath*) findIndexPathOfKey:(NSString*)key {
     for (int i = 0; i < self.answers.count; i++) {
-        if ([key isEqualToString:((Answer*)self.answers[i]).uid]) {
+        if ([key isEqualToString:((Answer*)self.answers[i]).answerID]) {
             return [NSIndexPath indexPathForRow:i inSection:0];
         }
     }
@@ -162,7 +164,7 @@
         [answerReference setValue:answerValue];
         
         // sync model in app (since not syncing with query)
-        Answer* answer = [[Answer alloc] initWithText:answerValue[@"text"] voteCount:0 uid:answerReference.key];
+        Answer* answer = [[Answer alloc] initWithText:answerValue[@"text"] voteCount:0 answerID:answerReference.key];
         [self.answers addObject:answer];
         [self.answersTableView reloadData];
     }];
@@ -201,24 +203,47 @@
     cell.answerLabel.text = answer.text;//answer.value[@"text"];
     //NSNumber* votes = answer.value[@"votes"];
     //cell.votesLabel.text = [votes.stringValue stringByAppendingString:@" votes"];
-    int votes = answer.voteCount;
+    int votes = answer.voteCount;//s.count;
     cell.votesLabel.text = [NSString stringWithFormat:@"%d votes", votes];
     
     // cell needs to know votesReference to update votes count when voting
     //Firebase* aidReference = [self.answersReference childByAppendingPath:answer.key];
-    Firebase* aidReference = [self.answersReference childByAppendingPath:answer.uid];
+    Firebase* aidReference = [self.answersReference childByAppendingPath:answer.answerID];
     cell.votesReference = [aidReference childByAppendingPath:@"votes"];
+    cell.answerID = answer.answerID;
     
-    // disallow voting if not logged in
-    if (![DataSource onlySource].loggedInUserID) {
+    if ([DataSource onlySource].loggedInUserID) {
+        // if logged in user voted for this answer
+        //if ([self loggedInUserVotedFor:cell.votesReference]) {
+        //if (answer.votes[[DataSource onlySource].loggedInUserID]) {
+        if ([DataSource onlySource].answersVotedFor[answer.answerID]) {
+            cell.votesSwitch.on = YES;
+        } else {
+            cell.votesSwitch.on = NO;
+        }
+    } else { // disallow voting if not logged in
         cell.votesSwitch.enabled = NO;
     }
+    
     
     //cell.tableView = tableView; // passing VCs or tableViews not right, breaking MVC
     //cell.delegate = self; // not necessary if using FB
     
     return cell;
 }
+
+//- (BOOL) loggedInUserVotedFor:(Firebase*)votesReference {
+//    __block BOOL voted = NO;
+//    [votesReference observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot* snapshot) {
+//        for (FDataSnapshot* uidVoted in snapshot.children) {
+//            if ([uidVoted.key isEqualToString:[DataSource onlySource].loggedInUserID]) {
+//                voted = YES;
+//                break;
+//            }
+//        }
+//    }];
+//    return voted;
+//}
 
 // called manually (since user can't reorder table manually)
 - (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
