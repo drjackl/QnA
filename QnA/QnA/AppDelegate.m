@@ -10,9 +10,6 @@
 #import <UICKeyChainStore.h>
 #import "DataSource.h"
 
-@interface AppDelegate ()
-
-@end
 
 @implementation AppDelegate
 

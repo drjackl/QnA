@@ -147,17 +147,17 @@
         
         // posting answer to backend
         Firebase* answerReference = [self.answersReference childByAutoId];
-//        NSDictionary* answerValue = @{@"text" : alertController.textFields[0].text,
-//                                      @"votes" : @0}; // new value: answer and votes tuple
+        NSDictionary* answerValue = @{@"text" : alertController.textFields[0].text,
+                                      @"votes" : @0}; // new value: answer and votes tuple
         
-        // no longer setting votes to be @0 since not using voteCount
-        NSDictionary* answerValue = @{@"text" : alertController.textFields[0].text}; // new value: answer and votes tuple
+//        // no longer setting votes to be @0 since not using voteCount
+//        NSDictionary* answerValue = @{@"text" : alertController.textFields[0].text}; // new value: answer and votes tuple
         //[answerReference setValue:alertController.textFields[0].text]; // old value: ans text
         [answerReference setValue:answerValue];
         
         // sync model in app (since not syncing with query)
         Answer* answer = [[Answer alloc] initWithText:answerValue[@"text"] voteCount:0 answerID:answerReference.key];
-        [self.answers addObject:answer];
+        [self.answers addObject:answer]; // this isn't necessarily always right, needs to be added in the right place
         [self.answersTableView reloadData];
     }];
     [alertController addAction:cancelAction];
