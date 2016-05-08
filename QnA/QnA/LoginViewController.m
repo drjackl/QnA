@@ -8,6 +8,7 @@
 
 #import "LoginViewController.h"
 #import <Firebase.h>
+#import <UICKeyChainStore.h>
 #import "DataSource.h"
 
 @interface LoginViewController ()
@@ -35,6 +36,9 @@
             NSLog(@"We're logged in!");
             
             [DataSource onlySource].loggedInUserID = authData.uid;
+            
+            // also save uid as access token so login remembered in future
+            [UICKeyChainStore setString:authData.uid forKey:@"access uid token"];
             
             [self showMainQuestions];
         }

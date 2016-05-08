@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import <UICKeyChainStore.h>
+#import "DataSource.h"
 
 @interface AppDelegate ()
 
@@ -17,6 +19,24 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    self.window = [[UIWindow alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    
+    // must be named "Main" (won't work for "MainBoard" or "MainStoryboard", which must've been previous iOS)
+    UIStoryboard* storyboard = [UIStoryboard storyboardWithName:@"Main" bundle:nil];
+    
+    UIViewController* initialViewController;
+    [DataSource onlySource].loggedInUserID = [UICKeyChainStore stringForKey:@"access uid token"];
+    if ([DataSource onlySource].loggedInUserID) {
+        // show questions
+        initialViewController = [storyboard instantiateViewControllerWithIdentifier:@"questionsNavigationController"];
+    } else {
+        // show login
+        initialViewController = [storyboard instantiateViewControllerWithIdentifier:@"loginViewController"];
+    }
+    
+    self.window.rootViewController = initialViewController;
+    [self.window makeKeyAndVisible];
+    
     return YES;
 }
 

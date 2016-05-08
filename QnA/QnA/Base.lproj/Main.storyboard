@@ -78,7 +78,7 @@
         <!--Login View Controller-->
         <scene sceneID="93j-CX-BTO">
             <objects>
-                <viewController id="GQw-AK-KYu" customClass="LoginViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="loginViewController" id="GQw-AK-KYu" customClass="LoginViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="kUo-kp-T7b"/>
                         <viewControllerLayoutGuide type="bottom" id="L7q-9z-APC"/>
@@ -275,7 +275,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="3605" y="-15"/>
+            <point key="canvasLocation" x="3383" y="-419"/>
         </scene>
         <!--Picture Picker-->
         <scene sceneID="WYb-uj-Vvn">
@@ -324,7 +324,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N8Z-UK-zQZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4295" y="-42"/>
+            <point key="canvasLocation" x="4065" y="-419"/>
         </scene>
         <!--Questions-->
         <scene sceneID="806-7u-Ji9">
@@ -592,7 +592,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qnn-cD-uWa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2562" y="722"/>
+            <point key="canvasLocation" x="2662" y="974"/>
         </scene>
         <!--View Profile-->
         <scene sceneID="7Io-vh-bxL">
@@ -684,12 +684,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WAk-op-LeZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2023" y="-15"/>
+            <point key="canvasLocation" x="3383" y="254"/>
         </scene>
         <!--Nav: Questions-->
         <scene sceneID="hu6-zU-s7R">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Rvf-0M-GJD" userLabel="Nav: Questions" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="questionsNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="Rvf-0M-GJD" userLabel="Nav: Questions" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ohf-xr-tZU">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -720,7 +720,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8kr-3H-h7b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2793" y="-15"/>
+            <point key="canvasLocation" x="2662" y="-419"/>
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
