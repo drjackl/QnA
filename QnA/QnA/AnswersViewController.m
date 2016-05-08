@@ -30,6 +30,8 @@
     // (if this isn't in, question label is still the default ("Question Text"))
     self.questionLabel.text = self.question.value[@"text"];
     
+    self.answers = [NSMutableArray array]; // no longer setting a new array in setValue, so must initialize
+    
     // hooked these up in storyboard
     //self.answersTableView.dataSource = self;
     //self.answersTableView.delegate = self;
@@ -55,29 +57,39 @@
     // sort according to number of votes
     FQuery* queryReference = [self.answersReference queryOrderedByChild:@"votes"];
     
+    // syncing done via ChildAdded observing below now
     // add read observer right away (if in viewDidAppear, answers would not show)
-    [queryReference observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-        NSMutableArray* mutableAnswers = [NSMutableArray new];
-        for (FDataSnapshot* answerData in snapshot.children) {
-            // before answers were ordered, just added to end
-            //[mutableAnswers addObject:object];
-            
-            // before using Answer array
-            //[mutableAnswers insertObject:answerData atIndex:0]; // insert in reverse order
-            
-            // when votes were just the voteCount, not a list of uids
-            //Answer* answer = [[Answer alloc] initWithText:answerData.value[@"text"] voteCount:[answerData.value[@"votes"] intValue] uid:answerData.key];
-            
-            //Answer* answer = [[Answer alloc] initWithText:answerData.value[@"text"] voteCount:((NSDictionary*)answerData.value[@"votes"]).count uid:answerData.key];
-            
-            Answer* answer = [[Answer alloc] initWithText:answerData.value[@"text"] voteCount:[answerData.value[@"votes"] intValue] answerID:answerData.key];
-            [mutableAnswers insertObject:answer atIndex:0]; // insert in reverse order
-        }
-        
-        self.answers = mutableAnswers;
-        
-        [self.answersTableView reloadData];
-    }];
+//    [queryReference observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
+//        NSMutableArray* mutableAnswers = [NSMutableArray new];
+//        for (FDataSnapshot* answerData in snapshot.children) {
+//            // before answers were ordered, just added to end
+//            //[mutableAnswers addObject:object];
+//            
+//            // before using Answer array
+//            //[mutableAnswers insertObject:answerData atIndex:0]; // insert in reverse order
+//            
+//            // when votes were just the voteCount, not a list of uids
+//            //Answer* answer = [[Answer alloc] initWithText:answerData.value[@"text"] voteCount:[answerData.value[@"votes"] intValue] uid:answerData.key];
+//            
+//            //Answer* answer = [[Answer alloc] initWithText:answerData.value[@"text"] voteCount:((NSDictionary*)answerData.value[@"votes"]).count uid:answerData.key];
+//            
+//            Answer* answer = [[Answer alloc] initWithText:answerData.value[@"text"] voteCount:[answerData.value[@"votes"] intValue] answerID:answerData.key];
+//            [mutableAnswers insertObject:answer atIndex:0]; // insert in reverse order
+//        }
+//        
+//        self.answers = mutableAnswers;
+//        
+//        [self.answersTableView reloadData];
+//        
+//        // try adding answer sync here ... did not work for avoiding first time
+////        [queryReference observeEventType:FEventTypeChildAdded andPreviousSiblingKeyWithBlock:^(FDataSnapshot* snapshot, NSString* prevKey) {
+////            NSLog(@"Added snapshot: %@, into prevKey: %@", snapshot, prevKey);
+////            
+//////            if (prevKey) {
+//////                <#statements#>
+//////            }
+////        }];
+//    }];
     
     // still a problem since this is called the first time as well
 //    [queryReference observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot* snapshot) {
@@ -88,9 +100,23 @@
 //        
 //        [self.answersTableView reloadData];
 //    }];
+    [queryReference observeEventType:FEventTypeChildAdded andPreviousSiblingKeyWithBlock:^(FDataSnapshot* snapshot, NSString* prevKey) {
+        Answer* answer = [[Answer alloc] initWithText:snapshot.value[@"text"] voteCount:[snapshot.value[@"votes"] intValue] answerID:snapshot.key];
+        
+        if (prevKey) {
+            NSIndexPath* indexPath = [self findIndexPathOfKey:prevKey];
+            [self.answers insertObject:answer atIndex:indexPath.row];
+        } else {
+            // if prevKey null, this item is first item or last item of self.answers
+            [self.answers addObject:answer];
+        }
+        
+        // don't forget to refresh
+        [self.answersTableView reloadData];
+    }];
     
     // had a problem with this method called multiple times per move, but that was probably due to model being changed doubly accidentally
-    [queryReference observeEventType:FEventTypeChildMoved andPreviousSiblingKeyWithBlock:^(FDataSnapshot *snapshot, NSString *prevKey) {
+    [queryReference observeEventType:FEventTypeChildMoved andPreviousSiblingKeyWithBlock:^(FDataSnapshot* snapshot, NSString* prevKey) {
         NSLog(@"Moved snapshot: %@, from prevKey: %@", snapshot, prevKey);
         
         NSIndexPath* oldIndexPath = [self findIndexPathOfKey:snapshot.key];
@@ -155,10 +181,11 @@
         //[answerReference setValue:alertController.textFields[0].text]; // old value: ans text
         [answerReference setValue:answerValue];
         
+        // no longer need to sync since observing ChildAdded does the syncing
         // sync model in app (since not syncing with query)
-        Answer* answer = [[Answer alloc] initWithText:answerValue[@"text"] voteCount:0 answerID:answerReference.key];
-        [self.answers addObject:answer]; // this isn't necessarily always right, needs to be added in the right place
-        [self.answersTableView reloadData];
+//        Answer* answer = [[Answer alloc] initWithText:answerValue[@"text"] voteCount:0 answerID:answerReference.key];
+//        [self.answers addObject:answer]; // this isn't necessarily always right, needs to be added in the right place
+//        [self.answersTableView reloadData];
     }];
     [alertController addAction:cancelAction];
     [alertController addAction:defaultAction];
@@ -247,7 +274,7 @@
 }
 
 
-#pragma mark - AnswerCell delegate methods
+//#pragma mark - AnswerCell delegate methods
 
 //- (void) cell:(AnswerCell*)cell didUpdateVoteOriginalVote:(int)originalVote increasing:(BOOL)increasing votesReference:(Firebase*)votesReference {
 //    NSIndexPath* originalIndexPath = [self.answersTableView indexPathForCell:cell];
