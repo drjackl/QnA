@@ -275,7 +275,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="3383" y="-419"/>
+            <point key="canvasLocation" x="3255" y="-419"/>
         </scene>
         <!--Picture Picker-->
         <scene sceneID="WYb-uj-Vvn">
@@ -324,7 +324,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="N8Z-UK-zQZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4065" y="-419"/>
+            <point key="canvasLocation" x="3937" y="-419"/>
         </scene>
         <!--Questions-->
         <scene sceneID="806-7u-Ji9">
@@ -340,7 +340,7 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qJ4-Tg-5HK">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="simpleQuestionCell" textLabel="Bgc-Ex-rJR" detailTextLabel="1lh-YI-TNu" style="IBUITableViewCellStyleSubtitle" id="srb-BR-7FR">
                                         <rect key="frame" x="0.0" y="92" width="600" height="44"/>
@@ -367,42 +367,34 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="240" selectionStyle="default" indentationWidth="10" reuseIdentifier="questionCell" rowHeight="130" id="jXe-Kf-RK2" customClass="QuestionCell">
-                                        <rect key="frame" x="0.0" y="136" width="600" height="130"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" verticalHuggingPriority="240" selectionStyle="default" indentationWidth="10" reuseIdentifier="questionCell" rowHeight="89" id="jXe-Kf-RK2" customClass="QuestionCell">
+                                        <rect key="frame" x="0.0" y="136" width="600" height="89"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" verticalHuggingPriority="240" tableViewCell="jXe-Kf-RK2" id="jNx-g8-b8v">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="129"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="88"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="2Uo-pd-Oex">
-                                                    <rect key="frame" x="8" y="8" width="584" height="113"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="2Uo-pd-Oex">
+                                                    <rect key="frame" x="8" y="8" width="584" height="72"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Question Text" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xxs-CF-h8X">
-                                                            <rect key="frame" x="0.0" y="0.0" width="524" height="20"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="514" height="20"/>
+                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <color key="textColor" red="0.29803921570000003" green="0.68627450980000004" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="255" verticalHuggingPriority="255" horizontalCompressionResistancePriority="740" verticalCompressionResistancePriority="740" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="v2a-4N-Ruv">
-                                                            <rect key="frame" x="524" y="0.0" width="60" height="90"/>
-                                                            <subviews>
-                                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="261" verticalHuggingPriority="261" horizontalCompressionResistancePriority="730" verticalCompressionResistancePriority="730" translatesAutoresizingMaskIntoConstraints="NO" id="8lW-u8-uAa">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
-                                                                    <constraints>
-                                                                        <constraint firstAttribute="height" constant="60" id="5ge-0j-TCt"/>
-                                                                        <constraint firstAttribute="width" constant="60" id="MhY-yS-t33"/>
-                                                                    </constraints>
-                                                                </imageView>
-                                                                <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="270" verticalHuggingPriority="270" horizontalCompressionResistancePriority="720" verticalCompressionResistancePriority="720" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MbG-Nu-gJc" customClass="UserButton">
-                                                                    <rect key="frame" x="0.0" y="60" width="60" height="30"/>
-                                                                    <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                                                    <state key="normal" title="Asker"/>
-                                                                    <connections>
-                                                                        <segue destination="ImX-TR-ZXy" kind="show" identifier="viewProfile" id="gPE-7i-tEE"/>
-                                                                    </connections>
-                                                                </button>
-                                                            </subviews>
-                                                        </stackView>
+                                                        <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="270" verticalHuggingPriority="270" horizontalCompressionResistancePriority="720" verticalCompressionResistancePriority="720" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MbG-Nu-gJc" customClass="UserButton">
+                                                            <rect key="frame" x="524" y="0.0" width="60" height="60"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="width" constant="60" id="aGZ-te-DyR"/>
+                                                                <constraint firstAttribute="height" constant="60" id="tCy-zT-anG"/>
+                                                            </constraints>
+                                                            <state key="normal" title="Asker" image="no-one"/>
+                                                            <connections>
+                                                                <segue destination="ImX-TR-ZXy" kind="show" identifier="viewProfile" id="gPE-7i-tEE"/>
+                                                            </connections>
+                                                        </button>
                                                     </subviews>
                                                 </stackView>
                                             </subviews>
@@ -413,10 +405,10 @@
                                                 <constraint firstAttribute="trailingMargin" secondItem="2Uo-pd-Oex" secondAttribute="trailing" id="yNl-IE-88S"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <connections>
                                             <outlet property="askerButton" destination="MbG-Nu-gJc" id="i0R-yR-ps5"/>
                                             <outlet property="questionText" destination="Xxs-CF-h8X" id="Nat-B7-6JL"/>
-                                            <outlet property="userImageView" destination="8lW-u8-uAa" id="D54-ty-XKP"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -449,7 +441,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8hz-fR-aun" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1855" y="722"/>
+            <point key="canvasLocation" x="1727" y="722"/>
         </scene>
         <!--Answers-->
         <scene sceneID="znf-Tp-K4C">
@@ -592,7 +584,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Qnn-cD-uWa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2662" y="974"/>
+            <point key="canvasLocation" x="2534" y="974"/>
         </scene>
         <!--View Profile-->
         <scene sceneID="7Io-vh-bxL">
@@ -684,7 +676,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="WAk-op-LeZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3383" y="254"/>
+            <point key="canvasLocation" x="3255" y="254"/>
         </scene>
         <!--Nav: Questions-->
         <scene sceneID="hu6-zU-s7R">
@@ -720,9 +712,12 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8kr-3H-h7b" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2662" y="-419"/>
+            <point key="canvasLocation" x="2534" y="-419"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="no-one" width="291" height="291"/>
+    </resources>
     <inferredMetricsTieBreakers>
         <segue reference="8FP-hy-4kc"/>
     </inferredMetricsTieBreakers>

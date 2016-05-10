@@ -119,7 +119,7 @@
         [uidReference observeEventType:FEventTypeValue withBlock:^(FDataSnapshot* snapshot) {
             //cell.detailTextLabel.text = snapshot.value[@"email"];
             //cell.detailTextLabel.text = [self createNameFromEmail:snapshot.value[@"email"]];
-            [cell.askerButton setTitle:[self createNameFromEmail:snapshot.value[@"email"]] forState:UIControlStateNormal];
+            //[cell.askerButton setTitle:[self createNameFromEmail:snapshot.value[@"email"]] forState:UIControlStateNormal];
             cell.askerButton.userReference = uidReference;
             
             // necessary for new posts since initially set to NO when first created somehow
@@ -128,7 +128,8 @@
             // this won't work since action needs to know the userID
             //[cell.askerButton addTarget:<#(nullable id)#> action:<#(nonnull SEL)#> forControlEvents:<#(UIControlEvents)#>]
             
-            [self downloadImageAt:snapshot.value[@"imageUrl"] andSetImageView:cell.userImageView];
+            [self downloadImageAt:snapshot.value[@"imageUrl"] andSetButton:cell.askerButton];
+            //[cell.askerButton.im]
 
         }];
     } else {
@@ -153,7 +154,7 @@
     return [username.capitalizedString stringByAppendingFormat:@" of House %@", house.capitalizedString];
 }
 
-- (void) downloadImageAt:(NSString*)imageUrlString andSetImageView:(UIImageView*)imageView {
+- (void) downloadImageAt:(NSString*)imageUrlString andSetButton:(UIButton*)button {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         NSURL* imageURL = [NSURL URLWithString:imageUrlString];
         NSURLRequest* request = [NSURLRequest requestWithURL:imageURL];
@@ -166,7 +167,8 @@
             if (image) {
                 
                 dispatch_async(dispatch_get_main_queue(), ^{
-                    imageView.image = image;
+                    //imageView.image = image;
+                    [button setImage:image forState:UIControlStateNormal];
                 });
                 
             } else {
