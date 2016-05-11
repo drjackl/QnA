@@ -338,15 +338,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qJ4-Tg-5HK">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qJ4-Tg-5HK">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                                <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.40000000600000002" green="0.80000001190000003" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="simpleQuestionCell" textLabel="Bgc-Ex-rJR" detailTextLabel="1lh-YI-TNu" style="IBUITableViewCellStyleSubtitle" id="srb-BR-7FR">
                                         <rect key="frame" x="0.0" y="92" width="600" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="srb-BR-7FR" id="93d-ch-mmQ">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Bgc-Ex-rJR">
@@ -371,19 +371,30 @@
                                         <rect key="frame" x="0.0" y="136" width="600" height="89"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" verticalHuggingPriority="240" tableViewCell="jXe-Kf-RK2" id="jNx-g8-b8v">
-                                            <rect key="frame" x="0.0" y="0.0" width="600" height="88"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="600" height="89"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="2Uo-pd-Oex">
-                                                    <rect key="frame" x="8" y="8" width="584" height="72"/>
+                                                    <rect key="frame" x="8" y="8" width="584" height="73"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Question Text" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xxs-CF-h8X">
-                                                            <rect key="frame" x="0.0" y="0.0" width="514" height="20"/>
-                                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
-                                                            <color key="textColor" red="0.29803921570000003" green="0.68627450980000004" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
-                                                            <nil key="highlightedColor"/>
-                                                        </label>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="1JL-8E-AmU">
+                                                            <rect key="frame" x="0.0" y="0.0" width="514" height="38"/>
+                                                            <subviews>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Question Text" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xxs-CF-h8X">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="514" height="21"/>
+                                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                                    <color key="textColor" red="0.29803921570000003" green="0.68627450980000004" blue="0.64705882349999999" alpha="1" colorSpace="calibratedRGB"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="# answers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FEG-63-HTs">
+                                                                    <rect key="frame" x="0.0" y="21" width="514" height="17"/>
+                                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                                    <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                    <nil key="highlightedColor"/>
+                                                                </label>
+                                                            </subviews>
+                                                        </stackView>
                                                         <button opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="270" verticalHuggingPriority="270" horizontalCompressionResistancePriority="720" verticalCompressionResistancePriority="720" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="MbG-Nu-gJc" customClass="UserButton">
                                                             <rect key="frame" x="524" y="0.0" width="60" height="60"/>
                                                             <constraints>
@@ -428,13 +439,14 @@
                                 <segue destination="hZ0-Xk-EgV" kind="presentation" identifier="editProfile" modalTransitionStyle="flipHorizontal" id="c7x-RJ-1Yr"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="+Q" id="s5Z-CO-6n4">
+                        <barButtonItem key="rightBarButtonItem" image="question-button" id="s5Z-CO-6n4">
                             <connections>
                                 <action selector="addQuestionModal" destination="kWL-2H-fCL" id="lj4-Ws-acU"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="editProfileBarButtonItem" destination="uq0-Hi-Joc" id="HaL-YE-VGt"/>
                         <outlet property="tableView" destination="qJ4-Tg-5HK" id="bMV-Mi-s7j"/>
                         <segue destination="42d-5c-6Ck" kind="show" identifier="answerQuickSegue" id="Wgd-F3-YJQ"/>
                     </connections>
@@ -571,7 +583,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Author asks ..." id="q7R-rU-iKh">
-                        <barButtonItem key="rightBarButtonItem" title="+A" id="gzZ-vj-Bx7">
+                        <barButtonItem key="rightBarButtonItem" image="answer-button" id="gzZ-vj-Bx7">
                             <connections>
                                 <action selector="addAnswer" destination="42d-5c-6Ck" id="bwk-dQ-WgV"/>
                             </connections>
@@ -716,7 +728,9 @@
         </scene>
     </scenes>
     <resources>
+        <image name="answer-button" width="58" height="32"/>
         <image name="no-one" width="291" height="291"/>
+        <image name="question-button" width="60" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="8FP-hy-4kc"/>

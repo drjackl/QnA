@@ -16,6 +16,7 @@
 
 @interface QuestionsViewController () <UITableViewDelegate, UITableViewDataSource>
 // IBOutlets
+@property (weak, nonatomic) IBOutlet UIBarButtonItem* editProfileBarButtonItem;
 @property (weak, nonatomic) IBOutlet UITableView* tableView;
 @end
 
@@ -45,6 +46,11 @@
     // both needs to be set
     self.tableView.estimatedRowHeight = 44;
     self.tableView.rowHeight = UITableViewAutomaticDimension;
+    
+    [[DataSource onlySource].loggedInUserReference observeEventType:FEventTypeValue withBlock:^(FDataSnapshot* snapshot) {
+        self.editProfileBarButtonItem.title = [self createFirstNameFromEmail:snapshot.value[@"email"]];
+    }];
+    
 }
 
 
@@ -134,11 +140,11 @@
         }];
     } else {
         //cell.detailTextLabel.text = @"Anony of House Mous";
-        [cell.askerButton setTitle:@"Anon E. Mous" forState:UIControlStateNormal];
+        [cell.askerButton setTitle:@"No One" forState:UIControlStateNormal];
         cell.askerButton.enabled = NO;
         
         // if image not set to nil, will have leftover image from previous cell
-        cell.userImageView.image = nil;
+        //cell.userImageView.image = nil;
     }
     
     return cell;
@@ -152,6 +158,11 @@
     NSString* houseWithDots = [domain substringToIndex:[domain rangeOfString:@"." options:NSBackwardsSearch].location];
     NSString* house = [houseWithDots stringByReplacingOccurrencesOfString:@"." withString:@" "];
     return [username.capitalizedString stringByAppendingFormat:@" of House %@", house.capitalizedString];
+}
+
+- (NSString*) createFirstNameFromEmail:(NSString*)email {
+    NSString* nameFromEmail = [self createNameFromEmail:email];
+    return [nameFromEmail substringToIndex:[nameFromEmail rangeOfString:@" "].location];
 }
 
 - (void) downloadImageAt:(NSString*)imageUrlString andSetButton:(UIButton*)button {

@@ -12,7 +12,7 @@
 @interface QuestionCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel* questionText;
-@property (weak, nonatomic) IBOutlet UIImageView* userImageView;
+//@property (weak, nonatomic) IBOutlet UIImageView* userImageView;
 
 // must ensure this button is id'ed as UserButton in storyboard
 @property (weak, nonatomic) IBOutlet UserButton* askerButton;
