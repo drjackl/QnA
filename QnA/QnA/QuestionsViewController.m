@@ -117,6 +117,15 @@
     //cell.textLabel.text = questionData.value[@"text"];
     cell.questionText.text = questionData.value[@"text"];
     
+    NSDictionary* answers = questionData.value[@"answers"];
+    NSString* answersText;
+    if (answers.count == 1) {
+        answersText = NSLocalizedString(@"answer", @"singular label for 'answer'");
+    } else {
+        answersText = NSLocalizedString(@"answers", @"plural label for 'answers'");
+    }
+    cell.numberOfAnswersLabel.text = [NSString stringWithFormat:@"%lu %@", answers.count, answersText];
+    
     //cell.detailTextLabel.text = questionData.value[@"uid"];
     
     NSString* uid = questionData.value[@"uid"];
@@ -136,7 +145,6 @@
             
             [self downloadImageAt:snapshot.value[@"imageUrl"] andSetButton:cell.askerButton];
             //[cell.askerButton.im]
-
         }];
     } else {
         //cell.detailTextLabel.text = @"Anony of House Mous";
