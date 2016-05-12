@@ -12,8 +12,9 @@
 @interface QuestionCell : UITableViewCell
 
 @property (weak, nonatomic) IBOutlet UILabel* questionText;
-@property (weak, nonatomic) IBOutlet UILabel *numberOfAnswersLabel;
+@property (weak, nonatomic) IBOutlet UILabel* numberOfAnswersLabel;
 
+// not using anymore
 //@property (weak, nonatomic) IBOutlet UIImageView* userImageView;
 
 // must ensure this button is id'ed as UserButton in storyboard

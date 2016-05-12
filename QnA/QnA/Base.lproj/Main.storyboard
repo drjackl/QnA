@@ -377,11 +377,11 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="2Uo-pd-Oex">
                                                     <rect key="frame" x="11" y="11" width="578" height="67"/>
                                                     <subviews>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="1JL-8E-AmU">
-                                                            <rect key="frame" x="0.0" y="0.0" width="508" height="62"/>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="1JL-8E-AmU">
+                                                            <rect key="frame" x="0.0" y="0.0" width="508" height="67"/>
                                                             <subviews>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5KB-xa-gw5">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="508" height="37"/>
+                                                                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5KB-xa-gw5" customClass="PostBubbleView">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="508" height="50"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Question Text" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xxs-CF-h8X">
                                                                             <rect key="frame" x="8" y="8" width="492" height="21"/>
@@ -399,8 +399,8 @@
                                                                         <constraint firstItem="Xxs-CF-h8X" firstAttribute="leading" secondItem="5KB-xa-gw5" secondAttribute="leadingMargin" id="zKI-Wa-IJE"/>
                                                                     </constraints>
                                                                 </view>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="# answers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FEG-63-HTs">
-                                                                    <rect key="frame" x="0.0" y="45" width="508" height="17"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="# answers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FEG-63-HTs">
+                                                                    <rect key="frame" x="0.0" y="58" width="508" height="9"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <nil key="highlightedColor"/>
@@ -432,6 +432,7 @@
                                         <connections>
                                             <outlet property="askerButton" destination="MbG-Nu-gJc" id="i0R-yR-ps5"/>
                                             <outlet property="numberOfAnswersLabel" destination="FEG-63-HTs" id="YUz-xh-IhD"/>
+                                            <outlet property="postBubbleView" destination="5KB-xa-gw5" id="qmC-pF-Vqy"/>
                                             <outlet property="questionText" destination="Xxs-CF-h8X" id="Nat-B7-6JL"/>
                                         </connections>
                                     </tableViewCell>
@@ -562,14 +563,14 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="600" height="117"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="UJI-XS-6sA">
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="-25" translatesAutoresizingMaskIntoConstraints="NO" id="UJI-XS-6sA">
                                                             <rect key="frame" x="8" y="8" width="584" height="101"/>
                                                             <subviews>
                                                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q9t-cb-0Ot">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="584" height="36"/>
+                                                                    <rect key="frame" x="0.0" y="0.0" width="584" height="41"/>
                                                                     <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Answer" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WE7-uZ-kFE">
-                                                                            <rect key="frame" x="11" y="11" width="562" height="14"/>
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Answer Text" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WE7-uZ-kFE">
+                                                                            <rect key="frame" x="11" y="11" width="562" height="21"/>
                                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                                             <color key="textColor" red="0.80000001190000003" green="0.40000000600000002" blue="1" alpha="1" colorSpace="calibratedRGB"/>

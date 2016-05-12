@@ -15,6 +15,7 @@
 		04B94D311CBAB3FC00C4A85C /* QuestionCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B94D301CBAB3FC00C4A85C /* QuestionCell.m */; };
 		04B94D361CBB08A100C4A85C /* AnswersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B94D351CBB08A100C4A85C /* AnswersViewController.m */; };
 		04B94D391CBB0C7C00C4A85C /* DataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B94D381CBB0C7C00C4A85C /* DataSource.m */; };
+		04C47C2F1CE3C34E00E98600 /* PostBubbleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C47C2E1CE3C34E00E98600 /* PostBubbleView.m */; };
 		04D00A4D1CB8912700A81AEE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D00A4C1CB8912700A81AEE /* main.m */; };
 		04D00A501CB8912700A81AEE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D00A4F1CB8912700A81AEE /* AppDelegate.m */; };
 		04D00A561CB8912700A81AEE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04D00A541CB8912700A81AEE /* Main.storyboard */; };
@@ -63,6 +64,8 @@
 		04B94D351CBB08A100C4A85C /* AnswersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AnswersViewController.m; sourceTree = "<group>"; };
 		04B94D371CBB0C7C00C4A85C /* DataSource.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DataSource.h; sourceTree = "<group>"; };
 		04B94D381CBB0C7C00C4A85C /* DataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataSource.m; sourceTree = "<group>"; };
+		04C47C2D1CE3C34E00E98600 /* PostBubbleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostBubbleView.h; sourceTree = "<group>"; };
+		04C47C2E1CE3C34E00E98600 /* PostBubbleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostBubbleView.m; sourceTree = "<group>"; };
 		04D00A481CB8912600A81AEE /* QnA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QnA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04D00A4C1CB8912700A81AEE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		04D00A4E1CB8912700A81AEE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -157,6 +160,8 @@
 				04B94D351CBB08A100C4A85C /* AnswersViewController.m */,
 				0414EFDD1CD67F250018218D /* AnswerCell.h */,
 				0414EFDE1CD67F250018218D /* AnswerCell.m */,
+				04C47C2D1CE3C34E00E98600 /* PostBubbleView.h */,
+				04C47C2E1CE3C34E00E98600 /* PostBubbleView.m */,
 				04F325611CC5626300B86C94 /* EditProfileViewController.h */,
 				04F325621CC5626300B86C94 /* EditProfileViewController.m */,
 				046F99211CD058E200B52D18 /* ProfileViewController.h */,
@@ -405,6 +410,7 @@
 			files = (
 				04D00A831CB8CC2600A81AEE /* LoginViewController.m in Sources */,
 				041936AB1CDA8AEA001296C9 /* Answer.m in Sources */,
+				04C47C2F1CE3C34E00E98600 /* PostBubbleView.m in Sources */,
 				04F325631CC5626300B86C94 /* EditProfileViewController.m in Sources */,
 				04B94D361CBB08A100C4A85C /* AnswersViewController.m in Sources */,
 				0414EFDF1CD67F250018218D /* AnswerCell.m in Sources */,
