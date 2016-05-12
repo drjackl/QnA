@@ -7,9 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "PostCell.h"
 #import "UserButton.h"
 
-@interface QuestionCell : UITableViewCell
+@interface QuestionCell : PostCell
 
 @property (weak, nonatomic) IBOutlet UILabel* questionText;
 @property (weak, nonatomic) IBOutlet UILabel* numberOfAnswersLabel;

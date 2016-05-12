@@ -16,6 +16,7 @@
 		04B94D361CBB08A100C4A85C /* AnswersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B94D351CBB08A100C4A85C /* AnswersViewController.m */; };
 		04B94D391CBB0C7C00C4A85C /* DataSource.m in Sources */ = {isa = PBXBuildFile; fileRef = 04B94D381CBB0C7C00C4A85C /* DataSource.m */; };
 		04C47C2F1CE3C34E00E98600 /* PostBubbleView.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C47C2E1CE3C34E00E98600 /* PostBubbleView.m */; };
+		04C47C321CE4ED9600E98600 /* PostCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 04C47C311CE4ED9600E98600 /* PostCell.m */; };
 		04D00A4D1CB8912700A81AEE /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D00A4C1CB8912700A81AEE /* main.m */; };
 		04D00A501CB8912700A81AEE /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 04D00A4F1CB8912700A81AEE /* AppDelegate.m */; };
 		04D00A561CB8912700A81AEE /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 04D00A541CB8912700A81AEE /* Main.storyboard */; };
@@ -66,6 +67,8 @@
 		04B94D381CBB0C7C00C4A85C /* DataSource.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DataSource.m; sourceTree = "<group>"; };
 		04C47C2D1CE3C34E00E98600 /* PostBubbleView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostBubbleView.h; sourceTree = "<group>"; };
 		04C47C2E1CE3C34E00E98600 /* PostBubbleView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostBubbleView.m; sourceTree = "<group>"; };
+		04C47C301CE4ED9600E98600 /* PostCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PostCell.h; sourceTree = "<group>"; };
+		04C47C311CE4ED9600E98600 /* PostCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PostCell.m; sourceTree = "<group>"; };
 		04D00A481CB8912600A81AEE /* QnA.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QnA.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		04D00A4C1CB8912700A81AEE /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		04D00A4E1CB8912700A81AEE /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
@@ -152,6 +155,8 @@
 				04D00A821CB8CC2600A81AEE /* LoginViewController.m */,
 				04D00A841CB9DCC700A81AEE /* QuestionsViewController.h */,
 				04D00A851CB9DCC700A81AEE /* QuestionsViewController.m */,
+				04C47C301CE4ED9600E98600 /* PostCell.h */,
+				04C47C311CE4ED9600E98600 /* PostCell.m */,
 				04B94D2F1CBAB3FC00C4A85C /* QuestionCell.h */,
 				04B94D301CBAB3FC00C4A85C /* QuestionCell.m */,
 				046F99241CD2610B00B52D18 /* UserButton.h */,
@@ -419,6 +424,7 @@
 				046F991A1CC72C4F00B52D18 /* PictureCollectionViewController.m in Sources */,
 				04D00A861CB9DCC700A81AEE /* QuestionsViewController.m in Sources */,
 				04D00A801CB8C85D00A81AEE /* SignupViewController.m in Sources */,
+				04C47C321CE4ED9600E98600 /* PostCell.m in Sources */,
 				04D00A501CB8912700A81AEE /* AppDelegate.m in Sources */,
 				046F99231CD058E300B52D18 /* ProfileViewController.m in Sources */,
 				04D00A4D1CB8912700A81AEE /* main.m in Sources */,

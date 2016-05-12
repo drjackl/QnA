@@ -432,7 +432,7 @@
                                         <connections>
                                             <outlet property="askerButton" destination="MbG-Nu-gJc" id="i0R-yR-ps5"/>
                                             <outlet property="numberOfAnswersLabel" destination="FEG-63-HTs" id="YUz-xh-IhD"/>
-                                            <outlet property="postBubbleView" destination="5KB-xa-gw5" id="qmC-pF-Vqy"/>
+                                            <outlet property="postBubbleView" destination="5KB-xa-gw5" id="BbR-Zr-5Yp"/>
                                             <outlet property="questionText" destination="Xxs-CF-h8X" id="Nat-B7-6JL"/>
                                         </connections>
                                     </tableViewCell>
@@ -498,7 +498,7 @@
                                                         </constraints>
                                                         <state key="normal" title="Button" image="no-one"/>
                                                     </button>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AOA-Qr-1ci">
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AOA-Qr-1ci" customClass="PostBubbleView">
                                                         <rect key="frame" x="85" y="0.0" width="493" height="46"/>
                                                         <subviews>
                                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="750" text="Question Text" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zDc-D6-Fp5">
@@ -556,20 +556,20 @@
                                                     </subviews>
                                                 </tableViewCellContentView>
                                             </tableViewCell>
-                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="answerCell" rowHeight="117" id="gyJ-Tk-pgb" customClass="AnswerCell">
-                                                <rect key="frame" x="0.0" y="72" width="600" height="117"/>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="answerCell" rowHeight="139" id="gyJ-Tk-pgb" customClass="AnswerCell">
+                                                <rect key="frame" x="0.0" y="72" width="600" height="139"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="gyJ-Tk-pgb" id="er7-sC-Hm6">
-                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="117"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="600" height="139"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="-25" translatesAutoresizingMaskIntoConstraints="NO" id="UJI-XS-6sA">
-                                                            <rect key="frame" x="8" y="8" width="584" height="101"/>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="UJI-XS-6sA">
+                                                            <rect key="frame" x="8" y="8" width="584" height="123"/>
                                                             <subviews>
-                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q9t-cb-0Ot">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="584" height="41"/>
+                                                                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q9t-cb-0Ot" customClass="PostBubbleView">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="584" height="50"/>
                                                                     <subviews>
-                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Answer Text" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WE7-uZ-kFE">
+                                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Answer Text" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WE7-uZ-kFE">
                                                                             <rect key="frame" x="11" y="11" width="562" height="21"/>
                                                                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -586,7 +586,7 @@
                                                                     </constraints>
                                                                 </view>
                                                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="hkD-hP-so7">
-                                                                    <rect key="frame" x="0.0" y="41" width="584" height="60"/>
+                                                                    <rect key="frame" x="0.0" y="63" width="584" height="60"/>
                                                                     <subviews>
                                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="SDJ-8T-hro">
                                                                             <rect key="frame" x="0.0" y="0.0" width="115" height="60"/>
@@ -631,6 +631,7 @@
                                                 <color key="backgroundColor" red="0.92931497097015381" green="0.79876613616943359" blue="0.99862641096115112" alpha="1" colorSpace="calibratedRGB"/>
                                                 <connections>
                                                     <outlet property="answerLabel" destination="WE7-uZ-kFE" id="7T3-eZ-dfq"/>
+                                                    <outlet property="postBubbleView" destination="q9t-cb-0Ot" id="ffC-1S-eq3"/>
                                                     <outlet property="votesLabel" destination="tuT-eu-1j3" id="VbB-md-EXa"/>
                                                     <outlet property="votesSwitch" destination="xLX-Vn-bx5" id="hKL-v1-gIc"/>
                                                 </connections>

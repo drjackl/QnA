@@ -29,6 +29,10 @@
 // could set answerData to be cleaner (rather than setting in tableView delegate method), but it works ok without. votesReference is what's really needed (as implemented below)
 //- (void) setAnswerData:(FDataSnapshot*)answerData {
 
+- (void) drawRect:(CGRect)rect {
+    [self drawCaret:CaretDirectionBottom];
+}
+
 
 - (void) setVotesReference:(Firebase*)votesReference {
     _votesReference = votesReference;

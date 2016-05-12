@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 #import <Firebase.h>
+#import "PostCell.h"
 
 @class AnswerCell;
 
@@ -16,7 +17,7 @@
 //- (void) cell:(AnswerCell*)cell didUpdateVoteOriginalVote:(int)originalVote increasing:(BOOL)increasing votesReference:(Firebase*)votesReference;
 //@end
 
-@interface AnswerCell : UITableViewCell
+@interface AnswerCell : PostCell
 
 // IBOutlets
 @property (weak, nonatomic) IBOutlet UILabel* answerLabel;
