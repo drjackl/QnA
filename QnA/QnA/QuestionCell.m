@@ -9,10 +9,6 @@
 #import "QuestionCell.h"
 #import "PostBubbleView.h"
 
-@interface QuestionCell ()
-//@property (weak, nonatomic) IBOutlet PostBubbleView* postBubbleView;
-@end
-
 @implementation QuestionCell
 
 - (void)awakeFromNib {
@@ -25,6 +21,7 @@
     // Configure the view for the selected state
 }
 
+// draw caret on right side
 - (void) drawRect:(CGRect)rect {
     [self drawCaret:CaretDirectionRight];
 }

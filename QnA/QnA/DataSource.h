@@ -28,4 +28,7 @@
 
 - (NSDictionary*) createPostWithText:(NSString*)text;
 
+- (NSString*) createNameFromEmail:(NSString*)email;
+- (NSString*) createFirstNameFromEmail:(NSString*)email;
+
 @end

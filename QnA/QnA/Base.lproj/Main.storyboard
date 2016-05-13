@@ -377,11 +377,11 @@
                                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="2Uo-pd-Oex">
                                                     <rect key="frame" x="11" y="11" width="578" height="67"/>
                                                     <subviews>
-                                                        <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="1JL-8E-AmU">
-                                                            <rect key="frame" x="0.0" y="0.0" width="508" height="67"/>
+                                                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="1JL-8E-AmU">
+                                                            <rect key="frame" x="0.0" y="0.0" width="508" height="62"/>
                                                             <subviews>
-                                                                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="5KB-xa-gw5" customClass="PostBubbleView">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="508" height="50"/>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5KB-xa-gw5" customClass="PostBubbleView">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="508" height="37"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Question Text" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xxs-CF-h8X">
                                                                             <rect key="frame" x="8" y="8" width="492" height="21"/>
@@ -399,8 +399,8 @@
                                                                         <constraint firstItem="Xxs-CF-h8X" firstAttribute="leading" secondItem="5KB-xa-gw5" secondAttribute="leadingMargin" id="zKI-Wa-IJE"/>
                                                                     </constraints>
                                                                 </view>
-                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="# answers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FEG-63-HTs">
-                                                                    <rect key="frame" x="0.0" y="58" width="508" height="9"/>
+                                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="# answers" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FEG-63-HTs">
+                                                                    <rect key="frame" x="0.0" y="45" width="508" height="17"/>
                                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                                     <nil key="highlightedColor"/>
@@ -448,6 +448,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Questions" id="Dyp-eQ-Zkn">
+                        <barButtonItem key="backBarButtonItem" title=" " id="los-GP-qKZ"/>
                         <barButtonItem key="leftBarButtonItem" title="Edit Profile" id="uq0-Hi-Joc">
                             <connections>
                                 <segue destination="hZ0-Xk-EgV" kind="presentation" identifier="editProfile" modalTransitionStyle="flipHorizontal" id="c7x-RJ-1Yr"/>
@@ -490,7 +491,7 @@
                                             <stackView opaque="NO" contentMode="scaleToFill" alignment="top" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="mRF-tb-ubY">
                                                 <rect key="frame" x="11" y="11" width="578" height="75"/>
                                                 <subviews>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vap-eH-sq7">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vap-eH-sq7" customClass="UserButton">
                                                         <rect key="frame" x="0.0" y="0.0" width="75" height="75"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="75" id="79k-gS-lUd"/>
@@ -591,7 +592,7 @@
                                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="SDJ-8T-hro">
                                                                             <rect key="frame" x="0.0" y="0.0" width="115" height="60"/>
                                                                             <subviews>
-                                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nrP-UZ-Mhb">
+                                                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nrP-UZ-Mhb" customClass="UserButton">
                                                                                     <rect key="frame" x="0.0" y="0.0" width="60" height="60"/>
                                                                                     <constraints>
                                                                                         <constraint firstAttribute="height" constant="60" id="SWW-4u-j21"/>
@@ -631,6 +632,7 @@
                                                 <color key="backgroundColor" red="0.92931497097015381" green="0.79876613616943359" blue="0.99862641096115112" alpha="1" colorSpace="calibratedRGB"/>
                                                 <connections>
                                                     <outlet property="answerLabel" destination="WE7-uZ-kFE" id="7T3-eZ-dfq"/>
+                                                    <outlet property="authorButton" destination="nrP-UZ-Mhb" id="dYe-ZU-UGm"/>
                                                     <outlet property="postBubbleView" destination="q9t-cb-0Ot" id="ffC-1S-eq3"/>
                                                     <outlet property="votesLabel" destination="tuT-eu-1j3" id="VbB-md-EXa"/>
                                                     <outlet property="votesSwitch" destination="xLX-Vn-bx5" id="hKL-v1-gIc"/>
@@ -659,7 +661,7 @@
                             <constraint firstAttribute="trailing" secondItem="ufc-li-o02" secondAttribute="trailing" id="zPm-61-Noa"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Author asks ..." id="q7R-rU-iKh">
+                    <navigationItem key="navigationItem" title="No One asks ..." id="q7R-rU-iKh">
                         <barButtonItem key="rightBarButtonItem" image="answer-button" id="gzZ-vj-Bx7">
                             <connections>
                                 <action selector="addAnswer" destination="42d-5c-6Ck" id="bwk-dQ-WgV"/>

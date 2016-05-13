@@ -30,6 +30,16 @@
     // (if this isn't in, question label is still the default ("Question Text"))
     self.questionLabel.text = self.question.value[@"text"];
     
+    //self.navigationItem.title = [DataSource onlySource].selectedQuestion.value[@"uid"];
+    NSString* questionAuthorUID = [DataSource onlySource].selectedQuestion.value[@"uid"];
+    if (questionAuthorUID) { // must do nil check, else runtime error
+        Firebase* questionAuthorReference = [[DataSource onlySource].usersReference childByAppendingPath:questionAuthorUID];
+        [questionAuthorReference observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot* snapshot) {
+            NSString* authorName = [[DataSource onlySource] createNameFromEmail:snapshot.value[@"email"]];
+            self.navigationItem.title = [authorName stringByAppendingString:@" asks ..."];
+        }];
+    }
+    
     self.answers = [NSMutableArray array]; // no longer setting a new array in setValue, so must initialize
     
     // hooked these up in storyboard
@@ -54,56 +64,17 @@
     NSString* allAnswersPath = [question.key stringByAppendingPathComponent:@"answers"]; // qid/answers
     self.answersReference = [[DataSource onlySource].questionsReference childByAppendingPath:allAnswersPath]; // "questions/qid/answers"
     
-    // sort according to number of votes
+    // sort according to number of votes (reverse of query)
     FQuery* queryReference = [self.answersReference queryOrderedByChild:@"votes"];
     
-    // syncing done via ChildAdded observing below now
+    // syncing done via ChildAdded (not Value) observing now
     // add read observer right away (if in viewDidAppear, answers would not show)
-//    [queryReference observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot *snapshot) {
-//        NSMutableArray* mutableAnswers = [NSMutableArray new];
-//        for (FDataSnapshot* answerData in snapshot.children) {
-//            // before answers were ordered, just added to end
-//            //[mutableAnswers addObject:object];
-//            
-//            // before using Answer array
-//            //[mutableAnswers insertObject:answerData atIndex:0]; // insert in reverse order
-//            
-//            // when votes were just the voteCount, not a list of uids
-//            //Answer* answer = [[Answer alloc] initWithText:answerData.value[@"text"] voteCount:[answerData.value[@"votes"] intValue] uid:answerData.key];
-//            
-//            //Answer* answer = [[Answer alloc] initWithText:answerData.value[@"text"] voteCount:((NSDictionary*)answerData.value[@"votes"]).count uid:answerData.key];
-//            
-//            Answer* answer = [[Answer alloc] initWithText:answerData.value[@"text"] voteCount:[answerData.value[@"votes"] intValue] answerID:answerData.key];
-//            [mutableAnswers insertObject:answer atIndex:0]; // insert in reverse order
-//        }
-//        
-//        self.answers = mutableAnswers;
-//        
-//        [self.answersTableView reloadData];
-//        
-//        // try adding answer sync here ... did not work for avoiding first time
-////        [queryReference observeEventType:FEventTypeChildAdded andPreviousSiblingKeyWithBlock:^(FDataSnapshot* snapshot, NSString* prevKey) {
-////            NSLog(@"Added snapshot: %@, into prevKey: %@", snapshot, prevKey);
-////            
-//////            if (prevKey) {
-//////                <#statements#>
-//////            }
-////        }];
-//    }];
-    
-    // still a problem since this is called the first time as well
-//    [queryReference observeEventType:FEventTypeChildAdded withBlock:^(FDataSnapshot* snapshot) {
-//
-//        // since new answer just add it to end
-//        Answer* answer = [[Answer alloc] initWithText:snapshot.value[@"text"] voteCount:[snapshot.value[@"votes"] intValue] uid:snapshot.key];
-//        [self.answers addObject:answer];
-//        
-//        [self.answersTableView reloadData];
-//    }];
+    // if there's a prevKey, insert at that index, else insert at end
     [queryReference observeEventType:FEventTypeChildAdded andPreviousSiblingKeyWithBlock:^(FDataSnapshot* snapshot, NSString* prevKey) {
         Answer* answer = [[Answer alloc] initWithText:snapshot.value[@"text"] voteCount:[snapshot.value[@"votes"] intValue] answerID:snapshot.key];
         
         if (prevKey) {
+            // findIndexPath finds in order of self.answers, not queryReference
             NSIndexPath* indexPath = [self findIndexPathOfKey:prevKey];
             [self.answers insertObject:answer atIndex:indexPath.row];
         } else {
@@ -115,7 +86,7 @@
         [self.answersTableView reloadData];
     }];
     
-    // had a problem with this method called multiple times per move, but that was probably due to model being changed doubly accidentally
+    // when an answer is moved (when its vote is changed and causes a resorting), show move animation and change the model as well
     [queryReference observeEventType:FEventTypeChildMoved andPreviousSiblingKeyWithBlock:^(FDataSnapshot* snapshot, NSString* prevKey) {
         NSLog(@"Moved snapshot: %@, from prevKey: %@", snapshot, prevKey);
         
@@ -171,21 +142,22 @@
     UIAlertAction* cancelAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Cancel", @"Cancel action") style:UIAlertActionStyleCancel handler:nil];
     UIAlertAction* defaultAction = [UIAlertAction actionWithTitle:NSLocalizedString(@"Post Answer", @"Post Answer action") style:UIAlertActionStyleDefault handler:^(UIAlertAction*_Nonnull action) {
         
-        // posting answer to backend
+        // posting answer to backend (answerValue used to have one value; before that, just the answer text itself)
         Firebase* answerReference = [self.answersReference childByAutoId];
-        NSDictionary* answerValue = @{@"text" : alertController.textFields[0].text,
-                                      @"votes" : @0}; // new value: answer and votes tuple
+        NSDictionary* answerValue;
         
-//        // no longer setting votes to be @0 since not using voteCount
-//        NSDictionary* answerValue = @{@"text" : alertController.textFields[0].text}; // new value: answer and votes tuple
-        //[answerReference setValue:alertController.textFields[0].text]; // old value: ans text
+        // if logged in, add logged in user as author (uid)
+        if ([DataSource onlySource].loggedInUserID) {
+            answerValue = @{@"text" : alertController.textFields[0].text,
+                            @"votes" : @0, // new value: answer and votes tuple
+                            @"uid" : [DataSource onlySource].loggedInUserID};
+        } else { // else don't
+            answerValue = @{@"text" : alertController.textFields[0].text,
+                            @"votes" : @0}; // new value: answer and votes tuple
+        }
         [answerReference setValue:answerValue];
         
-        // no longer need to sync since observing ChildAdded does the syncing
-        // sync model in app (since not syncing with query)
-//        Answer* answer = [[Answer alloc] initWithText:answerValue[@"text"] voteCount:0 answerID:answerReference.key];
-//        [self.answers addObject:answer]; // this isn't necessarily always right, needs to be added in the right place
-//        [self.answersTableView reloadData];
+        // used to update self.answers here since wasn't syncing before (only observed first time to set self.answers initially)
     }];
     [alertController addAction:cancelAction];
     [alertController addAction:defaultAction];
@@ -210,16 +182,20 @@
 }
 
 - (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {
-    //UITableViewCell* cell = [tableView dequeueReusableCellWithIdentifier:@"simpleAnswerCell" forIndexPath:indexPath];
+    // using AnswerCell, not UITableViewCell
     AnswerCell* cell = [tableView dequeueReusableCellWithIdentifier:@"answerCell" forIndexPath:indexPath];
     
-    //cell.answerData = self.answers[indexPath.row];
-    //FDataSnapshot* answer = self.answers[indexPath.row];
+    // previously just stored the FDataSnapshot
     Answer* answer = self.answers[indexPath.row];
     
     // old answer value was just the answer text
     // new answer value is a tuple with text and votes
     cell.answerLabel.text = answer.text;//answer.value[@"text"];
+    
+    // need to set up authorButton just like in questions
+    //cell.authorButton.userReference = [[DataSource onlySource].usersReference childByAppendingPath:answer.uid];
+    
+    
     //NSNumber* votes = answer.value[@"votes"];
     //cell.votesLabel.text = [votes.stringValue stringByAppendingString:@" votes"];
     int votes = answer.voteCount;//s.count;
@@ -251,7 +227,7 @@
     return cell;
 }
 
-// thsi doesn't work since the block doesn't execute synchronously
+// this doesn't work since the block doesn't execute synchronously
 //- (BOOL) loggedInUserVotedFor:(Firebase*)votesReference {
 //    __block BOOL voted = NO;
 //    [votesReference observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot* snapshot) {

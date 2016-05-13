@@ -35,6 +35,7 @@
         } else {
             NSLog(@"We signed up!");
             
+            // on successful signup, save the email to use for user's display name
             NSString* uid = result[@"uid"];
             Firebase* uidReference = [[DataSource onlySource].usersReference childByAppendingPath:uid];
             [uidReference setValue:@{@"email" : self.emailField.text}];

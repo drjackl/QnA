@@ -71,6 +71,21 @@
              @"uid" : self.loggedInUserID ? self.loggedInUserID : [NSNull null]}; // surprised this compiles
 }
 
+- (NSString*) createNameFromEmail:(NSString*)email {
+    NSRange atSymbolRange = [email rangeOfString:@"@"];
+    NSString* username = [email substringToIndex:atSymbolRange.location];
+    NSString* domain = [email substringFromIndex:atSymbolRange.location+atSymbolRange.length];
+    
+    NSString* houseWithDots = [domain substringToIndex:[domain rangeOfString:@"." options:NSBackwardsSearch].location];
+    NSString* house = [houseWithDots stringByReplacingOccurrencesOfString:@"." withString:@" "];
+    return [username.capitalizedString stringByAppendingFormat:@" of House %@", house.capitalizedString];
+}
+
+- (NSString*) createFirstNameFromEmail:(NSString*)email {
+    NSString* nameFromEmail = [self createNameFromEmail:email];
+    return [nameFromEmail substringToIndex:[nameFromEmail rangeOfString:@" "].location];
+}
+
 - (void) loadBoilerplateData {
     NSString* question1Text = @"How much wood would a wood chuck chuck if a woodchuck could chuck wood?";
     NSString* question2Text = @"How hard is it to get a job as an iOS Engineer?";

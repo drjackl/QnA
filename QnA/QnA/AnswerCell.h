@@ -9,6 +9,7 @@
 #import <UIKit/UIKit.h>
 #import <Firebase.h>
 #import "PostCell.h"
+#import "UserButton.h"
 
 @class AnswerCell;
 
@@ -21,6 +22,7 @@
 
 // IBOutlets
 @property (weak, nonatomic) IBOutlet UILabel* answerLabel;
+@property (weak, nonatomic) IBOutlet UserButton* authorButton;
 @property (weak, nonatomic) IBOutlet UILabel* votesLabel;
 @property (weak, nonatomic) IBOutlet UISwitch* votesSwitch; // expose so can disable if no one logged in
 

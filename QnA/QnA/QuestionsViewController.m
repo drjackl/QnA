@@ -48,7 +48,7 @@
     self.tableView.rowHeight = UITableViewAutomaticDimension;
     
     [[DataSource onlySource].loggedInUserReference observeEventType:FEventTypeValue withBlock:^(FDataSnapshot* snapshot) {
-        self.editProfileBarButtonItem.title = [self createFirstNameFromEmail:snapshot.value[@"email"]];
+        self.editProfileBarButtonItem.title = [[DataSource onlySource] createFirstNameFromEmail:snapshot.value[@"email"]];
     }];
     
 }
@@ -97,10 +97,10 @@
 #pragma mark - Table view data source
 
 // numberOfSections defaults to 1
-//- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-//#warning Incomplete implementation, return the number of sections
-//    return 0;
-//}
+/*- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+#warning Incomplete implementation, return the number of sections
+    return 0;
+}*/
 
 - (NSInteger)tableView:(UITableView*)tableView numberOfRowsInSection:(NSInteger)section {
     return [DataSource onlySource].questions.count;
@@ -108,14 +108,13 @@
 
 
 - (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {
-    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"simpleQuestionCell" forIndexPath:indexPath];
+    // using specific QuestionCell, not UITableViewCell, to set subview properities
     QuestionCell* cell = [tableView dequeueReusableCellWithIdentifier:@"questionCell" forIndexPath:indexPath];
     
     // Configure the cell...
     
     FDataSnapshot* questionData = [DataSource onlySource].questions[indexPath.row];
-    //cell.textLabel.text = questionData.value[@"text"];
-    cell.questionText.text = questionData.value[@"text"];
+    cell.questionText.text = questionData.value[@"text"]; // formerly, cell.textLabel.text
     
     NSDictionary* answers = questionData.value[@"answers"];
     NSString* answersText;
@@ -126,51 +125,31 @@
     }
     cell.numberOfAnswersLabel.text = [NSString stringWithFormat:@"%lu %@", answers.count, answersText];
     
-    //cell.detailTextLabel.text = questionData.value[@"uid"];
-    
+    // formerly used cell.detailTextLabel.text to print uid, email, etc.
     NSString* uid = questionData.value[@"uid"];
     if (uid) {
         Firebase* uidReference = [[DataSource onlySource].usersReference childByAppendingPath:uid];
         [uidReference observeEventType:FEventTypeValue withBlock:^(FDataSnapshot* snapshot) {
-            //cell.detailTextLabel.text = snapshot.value[@"email"];
-            //cell.detailTextLabel.text = [self createNameFromEmail:snapshot.value[@"email"]];
-            //[cell.askerButton setTitle:[self createNameFromEmail:snapshot.value[@"email"]] forState:UIControlStateNormal];
+            [cell.askerButton setTitle:[[DataSource onlySource] createNameFromEmail:snapshot.value[@"email"]] forState:UIControlStateNormal];
             cell.askerButton.userReference = uidReference;
             
             // necessary for new posts since initially set to NO when first created somehow
             cell.askerButton.enabled = YES;
             
-            // this won't work since action needs to know the userID
-            //[cell.askerButton addTarget:<#(nullable id)#> action:<#(nonnull SEL)#> forControlEvents:<#(UIControlEvents)#>]
+            // can't addTarget to cell.askerButton since action needs to know uid
             
             [self downloadImageAt:snapshot.value[@"imageUrl"] andSetButton:cell.askerButton];
-            //[cell.askerButton.im]
         }];
     } else {
-        //cell.detailTextLabel.text = @"Anony of House Mous";
         [cell.askerButton setTitle:@"No One" forState:UIControlStateNormal];
+        cell.askerButton.userReference = nil;
         cell.askerButton.enabled = NO;
         
         // if image not set to nil, will have leftover image from previous cell
-        //cell.userImageView.image = nil;
+        [cell.askerButton setImage:[UIImage imageNamed:@"no-one"] forState:UIControlStateNormal];
     }
     
     return cell;
-}
-
-- (NSString*) createNameFromEmail:(NSString*)email {
-    NSRange atSymbolRange = [email rangeOfString:@"@"];
-    NSString* username = [email substringToIndex:atSymbolRange.location];
-    NSString* domain = [email substringFromIndex:atSymbolRange.location+atSymbolRange.length];
-    
-    NSString* houseWithDots = [domain substringToIndex:[domain rangeOfString:@"." options:NSBackwardsSearch].location];
-    NSString* house = [houseWithDots stringByReplacingOccurrencesOfString:@"." withString:@" "];
-    return [username.capitalizedString stringByAppendingFormat:@" of House %@", house.capitalizedString];
-}
-
-- (NSString*) createFirstNameFromEmail:(NSString*)email {
-    NSString* nameFromEmail = [self createNameFromEmail:email];
-    return [nameFromEmail substringToIndex:[nameFromEmail rangeOfString:@" "].location];
 }
 
 - (void) downloadImageAt:(NSString*)imageUrlString andSetButton:(UIButton*)button {
@@ -242,13 +221,6 @@
  return YES;
  }
  */
-
-
-//- (CGFloat)tableView:(UITableView*)tableView heightForRowAtIndexPath:(NSIndexPath*)indexPath {
-//    UITableViewCell* cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"simpleQuestionCell"];
-//    //cell.textLabel.text = ;
-//    return 100.0;
-//}
 
 
 #pragma mark - Navigation
