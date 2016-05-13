@@ -143,7 +143,7 @@
     } else {
         [cell.askerButton setTitle:@"No One" forState:UIControlStateNormal];
         cell.askerButton.userReference = nil;
-        cell.askerButton.enabled = NO;
+        //cell.askerButton.enabled = NO; // so can see anon profile
         
         // if image not set to nil, will have leftover image from previous cell
         [cell.askerButton setImage:[UIImage imageNamed:@"no-one"] forState:UIControlStateNormal];
@@ -238,7 +238,7 @@
         if ([sender isKindOfClass:[UserButton class]]) {
             UserButton* button = sender;
             ((ProfileViewController*)segue.destinationViewController).userReference = button.userReference;
-            ((ProfileViewController*)segue.destinationViewController).userName = button.titleLabel.text;
+            //((ProfileViewController*)segue.destinationViewController).userName = button.titleLabel.text;
         }
     } else if ([segue.identifier isEqualToString:@"editProfile"]) {
         UINavigationController* navigationController = segue.destinationViewController;

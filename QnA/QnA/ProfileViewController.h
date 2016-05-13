@@ -10,6 +10,6 @@
 
 @interface ProfileViewController : EditProfileViewController
 
-@property (nonatomic) NSString* userName;
+//@property (nonatomic) NSString* userName;
 
 @end

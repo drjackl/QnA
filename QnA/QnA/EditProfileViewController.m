@@ -46,6 +46,7 @@
             
             // must check for null value in case a profile was never set, else accessing bad value
             if (snapshot.value != NSNull.null) { // apple doc
+                self.navigationItem.title = [[DataSource onlySource] createNameFromEmail:snapshot.value[@"email"]];
                 self.descriptionTextView.text = snapshot.value[@"description"];
                 [self loadProfilePicture:snapshot.value[@"imageUrl"]]; // method checks if imageID is nil
             }

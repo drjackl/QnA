@@ -11,12 +11,14 @@
 #import "DataSource.h"
 #import "Answer.h"
 #import "AnswerCell.h"
+#import "ProfileViewController.h"
 
 @interface AnswersViewController () </*AnswerCellDelegate,*/ UITableViewDataSource, UITableViewDelegate> // works without declaration, but declare to autocomplete moveRowAtIndexPath method
 @property (nonatomic) Firebase* answersReference;
 @property (nonatomic) NSMutableArray* answers;
 // IBOutlets
 @property (weak, nonatomic) IBOutlet UILabel* questionLabel;
+@property (weak, nonatomic) IBOutlet UserButton* authorButton;
 @property (weak, nonatomic) IBOutlet UITableView* answersTableView;
 @end
 
@@ -34,9 +36,15 @@
     NSString* questionAuthorUID = [DataSource onlySource].selectedQuestion.value[@"uid"];
     if (questionAuthorUID) { // must do nil check, else runtime error
         Firebase* questionAuthorReference = [[DataSource onlySource].usersReference childByAppendingPath:questionAuthorUID];
+        
+        // also need segue in storyboard (or here)
+        self.authorButton.userReference = questionAuthorReference;
+        
         [questionAuthorReference observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot* snapshot) {
             NSString* authorName = [[DataSource onlySource] createNameFromEmail:snapshot.value[@"email"]];
             self.navigationItem.title = [authorName stringByAppendingString:@" asks ..."];
+            
+            [self downloadAndSetProfileImageAtURL:snapshot.value[@"imageUrl"]];
         }];
     }
     
@@ -49,6 +57,31 @@
     // necessary for packing row height
     self.answersTableView.estimatedRowHeight = 50;
     self.answersTableView.rowHeight = UITableViewAutomaticDimension;
+}
+
+- (void) downloadAndSetProfileImageAtURL:(NSString*)imageUrlString {
+    if (imageUrlString) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSURL* url = [NSURL URLWithString:imageUrlString];
+            NSURLRequest* request = [NSURLRequest requestWithURL:url];
+
+            NSURLResponse* response; NSError* error;
+            
+            // try to download imageData
+            NSData* imageData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+            
+            if (imageData) {
+                UIImage* image = [UIImage imageWithData:imageData];
+                if (image) {
+                    
+                    // set the image
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [self.authorButton setImage:image forState:UIControlStateNormal];
+                    });
+                }
+            }
+        });
+    }
 }
 
 
@@ -326,14 +359,18 @@
 //    return replaceIndex;
 //}
 
-/*
+
 #pragma mark - Navigation
 
 // In a storyboard-based application, you will often want to do a little preparation before navigation
-- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+- (void)prepareForSegue:(UIStoryboardSegue*)segue sender:(id)sender {
     // Get the new view controller using [segue destinationViewController].
     // Pass the selected object to the new view controller.
+    
+    if ([sender isKindOfClass:[UserButton class]]) {
+        ((ProfileViewController*)segue.destinationViewController).userReference = ((UserButton*)sender).userReference;
+    }
 }
-*/
+
 
 @end

@@ -16,7 +16,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    self.navigationItem.title = self.userName;
+    //self.navigationItem.title = self.userName;
 }
 
 - (void)didReceiveMemoryWarning {
