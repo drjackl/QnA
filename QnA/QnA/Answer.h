@@ -10,10 +10,11 @@
 
 @interface Answer : NSObject
 
+@property (nonatomic) NSString* answerID;
+@property (nonatomic) NSString* authorID;
 @property (nonatomic) NSString* text;
 @property (nonatomic) int voteCount;
-@property (nonatomic) NSString* answerID;
 
-- (instancetype) initWithText:(NSString*)text voteCount:(int)voteCount answerID:(NSString*)uid;
+- (instancetype) initWithAnswerID:(NSString*)answerID authorID:(NSString*)authorID text:(NSString*)text voteCount:(int)voteCount;
 
 @end

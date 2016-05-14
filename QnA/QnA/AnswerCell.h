@@ -26,7 +26,7 @@
 @property (weak, nonatomic) IBOutlet UILabel* votesLabel;
 @property (weak, nonatomic) IBOutlet UISwitch* votesSwitch; // expose so can disable if no one logged in
 
-@property (nonatomic) NSString* answerID;
+@property (nonatomic) NSString* answerID; // needed to track if a user voted for this answer
 @property (nonatomic) Firebase* votesReference;
 
 //@property (weak, nonatomic) UITableView* tableView; // this was wrong, but easy for getting something to quickly work

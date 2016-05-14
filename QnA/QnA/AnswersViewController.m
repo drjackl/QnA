@@ -104,7 +104,8 @@
     // add read observer right away (if in viewDidAppear, answers would not show)
     // if there's a prevKey, insert at that index, else insert at end
     [queryReference observeEventType:FEventTypeChildAdded andPreviousSiblingKeyWithBlock:^(FDataSnapshot* snapshot, NSString* prevKey) {
-        Answer* answer = [[Answer alloc] initWithText:snapshot.value[@"text"] voteCount:[snapshot.value[@"votes"] intValue] answerID:snapshot.key];
+        //Answer* answer = [[Answer alloc] initWithText:snapshot.value[@"text"] voteCount:[snapshot.value[@"votes"] intValue] answerID:snapshot.key];
+        Answer* answer = [[Answer alloc] initWithAnswerID:snapshot.key authorID:snapshot.value[@"uid"] text:snapshot.value[@"text"] voteCount:[snapshot.value[@"votes"] intValue]];
         
         if (prevKey) {
             // findIndexPath finds in order of self.answers, not queryReference
@@ -214,31 +215,39 @@
     return self.answers.count;
 }
 
-- (UITableViewCell*)tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {
+- (UITableViewCell*) tableView:(UITableView*)tableView cellForRowAtIndexPath:(NSIndexPath*)indexPath {
     // using AnswerCell, not UITableViewCell
     AnswerCell* cell = [tableView dequeueReusableCellWithIdentifier:@"answerCell" forIndexPath:indexPath];
     
     // previously just stored the FDataSnapshot
     Answer* answer = self.answers[indexPath.row];
     
+    // answer text
     // old answer value was just the answer text
     // new answer value is a tuple with text and votes
+    // now Answer object holds text, votes, along with answer ID
     cell.answerLabel.text = answer.text;//answer.value[@"text"];
     
     // need to set up authorButton just like in questions
-    //cell.authorButton.userReference = [[DataSource onlySource].usersReference childByAppendingPath:answer.uid];
+    if (answer.authorID) {
+        cell.authorButton.userReference = [[DataSource onlySource].usersReference childByAppendingPath:answer.authorID];
+        [cell.authorButton.userReference observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot* snapshot) {
+            [self downloadAndSetProfilePicture:snapshot.value[@"imageUrl"] forCell:cell];
+        }];
+    } else { // necessary since cells are dequeued
+        cell.authorButton.userReference = nil;
+        [cell.authorButton setImage:[UIImage imageNamed:@"no-one"] forState:UIControlStateNormal];
+    }
     
-    
-    //NSNumber* votes = answer.value[@"votes"];
-    //cell.votesLabel.text = [votes.stringValue stringByAppendingString:@" votes"];
-    int votes = answer.voteCount;//s.count;
+    // vote count
+    int votes = answer.voteCount;
     cell.votesLabel.text = [NSString stringWithFormat:@"%d votes", votes];
     
     // cell needs to know votesReference to update votes count when voting
     //Firebase* aidReference = [self.answersReference childByAppendingPath:answer.key];
     Firebase* aidReference = [self.answersReference childByAppendingPath:answer.answerID];
     cell.votesReference = [aidReference childByAppendingPath:@"votes"];
-    cell.answerID = answer.answerID;
+    cell.answerID = answer.answerID; // for tracking if the logged in user voted on this answer
     
     if ([DataSource onlySource].loggedInUserID) {
         // if logged in user voted for this answer
@@ -260,7 +269,28 @@
     return cell;
 }
 
+- (void) downloadAndSetProfilePicture:(NSString*)imageUrlString forCell:(AnswerCell*)cell {
+    if (imageUrlString) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            NSURL* url = [NSURL URLWithString:imageUrlString];
+            NSURLRequest* request = [NSURLRequest requestWithURL:url];
+            
+            NSURLResponse* response; NSError* error;
+            NSData* imageData = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+            
+            if (imageData) {
+                UIImage* image = [UIImage imageWithData:imageData];
+                if (image) {
+                    
+                    [cell.authorButton setImage:image forState:UIControlStateNormal];
+                }
+            }
+        });
+    }
+}
+
 // this doesn't work since the block doesn't execute synchronously
+// wanted to
 //- (BOOL) loggedInUserVotedFor:(Firebase*)votesReference {
 //    __block BOOL voted = NO;
 //    [votesReference observeSingleEventOfType:FEventTypeValue withBlock:^(FDataSnapshot* snapshot) {
