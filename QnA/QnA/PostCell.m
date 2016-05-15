@@ -23,8 +23,9 @@
 - (void) drawCaret:(CaretDirection)direction {
     CGRect bubbleFrame = [self convertRect:self.postBubbleView.frame fromCoordinateSpace:self.postBubbleView.superview];
     static int offset = 7;
-    CGFloat point1X, point1Y, point2X, point2Y, point3X, point3Y;
     
+    // find the 3 points that make up the caret: line 12 is perpendicular, points 1 & 3 sit on edge of bubble while 2 is the point of the caret
+    CGFloat point1X, point1Y, point2X, point2Y, point3X, point3Y;
     if (direction == CaretDirectionRight) {
         point1X = CGRectGetMaxX(bubbleFrame);
         point1Y = CGRectGetMinY(bubbleFrame) + offset;
@@ -56,7 +57,7 @@
         point3Y = point1Y;
     }
     
-    // draw the caret
+    // draw the caret with these 3 points
     CGContextRef context = UIGraphicsGetCurrentContext();
     
     CGContextMoveToPoint(context, point1X, point1Y);

@@ -12,7 +12,6 @@
 @interface DataSource ()
 // redeclare as readwrite to set for this .m
 @property (nonatomic) Firebase* reference;
-@property (nonatomic) Firebase* appReference;
 @property (nonatomic) Firebase* questionsReference;
 @property (nonatomic) Firebase* usersReference;
 @end
@@ -32,9 +31,9 @@
     self = [super init];
     if (self) {
         self.reference = [[Firebase alloc] initWithUrl:@"https://qna-app.firebaseio.com"];
-        self.appReference = [self.reference childByAppendingPath:@"web/data"];
-        self.questionsReference = [self.appReference childByAppendingPath:@"questions"];
-        self.usersReference = [self.appReference childByAppendingPath:@"users"];
+        Firebase* appReference = [self.reference childByAppendingPath:@"web/data"];
+        self.questionsReference = [appReference childByAppendingPath:@"questions"];
+        self.usersReference = [appReference childByAppendingPath:@"users"];
         
         self.loggedInUserID = nil; // this might not be necessary
         
@@ -87,9 +86,9 @@
 }
 
 - (void) loadBoilerplateData {
-    NSString* question1Text = @"How much wood would a wood chuck chuck if a woodchuck could chuck wood?";
-    NSString* question2Text = @"How hard is it to get a job as an iOS Engineer?";
-    NSString* question3Text = @"What can I learn/know right now in 10 minutes that will be useful for the rest of my life?";
+    NSString* question1Text = @"Arya Stark hasn’t been seen since her father was killed. Where do you think she is? My money’s on dead. There’s a certain safety in death, wouldn’t you say?";
+    NSString* question2Text = @"What do we say to the God of death?";
+    NSString* question3Text = @"Which name would you like a girl to speak?";
     //NSString* question4Text = @"Why not?";
     
     NSDictionary* question1 = [self createPostWithText:question1Text];

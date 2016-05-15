@@ -10,15 +10,11 @@
 
 @implementation PostBubbleView
 
+// this initializer not used, so not needed
 //- (instancetype) initWithFrame:(CGRect)frame {
-//    self = [super initWithFrame:frame];
-//    if (self) {
-//        self.layer.cornerRadius = 8.0;
-//        self.layer.masksToBounds = YES;
-//    }
-//    return self;
-//}
 
+
+// all PostBubbleView does is create a rounded rectangle of its view rectangle (caret drawn in table cells)
 - (instancetype) initWithCoder:(NSCoder*)coder {
     self = [super initWithCoder:coder];
     if (self) {
@@ -28,7 +24,7 @@
     return self;
 }
 
-/*
+/* // moved to PostCell
 // Only override drawRect: if you perform custom drawing.
 // An empty implementation adversely affects performance during animation.
 - (void) drawRect:(CGRect)rect {

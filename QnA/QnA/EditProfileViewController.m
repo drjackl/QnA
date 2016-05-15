@@ -24,10 +24,10 @@
     // load description and download profile pic
     [self loadProfile];
     
-    // you can do below all in storyboard (don't even need IBAction)
-    //    // allow user to tap on profile pic as alternate way to set pic
-    //    UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedImage)];
-    //    [self.profileImageView addGestureRecognizer:tapRecognizer];
+    // all below done in storyboard (don't even need IBAction)
+//    // allow user to tap on profile pic as alternate way to set pic
+//    UITapGestureRecognizer* tapRecognizer = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(tappedImage)];
+//    [self.profileImageView addGestureRecognizer:tapRecognizer];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -112,11 +112,13 @@
     CLUploader* uploader = [[CLUploader alloc] init:cloudinary delegate:nil];
     
     NSData* imageData = UIImagePNGRepresentation(self.profileImageView.image);
-    if (!imageData) {
+    // if couldn't turn to PNG, try turning into JPG
+    if (!imageData) { // this bit of code hasn't happened yet as far as I can tell
         imageData = UIImageJPEGRepresentation(self.profileImageView.image, 0.5); // least compression/best quality
     }
     
-    // if put @"resource_type" is @"raw" must have a file (which we don't have as direct from UIImage)
+    // upload image data to Cloudinary and save url to Firebase
+    // not using this, but if put @"resource_type" is @"raw" must have a file (which we don't have as direct from UIImage)
     // error says must upload either url, file path, or NSData (no UIImage)
     [uploader upload:imageData options:nil withCompletion:^(NSDictionary* successResult, NSString* errorResult, NSInteger code, id context) {
         if (successResult) {

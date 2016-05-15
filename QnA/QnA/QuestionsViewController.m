@@ -64,7 +64,7 @@
     NSString* title = NSLocalizedString(@"Add A Question", @"Title for user to create a question");
     
     // message
-    NSAttributedString* exampleText = [[NSAttributedString alloc] initWithString:@"Is Apple a better technology company than Google?" attributes:@{NSFontAttributeName : [UIFont italicSystemFontOfSize:[UIFont systemFontSize]]}];
+    NSAttributedString* exampleText = [[NSAttributedString alloc] initWithString:@"Why has Game of Thrones become so popular?" attributes:@{NSFontAttributeName : [UIFont italicSystemFontOfSize:[UIFont systemFontSize]]}];
     NSString* messageText = [@"Ask the world a question.\nExample: " stringByAppendingString:exampleText.string];
     NSString* message = NSLocalizedString(messageText, @"Description for user to create a question");
     
@@ -169,10 +169,10 @@
                     [button setImage:image forState:UIControlStateNormal];
                 });
                 
-            } else {
+            } else { // couldn't turn downloaded data into image
                 NSLog(@"Image downloaded but couldn't be turned into UIImage");
             }
-        } else { // no imageData
+        } else { // no imageData downloaded
             NSLog(@"No image was able to be downloaded");
         }
     });

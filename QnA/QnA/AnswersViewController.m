@@ -32,7 +32,7 @@
     // (if this isn't in, question label is still the default ("Question Text"))
     self.questionLabel.text = self.question.value[@"text"];
     
-    //self.navigationItem.title = [DataSource onlySource].selectedQuestion.value[@"uid"];
+    //self.navigationItem.title = [DataSource onlySource].selectedQuestion.value[@"uid"]; // for simple on-the-right-track purposes
     NSString* questionAuthorUID = [DataSource onlySource].selectedQuestion.value[@"uid"];
     if (questionAuthorUID) { // must do nil check, else runtime error
         Firebase* questionAuthorReference = [[DataSource onlySource].usersReference childByAppendingPath:questionAuthorUID];
@@ -124,6 +124,8 @@
     [queryReference observeEventType:FEventTypeChildMoved andPreviousSiblingKeyWithBlock:^(FDataSnapshot* snapshot, NSString* prevKey) {
         NSLog(@"Moved snapshot: %@, from prevKey: %@", snapshot, prevKey);
         
+        
+        // 1. find where moving from and where moving to (oldIndexPath and newIndexPath)
         NSIndexPath* oldIndexPath = [self findIndexPathOfKey:snapshot.key];
         
         NSIndexPath* newIndexPath;
@@ -140,6 +142,8 @@
             newIndexPath = [NSIndexPath indexPathForRow:self.answers.count-1 inSection:0];
         }
         
+        
+        // 2. perform move
         [self.answersTableView beginUpdates];
         
         // this does the actual animation
@@ -251,15 +255,16 @@
     
     if ([DataSource onlySource].loggedInUserID) {
         // if logged in user voted for this answer
-        //if ([self loggedInUserVotedFor:cell.votesReference]) {
+        //if ([self loggedInUserVotedFor:cell.votesReference]) { // this doesn't work since reading from FireBase is asynchronous
         //if (answer.votes[[DataSource onlySource].loggedInUserID]) {
         if ([DataSource onlySource].answersVotedFor[answer.answerID]) {
-            cell.votesSwitch.on = YES;
+            cell.voteButton.selected = YES;
         } else {
-            cell.votesSwitch.on = NO;
+            cell.voteButton.selected = NO;
         }
     } else { // disallow voting if not logged in
-        cell.votesSwitch.enabled = NO;
+        cell.voteButton.enabled = NO;
+        cell.voteButton.selected = YES;
     }
     
     
@@ -271,6 +276,8 @@
 
 - (void) downloadAndSetProfilePicture:(NSString*)imageUrlString forCell:(AnswerCell*)cell {
     if (imageUrlString) {
+        
+        // dispatch background for downloading
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
             NSURL* url = [NSURL URLWithString:imageUrlString];
             NSURLRequest* request = [NSURLRequest requestWithURL:url];
@@ -282,7 +289,13 @@
                 UIImage* image = [UIImage imageWithData:imageData];
                 if (image) {
                     
-                    [cell.authorButton setImage:image forState:UIControlStateNormal];
+                    // set authorButton image once downloaded
+                    // argh, forgot to dispatch back
+                    dispatch_async(dispatch_get_main_queue(), ^{
+                        [cell.authorButton setImage:image forState:UIControlStateNormal];
+                        
+                        //[self.answersTableView reloadData]; // this makes things really jittery
+                    });
                 }
             }
         });

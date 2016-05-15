@@ -570,8 +570,8 @@
                                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="UJI-XS-6sA">
                                                             <rect key="frame" x="8" y="8" width="584" height="123"/>
                                                             <subviews>
-                                                                <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="q9t-cb-0Ot" customClass="PostBubbleView">
-                                                                    <rect key="frame" x="0.0" y="0.0" width="584" height="50"/>
+                                                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q9t-cb-0Ot" customClass="PostBubbleView">
+                                                                    <rect key="frame" x="0.0" y="0.0" width="584" height="43"/>
                                                                     <subviews>
                                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Answer Text" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WE7-uZ-kFE">
                                                                             <rect key="frame" x="11" y="11" width="562" height="21"/>
@@ -589,10 +589,10 @@
                                                                         <constraint firstAttribute="trailingMargin" secondItem="WE7-uZ-kFE" secondAttribute="trailing" constant="3" id="tnR-7t-Uy8"/>
                                                                     </constraints>
                                                                 </view>
-                                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="hkD-hP-so7">
+                                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="hkD-hP-so7">
                                                                     <rect key="frame" x="0.0" y="63" width="584" height="60"/>
                                                                     <subviews>
-                                                                        <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="SDJ-8T-hro">
+                                                                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="SDJ-8T-hro">
                                                                             <rect key="frame" x="0.0" y="0.0" width="115" height="60"/>
                                                                             <subviews>
                                                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nrP-UZ-Mhb" customClass="UserButton">
@@ -607,19 +607,22 @@
                                                                                     </connections>
                                                                                 </button>
                                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="# votes" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tuT-eu-1j3">
-                                                                                    <rect key="frame" x="70" y="0.0" width="45" height="60"/>
+                                                                                    <rect key="frame" x="70" y="22" width="45" height="16"/>
                                                                                     <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                                                     <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                                                     <nil key="highlightedColor"/>
                                                                                 </label>
                                                                             </subviews>
                                                                         </stackView>
-                                                                        <switch opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="xLX-Vn-bx5">
-                                                                            <rect key="frame" x="535" y="15" width="51" height="31"/>
+                                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sGT-4S-21B">
+                                                                            <rect key="frame" x="554" y="0.0" width="30" height="60"/>
+                                                                            <color key="tintColor" red="0.77720689769999995" green="0.38318917159999999" blue="0.99724942449999998" alpha="1" colorSpace="calibratedRGB"/>
+                                                                            <state key="normal" image="vote"/>
+                                                                            <state key="selected" image="voted"/>
                                                                             <connections>
-                                                                                <action selector="voteSwitchToggled:" destination="gyJ-Tk-pgb" eventType="valueChanged" id="Bfi-ev-gBY"/>
+                                                                                <action selector="voteButtonToggled:" destination="gyJ-Tk-pgb" eventType="touchUpInside" id="au7-Mq-O11"/>
                                                                             </connections>
-                                                                        </switch>
+                                                                        </button>
                                                                     </subviews>
                                                                 </stackView>
                                                             </subviews>
@@ -640,8 +643,8 @@
                                                     <outlet property="answerLabel" destination="WE7-uZ-kFE" id="7T3-eZ-dfq"/>
                                                     <outlet property="authorButton" destination="nrP-UZ-Mhb" id="dYe-ZU-UGm"/>
                                                     <outlet property="postBubbleView" destination="q9t-cb-0Ot" id="ffC-1S-eq3"/>
+                                                    <outlet property="voteButton" destination="sGT-4S-21B" id="MQQ-lG-JAe"/>
                                                     <outlet property="votesLabel" destination="tuT-eu-1j3" id="VbB-md-EXa"/>
-                                                    <outlet property="votesSwitch" destination="xLX-Vn-bx5" id="hKL-v1-gIc"/>
                                                 </connections>
                                             </tableViewCell>
                                         </prototypes>
@@ -817,6 +820,8 @@
         <image name="answer-button" width="58" height="32"/>
         <image name="no-one" width="291" height="291"/>
         <image name="question-button" width="60" height="32"/>
+        <image name="vote" width="30" height="34"/>
+        <image name="voted" width="30" height="34"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="e7Q-75-5mA"/>

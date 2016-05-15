@@ -33,7 +33,6 @@
     [self drawCaret:CaretDirectionBottom];
 }
 
-
 - (void) setVotesReference:(Firebase*)votesReference {
     _votesReference = votesReference;
     
@@ -48,12 +47,16 @@
     }];
 }
 
-- (IBAction) voteSwitchToggled:(UISwitch*)sender {
-    // so it seems switch has already been switched by the time this method is reached
-    //int originalVote = self.votes;
+- (IBAction) voteButtonToggled:(UIButton*)sender {
+    // flip selected state
+    sender.selected = !sender.selected;
+    
+    
     Firebase* answerVotesReference = [[DataSource onlySource].loggedInUserReference childByAppendingPath:@"answers_voted"];
     Firebase* answerIDReference = [answerVotesReference childByAppendingPath:self.answerID];
-    if (sender.isOn) {
+    
+    // update model here and in FB backend
+    if (sender.selected) {
         self.votes++;
         [answerIDReference setValue:self.answerID];
     } else {
@@ -61,7 +64,7 @@
         [answerIDReference removeValue];
     }
     
-    // wait to set value (though if not observing, shouldn't matter when this is done anymore)
+    // set value (if using delegate, could've done it there)
     [self.votesReference setValue:[NSNumber numberWithInt:self.votes]];
     
     // use delegate method to have access to tableView

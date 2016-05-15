@@ -24,7 +24,7 @@
 @property (weak, nonatomic) IBOutlet UILabel* answerLabel;
 @property (weak, nonatomic) IBOutlet UserButton* authorButton;
 @property (weak, nonatomic) IBOutlet UILabel* votesLabel;
-@property (weak, nonatomic) IBOutlet UISwitch* votesSwitch; // expose so can disable if no one logged in
+@property (weak, nonatomic) IBOutlet UIButton* voteButton; // expose so can disable if no one logged in
 
 @property (nonatomic) NSString* answerID; // needed to track if a user voted for this answer
 @property (nonatomic) Firebase* votesReference;

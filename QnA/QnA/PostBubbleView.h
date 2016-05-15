@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
+// all PostBubbleView does is create a rounded rectangle of its view rectangle (caret drawn in table cells)
 @interface PostBubbleView : UIView
 
 @end
