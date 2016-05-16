@@ -1,15 +1,22 @@
 //
-//  ProfileViewController.h
+//  EditProfileViewController.h
 //  QnA
 //
-//  Created by Jack Li on 4/26/16.
+//  Created by Jack Li on 4/18/16.
 //  Copyright © 2016 Jack Li. All rights reserved.
 //
 
-#import "EditProfileViewController.h"
+#import <UIKit/UIKit.h>
+#import <Firebase.h>
 
-@interface ProfileViewController : EditProfileViewController
+@interface ProfileViewController : UIViewController
 
-//@property (nonatomic) NSString* userName;
+@property (nonatomic) Firebase* userReference;
+
+// IBOutlets
+@property (weak, nonatomic) IBOutlet UITextView* descriptionTextView;
+@property (weak, nonatomic) IBOutlet UIImageView* profileImageView;
+
+- (void) loadProfilePicture:(NSString*)imageURLString;
 
 @end

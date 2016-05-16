@@ -326,81 +326,81 @@
 }
 
 
-//#pragma mark - AnswerCell delegate methods
+/*#pragma mark - AnswerCell delegate methods
 
-//- (void) cell:(AnswerCell*)cell didUpdateVoteOriginalVote:(int)originalVote increasing:(BOOL)increasing votesReference:(Firebase*)votesReference {
-//    NSIndexPath* originalIndexPath = [self.answersTableView indexPathForCell:cell];
-//    
-//    int replaceIndex = [self findReplaceIndexWithOriginalVote:originalVote increasing:increasing];
-//    
-//    // once replaceIndex found, can update votes
-//    int vote;
-//    if (increasing) {
-//        vote = originalVote+1;
-//    } else {
-//        vote = originalVote-1;
-//    }
-//    [votesReference setValue:[NSNumber numberWithInt:vote]];
-//    
-//    //FDataSnapshot* answerData = self.answers[originalIndexPath.row];
-//    //answerData.value[@"votes"];
-//    Answer* answer = self.answers[originalIndexPath.row];
-//    answer.voteCount = vote;
-//    
-//    if (replaceIndex != originalIndexPath.row) {
-//        // this is wrong because if replaceIndex greater (decrementing), you put it one *after* the last, so decrementing replaceIndex puts it one off
-////        if (replaceIndex > originalIndexPath.row) {
-////            replaceIndex--;
-////        }
-//        
-//        NSIndexPath* replaceIndexPath = [NSIndexPath indexPathForRow:replaceIndex inSection:originalIndexPath.section];
-//        
-//        
-//        [self.answersTableView beginUpdates];
-//        
-//        // this does the actual animation
-//        [self.answersTableView moveRowAtIndexPath:originalIndexPath toIndexPath:replaceIndexPath];
-//        
-//        // this updates the model (implemented delegate method above)
-//        [self tableView:self.answersTableView moveRowAtIndexPath:originalIndexPath toIndexPath:replaceIndexPath];
-//        
-//        [self.answersTableView endUpdates];
-//    }
-//}
+- (void) cell:(AnswerCell*)cell didUpdateVoteOriginalVote:(int)originalVote increasing:(BOOL)increasing votesReference:(Firebase*)votesReference {
+    NSIndexPath* originalIndexPath = [self.answersTableView indexPathForCell:cell];
+    
+    int replaceIndex = [self findReplaceIndexWithOriginalVote:originalVote increasing:increasing];
+    
+    // once replaceIndex found, can update votes
+    int vote;
+    if (increasing) {
+        vote = originalVote+1;
+    } else {
+        vote = originalVote-1;
+    }
+    [votesReference setValue:[NSNumber numberWithInt:vote]];
+    
+    //FDataSnapshot* answerData = self.answers[originalIndexPath.row];
+    //answerData.value[@"votes"];
+    Answer* answer = self.answers[originalIndexPath.row];
+    answer.voteCount = vote;
+    
+    if (replaceIndex != originalIndexPath.row) {
+        // this is wrong because if replaceIndex greater (decrementing), you put it one *after* the last, so decrementing replaceIndex puts it one off
+//        if (replaceIndex > originalIndexPath.row) {
+//            replaceIndex--;
+//        }
+        
+        NSIndexPath* replaceIndexPath = [NSIndexPath indexPathForRow:replaceIndex inSection:originalIndexPath.section];
+        
+        
+        [self.answersTableView beginUpdates];
+        
+        // this does the actual animation
+        [self.answersTableView moveRowAtIndexPath:originalIndexPath toIndexPath:replaceIndexPath];
+        
+        // this updates the model (implemented delegate method above)
+        [self tableView:self.answersTableView moveRowAtIndexPath:originalIndexPath toIndexPath:replaceIndexPath];
+        
+        [self.answersTableView endUpdates];
+    }
+}
 
 // replaceIndex is first index with originalVoteCount if increasing, or last index with originalVoteCount if decreasing
-//- (int) findReplaceIndexWithOriginalVote:(int)originalVote increasing:(BOOL)increasing {
-//    int replaceIndex = 0;
-//    
-//    while (replaceIndex < self.answers.count) {
-//        //FDataSnapshot* answerData = self.answers[replaceIndex];
-//        Answer* answer = self.answers[replaceIndex];
-//        //int answerVotes = [answerData.value[@"votes"] intValue];
-//        int answerVotes = answer.voteCount;
-//        
-//        // if increasing, want the first original value index
-//        if (increasing &&
-//            answerVotes == originalVote) {
-//            break;
-//        }
-//        
-//        // if decreasing, want the last original value index
-//        if (!increasing &&
-//            answerVotes < originalVote) {
-//            replaceIndex--; // 1 before the next lesser value
-//            break;
-//        }
-//        
-//        replaceIndex++;
-//    }
-//    
-//    // if you get to the end (eg, decrementing the last element), it's just the last index  
-//    if (replaceIndex == self.answers.count) {
-//        replaceIndex--;
-//    }
-//    
-//    return replaceIndex;
-//}
+- (int) findReplaceIndexWithOriginalVote:(int)originalVote increasing:(BOOL)increasing {
+    int replaceIndex = 0;
+    
+    while (replaceIndex < self.answers.count) {
+        //FDataSnapshot* answerData = self.answers[replaceIndex];
+        Answer* answer = self.answers[replaceIndex];
+        //int answerVotes = [answerData.value[@"votes"] intValue];
+        int answerVotes = answer.voteCount;
+        
+        // if increasing, want the first original value index
+        if (increasing &&
+            answerVotes == originalVote) {
+            break;
+        }
+        
+        // if decreasing, want the last original value index
+        if (!increasing &&
+            answerVotes < originalVote) {
+            replaceIndex--; // 1 before the next lesser value
+            break;
+        }
+        
+        replaceIndex++;
+    }
+    
+    // if you get to the end (eg, decrementing the last element), it's just the last index  
+    if (replaceIndex == self.answers.count) {
+        replaceIndex--;
+    }
+    
+    return replaceIndex;
+}*/
 
 
 #pragma mark - Navigation

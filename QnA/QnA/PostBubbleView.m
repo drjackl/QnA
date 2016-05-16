@@ -13,7 +13,6 @@
 // this initializer not used, so not needed
 //- (instancetype) initWithFrame:(CGRect)frame {
 
-
 // all PostBubbleView does is create a rounded rectangle of its view rectangle (caret drawn in table cells)
 - (instancetype) initWithCoder:(NSCoder*)coder {
     self = [super initWithCoder:coder];

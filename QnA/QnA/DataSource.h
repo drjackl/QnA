@@ -19,7 +19,7 @@
 
 @property (nonatomic) NSString* loggedInUserID;
 @property (nonatomic) Firebase* loggedInUserReference;
-@property (nonatomic) NSDictionary* answersVotedFor;
+@property (nonatomic) NSDictionary* answersVotedFor; // could've been an array, but easier to check for membership
 
 @property (nonatomic) NSArray* questions;
 @property (nonatomic) FDataSnapshot* selectedQuestion;

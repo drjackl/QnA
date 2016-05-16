@@ -161,7 +161,7 @@
         <!--Edit Profile-->
         <scene sceneID="yt8-Qz-Amr">
             <objects>
-                <viewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="bj2-nP-sZe" userLabel="Edit Profile" customClass="EditProfileViewController" sceneMemberID="viewController">
+                <viewController useStoryboardIdentifierAsRestorationIdentifier="YES" id="bj2-nP-sZe" userLabel="Edit Profile" customClass="ProfileViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="1nx-SI-2ee"/>
                         <viewControllerLayoutGuide type="bottom" id="DqN-3o-qck"/>
@@ -449,7 +449,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="Questions" id="Dyp-eQ-Zkn">
                         <barButtonItem key="backBarButtonItem" title=" " id="los-GP-qKZ"/>
-                        <barButtonItem key="leftBarButtonItem" title="Edit Profile" id="uq0-Hi-Joc">
+                        <barButtonItem key="leftBarButtonItem" title="No One" id="uq0-Hi-Joc">
                             <connections>
                                 <segue destination="hZ0-Xk-EgV" kind="presentation" identifier="editProfile" modalTransitionStyle="flipHorizontal" id="c7x-RJ-1Yr"/>
                             </connections>
@@ -824,7 +824,7 @@
         <image name="voted" width="30" height="34"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="e7Q-75-5mA"/>
         <segue reference="8FP-hy-4kc"/>
+        <segue reference="gPE-7i-tEE"/>
     </inferredMetricsTieBreakers>
 </document>

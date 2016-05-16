@@ -242,7 +242,7 @@
         }
     } else if ([segue.identifier isEqualToString:@"editProfile"]) {
         UINavigationController* navigationController = segue.destinationViewController;
-        ((EditProfileViewController*)navigationController.viewControllers[0]).userReference = [DataSource onlySource].loggedInUserReference;
+        ((ProfileViewController*)navigationController.viewControllers[0]).userReference = [DataSource onlySource].loggedInUserReference;
     }
 }
 
